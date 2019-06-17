@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./didauday-web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./didauday-dashboard:/app
+    restart: always
+  dashboard:
+    build:
+      context: ./didauday-dashboard
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - /app/node_modules
+      - ./didauday-dashboard:/app
+    restart: always

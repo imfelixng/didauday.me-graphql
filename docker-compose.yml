@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: ./didauday-web
+    restart: always
+  dashboard:
+    build: ./didauday-server
+    restart: always
+  web-server:
+    image: nginx:apline
+    ports:
+      - "80:80"
+    volumes:
+      - ./web-server/conf.d:/etc/nginx/conf.d
+    restart: always
+    depends_on:
+      - web
+      - dashboard
