@@ -2,19 +2,27 @@ version: '3'
 services:
   web:
     build: ./didauday-web
+    volumes:
+      - /app/node_modules
     restart: always
   dashboard:
     build: ./didauday-dashboard
+    volumes:
+      - /app/node_modules
     restart: always
   tour:
     build:
       context: ./didauday-server/services/tours
       dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
     restart: always
   server:
     build:
       context: ./didauday-server/gateway
       dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
     depends_on:
       - "tour"
     environment:
