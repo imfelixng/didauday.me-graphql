@@ -8,7 +8,7 @@ services:
       - "3000:3000"
     volumes:
       - /app/node_modules
-      - ./didauday-dashboard:/app
+      - ./didauday-web:/app
     restart: always
   dashboard:
     build:
@@ -19,4 +19,52 @@ services:
     volumes:
       - /app/node_modules
       - ./didauday-dashboard:/app
+    restart: always
+  tour:
+    build:
+      context: ./didauday-server/services/tours
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5001:5001"
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/tours:/app
+    restart: always
+  server:
+    build:
+      context: ./didauday-server/gateway
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/gateway:/app
+    depends_on:
+      - tour
+    environment:
+      - TOUR_URL=http://tour:5001/graphql
+    restart: always
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./databases/mongo/db:/data/db
+    restart: always
+  neo4j:
+    image: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./databases/neo4j/db:/data/db
+    environment:
+      - NEO4J_AUTH=neo4j/annq
+    restart: always
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./databases/redis/db:/data/db
     restart: always
