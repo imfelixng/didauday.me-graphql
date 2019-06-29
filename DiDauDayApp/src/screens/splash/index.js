@@ -7,7 +7,7 @@ const Splash = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      props.navigation.navigate('Register');
+      props.navigation.navigate('Login');
     }, 2000);
   }, []);
 

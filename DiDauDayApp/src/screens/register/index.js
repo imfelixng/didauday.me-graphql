@@ -9,7 +9,8 @@ import Button from './components/Button';
 
 const width = Dimensions.get('screen').width;
 
-const Register = () => {
+const Register = (props) => {
+  console.log(props);
   return (
     <ScrollView>
       <ContainerViewCustom
@@ -69,8 +70,10 @@ const Register = () => {
   )
 }
 
-Register.navigationOptions = {
-  title: "Register"
+Register.navigationOptions = ({ navigation }) => {
+  return {
+    title: "Register",
+  }
 };
 
 export default Register
