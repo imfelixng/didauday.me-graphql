@@ -1,1 +1,3 @@
-import styled from 'styled-components/native';
+export * from './image';
+export * from './view';
+export * from './text';
