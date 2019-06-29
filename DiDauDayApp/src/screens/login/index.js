@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
 
-import { ContainerViewLogin, ViewSocialButton } from './styled';
+import { ContainerViewCustom, ViewSocialButton } from './styled';
 import InputField from './components/InputField';
 import Button from './components/Button';
 
@@ -9,7 +9,7 @@ const width = Dimensions.get('screen').width;
 
 const Login = () => {
   return (
-    <ContainerViewLogin
+    <ContainerViewCustom
     >
       <InputField
         width = { width - 20 }
@@ -43,7 +43,7 @@ const Login = () => {
           type = "logo-facebook"
         />
       </ViewSocialButton>
-    </ContainerViewLogin>
+    </ContainerViewCustom>
   )
 }
 
