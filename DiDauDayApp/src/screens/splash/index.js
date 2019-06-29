@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ContainerView } from '../../styled';
 import { ImageBackground } from './styled';
 import Logo from './components/Logo';
 
-const Splash = () => {
+const Splash = (props) => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      props.navigation.navigate('Login');
+    }, 2000);
+  }, []);
+
   return (
     <ContainerView>
       <ImageBackground
@@ -17,6 +24,8 @@ const Splash = () => {
   )
 }
 
-Splash.navigationOptions = null;
+Splash.navigationOptions = {
+  header: null
+};
 
 export default Splash
