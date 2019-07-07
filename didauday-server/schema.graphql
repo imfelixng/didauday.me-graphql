@@ -1,0 +1,440 @@
+type Account {
+  _id: ID!
+  email: String!
+  password: String!
+  confirm_token: String!
+  is_confirm: String
+  profile: Profile!
+  role: Role!
+  type_account: TypeAccount!
+  status: Boolean
+  token: String!
+  is_exp: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Booking {
+  _id: ID!
+  booking_list: [BookingItem!]!
+  total_price: Float!
+  buyer: Profile!
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String!
+  payerID: String
+  token_paypal: String!
+  url_paypal: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type BookingItem {
+  _id: ID!
+  type_booking: TypeBooking!
+  price: Float!
+  coupon_code: String
+  is_checkout: Boolean
+  room: Room
+  flight: Flight
+  tour: Tour
+  date_start: String
+  date_end: String
+  customers: [Customer!]!
+  quantity: Int!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Customer {
+  _id: ID!
+  email: String!
+  lastname: String!
+  firstname: String!
+  phone_number: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type City {
+  _id: ID!
+  name: String!
+  zipcode: Int!
+  country: String!
+  location: Location!
+  image: String
+  createdAt: String!
+  updateAt: String!
+}
+
+type Location {
+  _id: ID!
+  type_location: TypeLocation!
+  coordinates: [Float!]!
+  createdAt: String!
+  updateAt: String!
+}
+
+type AirPort {
+  _id: ID!
+  name: String!
+  airport_code: String!
+  city: City!
+  createdAt: String!
+  updateAt: String!
+}
+
+type CouponCode {
+  _id: ID!
+  type_couponcode: TypeCouponCode!
+  hotel: Hotel
+  tour: Tour
+  percent: Float!
+  code: String!
+  creater: Profile
+  date_start: String!
+  date_end: String!
+  quantity: Int!
+  available: Int
+  status: Boolean
+  createdAt: String!
+  updateAt: String!
+}
+
+type Discount {
+  _id: ID!
+  name: String!
+  type_discount: TypeDiscount!
+  percent: Float!
+  creater: Profile!
+  hotel: Hotel
+  tour: Tour
+  date_start: String!
+  date_end: String!
+  status: Boolean
+  createdAt: String!
+  updateAt: String!
+}
+
+type Favorite {
+  _id: ID!
+  type_favorite: TypeFavorite!
+  favoritor: Profile
+  hotel: Hotel
+  tour: Tour
+  createdAt: String!
+  updateAt: String!
+}
+
+type Flight {
+  _id: ID!
+  name: String!
+  start_location: AirPort!
+  end_location: AirPort!
+  time_start: TimeFlight!
+  time_end: TimeFlight!
+  price: Float!
+  date_start: String!
+  date_end: String!
+  provider: Provider
+  flight_id: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type TimeFlight {
+  _id: ID!
+  hour: Int!
+  minute: Int!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Hotel {
+  _id: ID!
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  city: City!
+  facilities: [Facility!]!
+  images: [String!]!
+  rules: [Rule!]!
+  location: Location!
+  rooms: [Room]!
+  owner: Profile!
+  isOpen: Boolean
+  createdAt: String!
+  updateAt: String!
+}
+
+type Facility {
+  _id: ID!
+  icon: String!
+  name: String!
+  status: Boolean
+  createdAt: String!
+  updateAt: String!
+}
+
+type Rule {
+  _id: ID!
+  name: String!
+  content: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Place {
+  _id: ID!
+  name: String!
+  location: Location!
+  address: String!
+  city: City!
+  image: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Message {
+  _id: ID!
+  type_message: TypeMessage!
+  partner: Profile
+  member: Profile!
+  content: String!
+  recommendations: [Recommendation]
+  createdAt: String!
+  updateAt: String!
+}
+
+type Recommendation {
+  _id: ID!
+  type_recommendation: TypeRecommendation!
+  hotel: Hotel
+  tour: Tour
+  flight: Flight
+  createdAt: String!
+  updateAt: String!
+}
+
+type Notification {
+  _id: ID!
+  reciever: Profile!
+  title: String!
+  content: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Passenger {
+  _id: ID!
+  email: String!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  phone_number: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Payment {
+  _id: ID!
+  email_receiver: String!
+  email_sender: String!
+  type_payment: TypePayment!
+  price: Float!
+  paymentID: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Permission {
+  _id: ID!
+  role: Role!
+  resource: String!
+  action: String!
+  possession: TypePossession!
+  attributes: [Attribute!]!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Attribute {
+  _id: ID!
+  field: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Profile {
+  _id: ID!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  city: City!
+  email: String!
+  phone_number: String!
+  role: Role!
+  email_paypal: String
+  createdAt: String!
+  updateAt: String!
+}
+
+type Provider {
+  _id: ID!
+  name: String!
+  code: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Review {
+  _id: ID!
+  reviewer: Profile
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+  hotel: Hotel
+  room: Room
+  tour: Tour
+  createdAt: String!
+  updateAt: String!
+}
+
+type Role {
+  _id: ID!
+  name: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Room {
+  _id: ID!
+  name: String!
+  square: Float!
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int!
+  adults: Int!
+  children: Int!
+  price: Float!
+  description: String!
+  images: [String!]!
+  amenities: [Amenity!]!
+  hotel: Hotel!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Amenity {
+  _id: ID!
+  icon: String!
+  name: String!
+  status: Boolean
+  createdAt: String!
+  updateAt: String!
+}
+
+type Tour {
+  _id: ID!
+  name: String!
+  duration: String!
+  tour_type: String!
+  group_size: Int!
+  price: Float!
+  language_tour: String!
+  description: String!
+  images: [String!]!
+  rate: Float!
+  num_review: Int!
+  departure_day: String!
+  city: City
+  itineraries: [Itinerary!]!
+  available: Int
+  owner: Profile!
+  createdAt: String!
+  updateAt: String!
+}
+
+type Itinerary {
+  _id: ID!
+  place: Place!
+  description: String!
+  image: String!
+  createdAt: String!
+  updateAt: String!
+}
+
+enum TypeAccount {
+  EMAIL
+  PASSWORD
+}
+
+enum TypeBooking {
+  FLIGHT
+  HOTEL
+  TOUR
+}
+
+enum TypeCouponCode {
+  ALL
+  HOTEL
+  TOUR
+}
+
+enum TypeDiscount {
+  ALL
+  HOTEL
+  TOUR
+}
+
+enum TypeFavorite {
+  HOTEL
+  TOUR
+}
+
+enum TypeRecommendation {
+  FLIGHT
+  HOTEL
+  TOUR
+}
+
+enum TypeReview {
+  ROOM
+  HOTEL
+  TOUR
+}
+
+enum TypeLocation {
+  POINT
+}
+
+enum TypeMessage {
+  SUPPORT
+  CHATBOT
+}
+
+enum TypePayment {
+  BOOKING
+  PAY
+  REFUND
+}
+
+enum TypePossession {
+  OWN
+  ANY
+}
+
+enum TypeRoom {
+  AVAILABLE
+  NOT_AVAILABLE
+}
+
+type Query {
+  me: Profile
+}
