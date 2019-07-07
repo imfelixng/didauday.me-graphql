@@ -22,13 +22,23 @@ services:
     restart: always
   tour:
     build:
-      context: ./didauday-server/services/tours
+      context: ./didauday-server/services/tour
       dockerfile: Dockerfile.dev
     ports:
       - "5001:5001"
     volumes:
       - /app/node_modules
       - ./didauday-server/services/tours:/app
+    restart: always
+  auth:
+    build:
+      context: ./didauday-server/services/auth
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5002:5002"
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/auth:/app
     restart: always
   server:
     build:

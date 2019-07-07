@@ -17,6 +17,13 @@ services:
     volumes:
       - /app/node_modules
     restart: always
+  auth:
+    build:
+      context: ./didauday-server/services/auth
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway
@@ -25,8 +32,10 @@ services:
       - /app/node_modules
     depends_on:
       - "tour"
+      - "auth"
     environment:
       - TOUR_URL=http://tour:5001/graphql
+      - AUTH_URL=http://auth:5002/graphql
   mongo:
     image: mongo
     volumes:
