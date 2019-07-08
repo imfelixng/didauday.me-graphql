@@ -28,7 +28,7 @@ services:
       - "5001:5001"
     volumes:
       - /app/node_modules
-      - ./didauday-server/services/tours:/app
+      - ./didauday-server/services/tour:/app
     restart: always
   auth:
     build:
@@ -51,8 +51,10 @@ services:
       - ./didauday-server/gateway:/app
     depends_on:
       - tour
+      - auth
     environment:
       - TOUR_URL=http://tour:5001/graphql
+      - AUTH_URL=http://auth:5002/graphql
     restart: always
   mongo:
     image: mongo

@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import { buildFederatedSchema } from '@apollo/federation';
 
-import typeDefs from './schema/tour.js';
+import typeDefs from './schema';
 import resolvers from './resolvers';
 
 const PORT = process.env.PORT || 5001;
