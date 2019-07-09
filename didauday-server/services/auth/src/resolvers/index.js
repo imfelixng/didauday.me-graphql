@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 
-import tourResolver from './tour.js.js';
+import authResolver from './auth.js';
 
 const rootResolvers = {};
 
-const resolvers = merge(rootResolvers, tourResolver);
+const resolvers = merge(rootResolvers, authResolver);
 
 export default resolvers;

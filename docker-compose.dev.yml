@@ -29,6 +29,8 @@ services:
     volumes:
       - /app/node_modules
       - ./didauday-server/services/tour:/app
+    environment:
+      - PORT=5001
     restart: always
   auth:
     build:
@@ -39,6 +41,8 @@ services:
     volumes:
       - /app/node_modules
       - ./didauday-server/services/auth:/app
+    environment:
+      - PORT=5002
     restart: always
   server:
     build:
@@ -55,6 +59,7 @@ services:
     environment:
       - TOUR_URL=http://tour:5001/graphql
       - AUTH_URL=http://auth:5002/graphql
+      - PORT=5000
     restart: always
   mongo:
     image: mongo
