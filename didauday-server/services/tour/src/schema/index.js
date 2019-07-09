@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
 
-const post = gql`
+const tourSchema = gql`
   # A post entry
   type Post @key(fields: "id") {
     id: Int!
@@ -26,4 +26,4 @@ const post = gql`
   }
 `;
 
-export default post;
+export default tourSchema;
