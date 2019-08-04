@@ -1,26 +1,68 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FBAuth {
-
   FirebaseAuth _fbAuth = FirebaseAuth.instance;
+  Firestore _fs = Firestore.instance;
 
-  Future signIn(String email, String password) async {
+  Future login(String email, String password) async {
     var result;
     try {
-      result = await _fbAuth.signInWithEmailAndPassword(email: email, password: password);
+      result = await _fbAuth.signInWithEmailAndPassword(
+          email: email, password: password);
     } catch (error) {
-      throw _errorResetPassword(error.code);
+      throw _errorLogin(error.code);
     }
 
     return result.user;
+  }
+
+  Future register(
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      int birthday,
+      String gender,
+      String address,
+      String phoneNumber) async {
+    var result;
+    try {
+      result = await _fbAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      await createUser(result.user.uid, firstName, lastName, birthday, gender,
+          address, phoneNumber);
+      return result.user;
+
+    } catch (error) {
+      throw _errorRegister(error.code);
+    }
   }
 
   Future resetPassword(String email) async {
     try {
       await _fbAuth.sendPasswordResetEmail(email: email);
     } catch (error) {
-      throw _errorLogin(error.code);
+      throw _errorResetPassword(error.code);
+    }
+  }
+
+  Future createUser(String userId, String firstName, String lastName,
+      int birthday, String gender, String address, String phoneNumber) async {
+    try {
+      await _fs.collection('users').document(userId).setData({
+        'userId': userId,
+        'firstName': firstName,
+        'lastName': lastName,
+        'birthday': birthday,
+        'gender': gender,
+        'address': address,
+        'phoneNumber': phoneNumber,
+      });
+    } catch(error) {
+      print("============================================");
+      print(error);
+      throw error;
     }
   }
 
@@ -28,7 +70,7 @@ class FBAuth {
     var error = '';
     switch (code) {
       case 'ERROR_INVALID_EMAIL':
-        error  ='The email address is malformed';
+        error = 'The email address is malformed';
         break;
       case 'ERROR_WRONG_PASSWORD':
         error = 'The password is wrong';
@@ -43,10 +85,29 @@ class FBAuth {
         error = 'There was too many attempts to sign in as this user';
         break;
       case 'ERROR_OPERATION_NOT_ALLOWED':
-        error = "Can't sign in, please try again";
+        error = "Can't login, please try again";
         break;
       default:
-        error = "Can't sign in, please try again";
+        error = "Can't login please try again";
+    }
+
+    return error;
+  }
+
+  String _errorRegister(String code) {
+    var error = '';
+    switch (code) {
+      case 'ERROR_WEAK_PASSWORD':
+        error = 'The password is not strong enough';
+        break;
+      case 'ERROR_INVALID_EMAIL':
+        error = 'The email address is malformed';
+        break;
+      case 'ERROR_EMAIL_ALREADY_IN_USE':
+        error = 'The email is already in use by a different account';
+        break;
+      default:
+        error = "Can't register, please try again";
     }
 
     return error;
@@ -56,7 +117,7 @@ class FBAuth {
     var error = '';
     switch (code) {
       case 'ERROR_INVALID_EMAIL':
-        error  ='The email address is malformed';
+        error = 'The email address is malformed';
         break;
       case 'ERROR_USER_NOT_FOUND':
         error = 'The user not found';
@@ -67,5 +128,4 @@ class FBAuth {
 
     return error;
   }
-
 }

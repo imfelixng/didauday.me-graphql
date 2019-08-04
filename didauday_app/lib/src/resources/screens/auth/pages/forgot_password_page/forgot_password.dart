@@ -21,6 +21,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       try{
         await _forgotPasswordBloc.onResetPassword(email);
         LoadingDialog.hideLoadingDialog(context);
+        _emailController.text = "";
+        MessageDialog.showMsgDialog(context, "Success", 'Please check your email to reset pasword.');
       } catch(error) {
         print(error);
         LoadingDialog.hideLoadingDialog(context);

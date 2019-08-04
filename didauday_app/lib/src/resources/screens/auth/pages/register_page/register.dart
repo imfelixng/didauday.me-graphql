@@ -1,4 +1,6 @@
 import 'package:didauday_app/src/resources/screens/auth/blocs/register_bloc.dart';
+import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
+import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,7 +13,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final DateFormat format = DateFormat("dd/MM/yyyy");
 
-  var _valueGender = 'male';
+  var _valueGender = 'MALE';
   DateTime _valueBirthday;
 
   TextEditingController _emailController = TextEditingController();
@@ -27,7 +29,7 @@ class _RegisterState extends State<Register> {
   RegisterBloc registerBloc = RegisterBloc();
 
 
-  void _onRegister() {
+  void _onRegister() async {
     var email = _emailController.text;
     var password = _passwordController.text;
     var confirmPassword = _confirmPasswordController.text;
@@ -40,7 +42,17 @@ class _RegisterState extends State<Register> {
     var gender = _valueGender;
 
     if (registerBloc.isValidDataRegister(email, password, confirmPassword, firstName, lastName, birthday, gender, address, phoneNumber)) {
-      print('oke');
+      LoadingDialog.showLoadingDialog(context, "Signing up. Please wait...");
+      var userInfo;
+      try{
+        userInfo = await registerBloc.onRegister(email, password, firstName, lastName, birthday, gender, address, phoneNumber);
+        LoadingDialog.hideLoadingDialog(context);
+        print(userInfo);
+        Navigator.pushNamed(context, '/auth/login');
+      } catch(error) {
+        LoadingDialog.hideLoadingDialog(context);
+        MessageDialog.showMsgDialog(context, "Register", error);
+      }
     }
 
   }
@@ -229,7 +241,7 @@ class _RegisterState extends State<Register> {
                           labelText: "Gender", border: OutlineInputBorder()),
                       items: [
                         DropdownMenuItem(
-                          value: "male",
+                          value: "MALE",
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -245,7 +257,7 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                         DropdownMenuItem(
-                          value: "female",
+                          value: "FEMALE",
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[

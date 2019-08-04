@@ -29,9 +29,9 @@ class LoginBloc {
 
   }
 
-  Future onSignIn(String email, String password) {
+  Future onLogin(String email, String password) {
     FBAuth fbAuth = FBAuth();
-    return fbAuth.signIn(email, password);
+    return fbAuth.login(email, password);
   }
 
   void dispose() {

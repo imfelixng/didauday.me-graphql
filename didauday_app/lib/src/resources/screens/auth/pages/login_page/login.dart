@@ -23,14 +23,13 @@ class _LoginState extends State<Login> {
       LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
       var userInfo;
       try{
-        userInfo = await _loginBloc.onSignIn(email, password);
+        userInfo = await _loginBloc.onLogin(email, password);
         LoadingDialog.hideLoadingDialog(context);
+        Navigator.pushNamedAndRemoveUntil(context, '/home', ( _ ) => false);
       } catch(error) {
         LoadingDialog.hideLoadingDialog(context);
         MessageDialog.showMsgDialog(context, "Login", error);
       }
-      print(userInfo);
-      Navigator.pushNamedAndRemoveUntil(context, '/home', ( _ ) => false);
     }
 
   }

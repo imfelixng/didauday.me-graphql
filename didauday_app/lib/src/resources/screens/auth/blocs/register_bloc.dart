@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
 import 'package:didauday_app/src/resources/screens/auth/validators/register_validate.dart';
 
 
@@ -88,6 +89,16 @@ class RegisterBloc {
 
   }
 
+
+  Future onRegister(String email, String password,
+      String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
+      ) {
+
+    int _birthday = birthday.millisecondsSinceEpoch;
+
+    FBAuth fbAuth = FBAuth();
+    return fbAuth.register(email, password, firstName, lastName, _birthday, gender, address, phoneNumber);
+  }
 
   void dispose() {
     _emailController.close();
