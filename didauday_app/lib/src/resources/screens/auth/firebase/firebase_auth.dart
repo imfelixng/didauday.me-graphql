@@ -30,7 +30,7 @@ class FBAuth {
     try {
       result = await _fbAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await createUser(result.user.uid, firstName, lastName, birthday, gender,
+      await createUser(result.user.uid, email, firstName, lastName, birthday, gender,
           address, phoneNumber);
       return result.user;
 
@@ -47,17 +47,19 @@ class FBAuth {
     }
   }
 
-  Future createUser(String userId, String firstName, String lastName,
+  Future createUser(String userId, String email, String firstName, String lastName,
       int birthday, String gender, String address, String phoneNumber) async {
     try {
       await _fs.collection('users').document(userId).setData({
         'userId': userId,
+        'email': email,
         'firstName': firstName,
         'lastName': lastName,
         'birthday': birthday,
         'gender': gender,
         'address': address,
         'phoneNumber': phoneNumber,
+        'isComplete': true,
       });
     } catch(error) {
       print("============================================");
