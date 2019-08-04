@@ -16,20 +16,20 @@ class _LoginState extends State<Login> {
 
   LoginBloc _loginBloc = LoginBloc();
 
-  Future _onLogin() async {
+  void _onLogin() async {
     var email = _emailController.text;
     var password = _passwordController.text;
     if (_loginBloc.isValidDataLogin(email, password)) {
       LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
-      var result;
+      var userInfo;
       try{
-        result = await _loginBloc.onSignIn(email, password);
+        userInfo = await _loginBloc.onSignIn(email, password);
         LoadingDialog.hideLoadingDialog(context);
       } catch(error) {
         LoadingDialog.hideLoadingDialog(context);
         MessageDialog.showMsgDialog(context, "Login", error);
       }
-
+      print(userInfo);
       Navigator.pushNamedAndRemoveUntil(context, '/home', ( _ ) => false);
     }
 

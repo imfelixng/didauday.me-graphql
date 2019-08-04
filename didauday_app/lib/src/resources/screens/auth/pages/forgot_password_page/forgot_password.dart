@@ -1,4 +1,6 @@
 import 'package:didauday_app/src/resources/screens/auth/blocs/forgot_password_bloc.dart';
+import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
+import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -11,12 +13,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   ForgotPasswordBloc _forgotPasswordBloc = ForgotPasswordBloc();
 
 
-  void _onReset() {
+  void _onReset() async {
 
     var email = _emailController.text;
-    print('aaa');
     if (_forgotPasswordBloc.isValidDataReset(email)) {
-      print('oke');
+      LoadingDialog.showLoadingDialog(context, 'Reseting password. Please wait ...');
+      try{
+        await _forgotPasswordBloc.onResetPassword(email);
+        LoadingDialog.hideLoadingDialog(context);
+      } catch(error) {
+        print(error);
+        LoadingDialog.hideLoadingDialog(context);
+        MessageDialog.showMsgDialog(context, "Reset Password", error);
+      }
     }
 
   }

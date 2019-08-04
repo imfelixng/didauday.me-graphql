@@ -10,10 +10,18 @@ class FBAuth {
     try {
       result = await _fbAuth.signInWithEmailAndPassword(email: email, password: password);
     } catch (error) {
-      throw _errorLogin(error.code);
+      throw _errorResetPassword(error.code);
     }
 
     return result.user;
+  }
+
+  Future resetPassword(String email) async {
+    try {
+      await _fbAuth.sendPasswordResetEmail(email: email);
+    } catch (error) {
+      throw _errorLogin(error.code);
+    }
   }
 
   String _errorLogin(String code) {
@@ -39,6 +47,22 @@ class FBAuth {
         break;
       default:
         error = "Can't sign in, please try again";
+    }
+
+    return error;
+  }
+
+  String _errorResetPassword(String code) {
+    var error = '';
+    switch (code) {
+      case 'ERROR_INVALID_EMAIL':
+        error  ='The email address is malformed';
+        break;
+      case 'ERROR_USER_NOT_FOUND':
+        error = 'The user not found';
+        break;
+      default:
+        error = "Can't reset password, please try again";
     }
 
     return error;
