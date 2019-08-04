@@ -75,4 +75,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _forgotPasswordBloc.dispose();
+    super.dispose();
+  }
 }

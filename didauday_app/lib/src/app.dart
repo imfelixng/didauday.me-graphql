@@ -3,6 +3,7 @@ import 'resources/screens/auth/auth.dart';
 import 'resources/screens/auth/pages/forgot_password_page/forgot_password.dart';
 import 'resources/screens/auth/pages/login_page/login.dart';
 import 'resources/screens/auth/pages/register_page/register.dart';
+import 'resources/screens/home/home.dart';
 
 class App extends StatelessWidget {
   @override
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
         '/auth/login': (context) => Login(),
         '/auth/register': (context) => Register(),
         '/auth/forgot_password': (context) => ForgotPassword(),
+        '/home': (context) => Home(),
       },
     );
   }

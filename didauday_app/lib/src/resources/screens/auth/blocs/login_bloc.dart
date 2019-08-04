@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
+
 import '../validators/login_validate.dart';
 
 class LoginBloc {
@@ -27,6 +29,10 @@ class LoginBloc {
 
   }
 
+  Future onSignIn(String email, String password) {
+    FBAuth fbAuth = FBAuth();
+    return fbAuth.signIn(email, password);
+  }
 
   void dispose() {
     _emailController.close();

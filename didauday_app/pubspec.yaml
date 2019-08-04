@@ -26,7 +26,6 @@ dependencies:
   intro_slider:
   firebase_core:
   firebase_auth:
-  cloud_firestore:
   intl:
   font_awesome_flutter:
   flutter_google_places:

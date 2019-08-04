@@ -343,4 +343,11 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    registerBloc.dispose();
+    super.dispose();
+  }
+
 }
