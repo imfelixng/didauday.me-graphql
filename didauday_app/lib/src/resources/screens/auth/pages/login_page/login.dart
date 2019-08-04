@@ -1,3 +1,4 @@
+import 'package:didauday_app/src/resources/screens/auth/blocs/login_bloc.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -6,8 +7,26 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  LoginBloc _loginBloc = LoginBloc();
+
   @override
   Widget build(BuildContext context) {
+
+    void _onLogin() {
+
+      var email = _emailController.text;
+      var password = _passwordController.text;
+      print('aaa');
+      if (_loginBloc.isValidDataLogin(email, password)) {
+        print('oke');
+      }
+
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -17,27 +36,41 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10,),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.email,
-                    )
-                  ),
+                child: StreamBuilder<Object>(
+                  stream: _loginBloc.emailStream,
+                  builder: (context, snapshot) {
+                    return TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        errorText: snapshot.hasError ? snapshot.error : null,
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          Icons.email,
+                        )
+                      ),
+                    );
+                  }
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical:10,),
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                      prefixIcon: Icon(
-                        Icons.lock,
-                      )
-                  ),
+                child: StreamBuilder<Object>(
+                  stream: _loginBloc.passwordStream,
+                  builder: (context, snapshot) {
+                    return TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          errorText: snapshot.hasError ? snapshot.error : null,
+                        labelText: 'Password',
+                        border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.lock,
+                          )
+                      ),
+                    );
+                  }
                 ),
               ),
               Padding(
@@ -67,9 +100,7 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: RaisedButton(
                     color: Color(0xfffd5739),
-                    onPressed: () {
-
-                    },
+                    onPressed: _onLogin,
                     child: Text(
                       'Login',
                       style: TextStyle(
@@ -93,9 +124,7 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: RaisedButton(
                     color: Color(0xfffd5739),
-                    onPressed: () {
-
-                    },
+                    onPressed: (){},
                     child: Row(
                       children: <Widget>[
                         Text(
@@ -165,4 +194,11 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _loginBloc.dispose();
+    super.dispose();
+  }
+
 }

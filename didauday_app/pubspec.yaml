@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   intro_slider:
   firebase_core:
+  firebase_auth:
   datetime_picker_formfield:
   intl:
   font_awesome_flutter:
