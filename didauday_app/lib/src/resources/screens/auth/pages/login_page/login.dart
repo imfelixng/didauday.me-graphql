@@ -13,24 +13,23 @@ class _LoginState extends State<Login> {
 
   LoginBloc _loginBloc = LoginBloc();
 
-  @override
-  Widget build(BuildContext context) {
+  void _onLogin() {
 
-    void _onLogin() {
-
-      var email = _emailController.text;
-      var password = _passwordController.text;
-      print('aaa');
-      if (_loginBloc.isValidDataLogin(email, password)) {
-        print('oke');
-      }
-
+    var email = _emailController.text;
+    var password = _passwordController.text;
+    print('aaa');
+    if (_loginBloc.isValidDataLogin(email, password)) {
+      print('oke');
     }
 
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(10,),
+          padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[

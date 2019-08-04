@@ -25,7 +25,7 @@ class _RegisterState extends State<Register> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(
-            10,
+            20,
           ),
           child: SingleChildScrollView(
             child: Column(

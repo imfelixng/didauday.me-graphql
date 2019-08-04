@@ -1,3 +1,4 @@
+import 'package:didauday_app/src/resources/screens/auth/blocs/forgot_password_bloc.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -6,6 +7,20 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  TextEditingController _emailController = TextEditingController();
+  ForgotPasswordBloc _forgotPasswordBloc = ForgotPasswordBloc();
+
+
+  void _onReset() {
+
+    var email = _emailController.text;
+    print('aaa');
+    if (_forgotPasswordBloc.isValidDataReset(email)) {
+      print('oke');
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,19 +29,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(10,),
+          padding: EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10,),
-                child: TextField(
-                  decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(
-                        Icons.email,
-                      )
-                  ),
+                child: StreamBuilder<Object>(
+                  stream: _forgotPasswordBloc.emailStream,
+                  builder: (context, snapshot) {
+                    return TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        errorText: snapshot.hasError ? snapshot.error : null,
+                          labelText: 'Email',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.email,
+                          )
+                      ),
+                    );
+                  }
                 ),
               ),
               Padding(
@@ -36,9 +58,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   width: double.infinity,
                   child: RaisedButton(
                     color: Color(0xfffd5739),
-                    onPressed: () {
-
-                    },
+                    onPressed: _onReset,
                     child: Text(
                       'Reset password',
                       style: TextStyle(
