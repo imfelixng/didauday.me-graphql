@@ -45,12 +45,17 @@ class _LoginState extends State<Login> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Text(
-                        'Forgot password',
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 16,
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/auth/forgot_password');
+                      },
+                      child: Text(
+                          'Forgot password',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 16,
+                          ),
+                      ),
                     ),
                   ],
                 ),
