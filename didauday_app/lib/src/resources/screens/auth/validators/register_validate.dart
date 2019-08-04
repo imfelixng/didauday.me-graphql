@@ -22,8 +22,8 @@ class RegisterValidate {
     return firstName != null && firstName.length > 0;
   }
 
-  static bool isValidBirthday(String birthday) {
-    return birthday != null && birthday.length > 0;
+  static bool isValidBirthday(DateTime birthday) {
+    return birthday != null && birthday.isBefore(DateTime.now());
   }
 
   static bool isValidAddress(String address) {

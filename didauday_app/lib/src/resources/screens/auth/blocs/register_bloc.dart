@@ -30,7 +30,7 @@ class RegisterBloc {
 
   bool isValidDataRegister(
       String email, String password, String confirmPassword,
-      String firstName, String lastName, String birthday, String gender, String address, String phoneNumber,
+      String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
   ) {
 
     if (!RegisterValidate.isValidEmail(email)) {

@@ -1,4 +1,3 @@
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:didauday_app/src/resources/screens/auth/blocs/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +12,7 @@ class _RegisterState extends State<Register> {
   final DateFormat format = DateFormat("dd/MM/yyyy");
 
   var _valueGender = 'male';
+  DateTime _valueBirthday;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -33,7 +33,7 @@ class _RegisterState extends State<Register> {
     var confirmPassword = _confirmPasswordController.text;
     var firstName = _firstNameController.text;
     var lastName = _lastNameController.text;
-    var birthday = _birthdayController.text;
+    var birthday = _valueBirthday;
     var address = _addressController.text;
     var phoneNumber = _phoneNumberController.text;
 
@@ -47,6 +47,20 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future _selectDate() async {
+      DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: new DateTime.now(),
+          firstDate: new DateTime(1900),
+          lastDate: new DateTime(2100)
+      );
+      if(picked != null) setState(() {
+        _birthdayController.text = format.format(picked);
+        _valueBirthday = picked;
+        });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Register'),
@@ -191,26 +205,21 @@ class _RegisterState extends State<Register> {
                   child: StreamBuilder<Object>(
                       stream: registerBloc.birthdayStream,
                       builder: (context, snapshot) {
-                        return DateTimeField(
-                          controller: _birthdayController,
+                        return TextField(
                           readOnly: true,
+                          controller: _birthdayController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "Birthday",
-                            prefixIcon: Icon(
-                              Icons.date_range,
-                            ),
-                          ),
-                          format: format,
-                          onShowPicker: (context, currentValue) {
-                            return showDatePicker(
-                                context: context,
-                                firstDate: DateTime(1900),
-                                initialDate: currentValue ?? DateTime.now(),
-                                lastDate: DateTime(2100));
-                          },
+                              errorText:
+                              snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Birthday',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(
+                                Icons.date_range,
+                              )),
+                          onTap: _selectDate,
                         );
-                      }),
+                      },
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
