@@ -1,4 +1,5 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:didauday_app/src/resources/screens/auth/blocs/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,18 +10,46 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   final DateFormat format = DateFormat("dd/MM/yyyy");
 
   var _valueGender = 'male';
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _birthdayController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
+
+  RegisterBloc registerBloc = RegisterBloc();
+
+
+  void _onRegister() {
+    var email = _emailController.text;
+    var password = _passwordController.text;
+    var confirmPassword = _confirmPasswordController.text;
+    var firstName = _firstNameController.text;
+    var lastName = _lastNameController.text;
+    var birthday = _birthdayController.text;
+    var address = _addressController.text;
+    var phoneNumber = _phoneNumberController.text;
+
+    var gender = _valueGender;
+
+    if (registerBloc.isValidDataRegister(email, password, confirmPassword, firstName, lastName, birthday, gender, address, phoneNumber)) {
+      print('oke');
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Color(0xfffd5739)),
-        elevation: 0,
+        title: Text('Register'),
       ),
       body: SafeArea(
         child: Container(
@@ -46,42 +75,64 @@ class _RegisterState extends State<Register> {
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.email,
-                        )),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.emailStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.email,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.lock,
-                        )),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.passwordStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Password',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                              )),
+                        );
+                      }),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.lock,
-                        )),
-                  ),
+                StreamBuilder<Object>(
+                  stream: registerBloc.confirmPasswordStream,
+                  builder: (context, snapshot) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      child: TextField(
+                        controller: _confirmPasswordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            errorText:
+                            snapshot.hasError ? snapshot.error : null,
+                            labelText: 'Confirm Password',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                            )),
+                      ),
+                    );
+                  }
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -99,48 +150,67 @@ class _RegisterState extends State<Register> {
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'First name',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.person,
-                        )),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.firstNameStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _firstNameController,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'First name',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.person,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Last name',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.person,
-                        )),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.lastNameStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _lastNameController,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Last name',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.person,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: DateTimeField(
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Birthday",
-                      prefixIcon: Icon(
-                        Icons.date_range,
-                      ),
-                    ),
-                    format: format,
-                    onShowPicker: (context, currentValue) {
-                      return showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1900),
-                          initialDate: currentValue ?? DateTime.now(),
-                          lastDate: DateTime(2100));
-                    },
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.birthdayStream,
+                      builder: (context, snapshot) {
+                        return DateTimeField(
+                          controller: _birthdayController,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Birthday",
+                            prefixIcon: Icon(
+                              Icons.date_range,
+                            ),
+                          ),
+                          format: format,
+                          onShowPicker: (context, currentValue) {
+                            return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
+                          },
+                        );
+                      }),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -199,32 +269,46 @@ class _RegisterState extends State<Register> {
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Address',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.location_on,
-                        )),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.addressStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _addressController,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Address',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.location_on,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.phone,
-                        ),
-                    ),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: registerBloc.phoneNumberStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _phoneNumberController,
+                          decoration: InputDecoration(
+                            errorText:
+                                snapshot.hasError ? snapshot.error : null,
+                            labelText: 'Phone number',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(
+                              Icons.phone,
+                            ),
+                          ),
+                        );
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 30,
+                    top: 20,
                     bottom: 10,
                   ),
                   child: SizedBox(
@@ -232,7 +316,7 @@ class _RegisterState extends State<Register> {
                     width: double.infinity,
                     child: RaisedButton(
                       color: Color(0xfffd5739),
-                      onPressed: () {},
+                      onPressed: _onRegister,
                       child: Text(
                         'Register',
                         style: TextStyle(

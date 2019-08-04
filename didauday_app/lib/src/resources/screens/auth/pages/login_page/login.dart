@@ -1,5 +1,6 @@
 import 'package:didauday_app/src/resources/screens/auth/blocs/login_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -126,6 +127,13 @@ class _LoginState extends State<Login> {
                     onPressed: (){},
                     child: Row(
                       children: <Widget>[
+                        Icon(
+                          FontAwesomeIcons.google,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
                         Text(
                           'Login with Google',
                           style: TextStyle(
@@ -150,6 +158,13 @@ class _LoginState extends State<Login> {
                     },
                     child: Row(
                       children: <Widget>[
+                        Icon(
+                          FontAwesomeIcons.facebookF,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
                         Text(
                           'Login with Facebook',
                           style: TextStyle(
