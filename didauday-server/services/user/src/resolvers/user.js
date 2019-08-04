@@ -1,12 +1,8 @@
 const resolvers = {
   Query: {
-    auth: () => "ngquangan",
-    me: () => {
+    checkProfile: () => {
       return {
-        _id: "1234",
-        firstname: "An1",
-        lastname: "Nguyen1",
-        email: "12345@1",
+        is_complete: false,
       }
     }
   },

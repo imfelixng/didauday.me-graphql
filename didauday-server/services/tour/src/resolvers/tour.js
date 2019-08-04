@@ -58,17 +58,6 @@ const resolvers = {
   User: {
     posts: ({ id }) => filter(posts, { authorId: id })
   },
-  Profile: {
-    __resolveReference(object) {
-      return {
-        _id: "123",
-        firstname: "An",
-        lastname: "Nguyen",
-        email: "12345@",
-      }
-    }
-
-  }
 };
 
 export default resolvers;

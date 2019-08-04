@@ -2,13 +2,6 @@ import { gql } from 'apollo-server';
 
 const tourSchema = gql`
 
-  type Profile @key(fields: "_id") {
-    _id: ID!
-    firstname: String!
-    lastname: String!
-    email: String!
-  }
-
   # A post entry
   type Post @key(fields: "id") {
     id: Int!
