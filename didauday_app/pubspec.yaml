@@ -28,6 +28,7 @@ dependencies:
   datetime_picker_formfield:
   intl:
   font_awesome_flutter:
+  flutter_google_places:
 
 dev_dependencies:
   flutter_test:
