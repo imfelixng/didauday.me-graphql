@@ -47,7 +47,7 @@ class _RegisterState extends State<Register> {
       try{
         userInfo = await registerBloc.onRegister(email, password, firstName, lastName, birthday, gender, address, phoneNumber);
         LoadingDialog.hideLoadingDialog(context);
-        print(userInfo);
+        MessageDialog.showMsgDialog(context, "Register", "Please check your email inbox to verify this account.");
         Navigator.pushNamed(context, '/auth/login');
       } catch(error) {
         LoadingDialog.hideLoadingDialog(context);

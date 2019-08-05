@@ -18,7 +18,10 @@ class FBAuth {
     }
     var token = await user.getIdToken();
     print(token);
-    return user;
+
+    if (user.isEmailVerified)
+      return user;
+    throw "You must be verified your account.";
   }
 
   Future loginWithGoogle() async {
@@ -47,14 +50,15 @@ class FBAuth {
       String gender,
       String address,
       String phoneNumber) async {
-    var result;
+    FirebaseUser user;
     try {
-      result = await _fbAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      await createUser(result.user.uid, email, firstName, lastName, birthday, gender,
-          address, phoneNumber);
-      return result.user;
+      user = (await _fbAuth.createUserWithEmailAndPassword(
+          email: email, password: password)).user;
 
+      await user.sendEmailVerification();
+
+      await _fbAuth.signOut();
+      return user;
     } catch (error) {
       throw _errorRegister(error.code);
     }
@@ -65,27 +69,6 @@ class FBAuth {
       await _fbAuth.sendPasswordResetEmail(email: email);
     } catch (error) {
       throw _errorResetPassword(error.code);
-    }
-  }
-
-  Future createUser(String userId, String email, String firstName, String lastName,
-      int birthday, String gender, String address, String phoneNumber) async {
-    try {
-      await _fs.collection('users').document(userId).setData({
-        'userId': userId,
-        'email': email,
-        'firstName': firstName,
-        'lastName': lastName,
-        'birthday': birthday,
-        'gender': gender,
-        'address': address,
-        'phoneNumber': phoneNumber,
-        'isComplete': true,
-      });
-    } catch(error) {
-      print("============================================");
-      print(error);
-      throw error;
     }
   }
 
