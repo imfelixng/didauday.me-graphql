@@ -26,7 +26,10 @@ const gateway = new ApolloGateway({ serviceList: services });
   const server = new ApolloServer({
     schema,
     executor,
-    tracing: true
+    tracing: true,
+    introspectionHeaders: {
+      'auth-header': "please.add.me.to.schema.call"
+    }
   });
   const app = express();
 
