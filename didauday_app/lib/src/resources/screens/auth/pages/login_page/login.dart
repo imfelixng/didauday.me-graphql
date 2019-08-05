@@ -38,17 +38,27 @@ class _LoginState extends State<Login> {
   }
 
   void _onLoginWithGoogle() async {
-    LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
     FirebaseUser userInfo;
     try{
       userInfo = await _loginBloc.onLoginWithGoogle();
       var token = await userInfo.getIdToken();
       print(token);
-      LoadingDialog.hideLoadingDialog(context);
       Navigator.pushNamedAndRemoveUntil(context, '/user/update_profile', ( _ ) => false);
     } catch(error) {
-      LoadingDialog.hideLoadingDialog(context);
-      MessageDialog.showMsgDialog(context, "Login", error);
+      MessageDialog.showMsgDialog(context, "Login with google", error);
+    }
+
+  }
+
+  void _onLoginWithFacebook() async {
+    FirebaseUser userInfo;
+    try{
+      userInfo = await _loginBloc.onLoginWithFacebook();
+      var token = await userInfo.getIdToken();
+      print(token);
+      Navigator.pushNamedAndRemoveUntil(context, '/user/update_profile', ( _ ) => false);
+    } catch(error) {
+      MessageDialog.showMsgDialog(context, "Login with facebook", error);
     }
 
   }
@@ -182,9 +192,7 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: RaisedButton(
                       color: Color(0xff3a5a99),
-                      onPressed: () {
-
-                      },
+                      onPressed: _onLoginWithFacebook,
                       child: Row(
                         children: <Widget>[
                           Icon(

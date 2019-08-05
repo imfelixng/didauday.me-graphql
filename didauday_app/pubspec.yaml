@@ -29,6 +29,7 @@ dependencies:
   font_awesome_flutter:
   flutter_google_places:
   google_sign_in:
+  flutter_facebook_login:
 
 dev_dependencies:
   flutter_test:

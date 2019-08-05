@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FBAuth {
@@ -22,17 +23,47 @@ class FBAuth {
 
   Future loginWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    try {
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    return user;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final FirebaseUser user = (await _fbAuth.signInWithCredential(credential)).user;
+      return user;
+    } catch(error) {
+      throw _errorLoginSocial(error.code);
+    }
+  }
+
+  Future loginWithFacebook() async {
+    var fbLogin = FacebookLogin();
+    FacebookLoginResult result;
+    try {
+      print("==================");
+      result = await fbLogin.logInWithReadPermissions(
+          ['email', 'public_profile']);
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          var accessToken = result.accessToken;
+          print(accessToken.token);
+          final AuthCredential credential = FacebookAuthProvider.getCredential(accessToken: accessToken.token);
+          final FirebaseUser user =(await _fbAuth.signInWithCredential(credential)).user;
+          return user;
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          throw _errorLoginSocial("CANCEL_BY_USER");
+          break;
+        case FacebookLoginStatus.error:
+          throw _errorLoginSocial("UNKNOWN ERROR");
+          break;
+      }
+    } catch(error) {
+      throw _errorLoginSocial(error.code);
+    }
   }
 
   Future register(
@@ -86,6 +117,31 @@ class FBAuth {
         break;
       case 'ERROR_OPERATION_NOT_ALLOWED':
         error = "Can't login, please try again";
+        break;
+      default:
+        error = "Can't login please try again";
+    }
+
+    return error;
+  }
+
+  String _errorLoginSocial(String code) {
+    var error = '';
+    switch (code) {
+      case 'ERROR_INVALID_CREDENTIAL':
+        error = 'The credential data is malformed or has expired.';
+        break;
+      case 'ERROR_USER_DISABLED':
+        error = 'The user has been disabled';
+        break;
+      case 'ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL':
+        error = 'There already exists an account with the email address asserted by Google';
+        break;
+      case 'ERROR_OPERATION_NOT_ALLOWED':
+        error = 'Indicates that Google accounts are not enabled';
+        break;
+      case 'ERROR_INVALID_ACTION_CODE':
+        error = 'The action code in the link is malformed, expired, or has already been used';
         break;
       default:
         error = "Can't login please try again";
