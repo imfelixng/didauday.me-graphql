@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FBAuth {
   FirebaseAuth _fbAuth = FirebaseAuth.instance;
-  Firestore _fs = Firestore.instance;
 
   Future login(String email, String password) async {
     FirebaseUser user;
@@ -16,8 +14,6 @@ class FBAuth {
     } catch (error) {
       throw _errorLogin(error.code);
     }
-    var token = await user.getIdToken();
-    print(token);
 
     if (user.isEmailVerified)
       return user;
@@ -35,9 +31,7 @@ class FBAuth {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-
     final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    print("signed in " + user.displayName);
     return user;
   }
 

@@ -1,6 +1,7 @@
 import 'package:didauday_app/src/resources/screens/auth/blocs/login_bloc.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,9 +22,11 @@ class _LoginState extends State<Login> {
     var password = _passwordController.text;
     if (_loginBloc.isValidDataLogin(email, password)) {
       LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
-      var userInfo;
+      FirebaseUser userInfo;
       try{
         userInfo = await _loginBloc.onLogin(email, password);
+        var token = await userInfo.getIdToken();
+        print(token);
         LoadingDialog.hideLoadingDialog(context);
         Navigator.pushNamedAndRemoveUntil(context, '/home', ( _ ) => false);
       } catch(error) {
@@ -34,8 +37,20 @@ class _LoginState extends State<Login> {
 
   }
 
-  void _onLoginWithGoogle() {
-    _loginBloc.onLoginWithGoogle();
+  void _onLoginWithGoogle() async {
+    LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
+    FirebaseUser userInfo;
+    try{
+      userInfo = await _loginBloc.onLoginWithGoogle();
+      var token = await userInfo.getIdToken();
+      print(token);
+      LoadingDialog.hideLoadingDialog(context);
+      Navigator.pushNamedAndRemoveUntil(context, '/user/update_profile', ( _ ) => false);
+    } catch(error) {
+      LoadingDialog.hideLoadingDialog(context);
+      MessageDialog.showMsgDialog(context, "Login", error);
+    }
+
   }
 
   @override
