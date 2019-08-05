@@ -1,6 +1,6 @@
 const resolvers = {
   Query: {
-    checkProfile: () => {
+    checkProfile: (parent, args, context, info) => {
       return {
         is_complete: false,
       }
