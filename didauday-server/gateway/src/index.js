@@ -3,7 +3,7 @@ const { ApolloGateway } = require("@apollo/gateway");
 const express = require("express");
 
 const tourUrl = process.env.TOUR_URL || "http://localhost:5001/graphql";
-const authUrl = process.env.AUTH_URL || "http://localhost:5002/graphql";
+const userUrl = process.env.USER_URL || "http://localhost:5002/graphql";
 
 const PORT = process.env.PORT || 5000;
 
@@ -13,8 +13,8 @@ const services = [
     url: tourUrl
   },
   {
-    name: "auth",
-    url: authUrl
+    name: "user",
+    url: userUrl
   }
 ];
 

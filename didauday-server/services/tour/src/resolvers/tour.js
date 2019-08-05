@@ -57,7 +57,7 @@ const resolvers = {
   },
   User: {
     posts: ({ id }) => filter(posts, { authorId: id })
-  }
+  },
 };
 
 export default resolvers;
