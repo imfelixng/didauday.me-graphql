@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server';
 
 const tourSchema = gql`
+
   # A post entry
   type Post @key(fields: "id") {
     id: Int!
@@ -16,7 +17,7 @@ const tourSchema = gql`
   }
 
   # Queries from post service
-  type Query {
+  extend type Query {
     # List of all our posts
     allPosts: [Post]
     # A single post
