@@ -12,10 +12,21 @@ services:
     restart: always
   tour:
     build:
-      context: ./didauday-server/services/tours
+      context: ./didauday-server/services/tour
       dockerfile: Dockerfile
     volumes:
       - /app/node_modules
+    environment:
+      - PORT=5001
+    restart: always
+  auth:
+    build:
+      context: ./didauday-server/services/auth
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+    environment:
+      - PORT=5002
     restart: always
   server:
     build:
@@ -23,10 +34,13 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /app/node_modules
-    depends_on:
-      - "tour"
     environment:
       - TOUR_URL=http://tour:5001/graphql
+      - AUTH_URL=http://auth:5002/graphql
+      - PORT=5000
+    depends_on:
+      - tour
+      - auth
   mongo:
     image: mongo
     volumes:
