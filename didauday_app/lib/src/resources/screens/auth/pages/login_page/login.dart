@@ -34,6 +34,10 @@ class _LoginState extends State<Login> {
 
   }
 
+  void _onLoginWithGoogle() {
+    _loginBloc.onLoginWithGoogle();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +138,7 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: RaisedButton(
                       color: Color(0xfffd5739),
-                      onPressed: (){},
+                      onPressed: _onLoginWithGoogle,
                       child: Row(
                         children: <Widget>[
                           Icon(

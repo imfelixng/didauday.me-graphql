@@ -34,6 +34,11 @@ class LoginBloc {
     return fbAuth.login(email, password);
   }
 
+  Future onLoginWithGoogle() {
+    FBAuth fbAuth = FBAuth();
+    return fbAuth.loginWithGoogle();
+  }
+
   void dispose() {
     _emailController.close();
     _passwordController.close();

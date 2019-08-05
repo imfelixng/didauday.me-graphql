@@ -1,20 +1,41 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FBAuth {
   FirebaseAuth _fbAuth = FirebaseAuth.instance;
   Firestore _fs = Firestore.instance;
 
   Future login(String email, String password) async {
-    var result;
+    FirebaseUser user;
     try {
-      result = await _fbAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+      user = (
+          await _fbAuth.signInWithEmailAndPassword(
+              email: email, password: password)
+      ).user;
     } catch (error) {
       throw _errorLogin(error.code);
     }
+    var token = await user.getIdToken();
+    print(token);
+    return user;
+  }
 
-    return result.user;
+  Future loginWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+    print("signed in " + user.displayName);
+    return user;
   }
 
   Future register(
