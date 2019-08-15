@@ -1,9 +1,13 @@
+import 'package:didauday_app/src/core/services/graphql/config/config.dart';
+import 'package:didauday_app/src/core/services/graphql/query/query_profile.dart';
+import 'package:didauday_app/src/core/services/shared_preferences_service.dart';
 import 'package:didauday_app/src/resources/screens/auth/blocs/login_bloc.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,9 +15,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
   LoginBloc _loginBloc = LoginBloc();
 
@@ -23,44 +28,100 @@ class _LoginState extends State<Login> {
     if (_loginBloc.isValidDataLogin(email, password)) {
       LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
       FirebaseUser userInfo;
-      try{
+      try {
         userInfo = await _loginBloc.onLogin(email, password);
         var token = await userInfo.getIdToken();
-        print(token);
-        LoadingDialog.hideLoadingDialog(context);
-        Navigator.pushNamedAndRemoveUntil(context, '/home', ( _ ) => false);
-      } catch(error) {
+
+        await sharedPreferenceService.getSharedPreferencesInstance();
+        await sharedPreferenceService.setToken(token.token);
+
+        GraphQLClient _client = graphQLConfiguration.clientToQuery();
+        QueryResult result = await _client.query(
+          QueryOptions(
+            document: QueryProfile.checkProfile,
+          ),
+        );
+
+        if (!result.hasErrors) {
+          bool isComplete = result.data.data["check"]["is_complete"];
+          LoadingDialog.hideLoadingDialog(context);
+          if (isComplete) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/home', (_) => false);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/user/update_profile', (_) => false);
+          }
+        }
+
+      } catch (error) {
         LoadingDialog.hideLoadingDialog(context);
         MessageDialog.showMsgDialog(context, "Login", error);
       }
     }
-
   }
 
   void _onLoginWithGoogle() async {
     FirebaseUser userInfo;
-    try{
+    try {
       userInfo = await _loginBloc.onLoginWithGoogle();
       var token = await userInfo.getIdToken();
-      print(token);
-      Navigator.pushNamedAndRemoveUntil(context, '/user/update_profile', ( _ ) => false);
-    } catch(error) {
+      await sharedPreferenceService.getSharedPreferencesInstance();
+      await sharedPreferenceService.setToken(token.token);
+
+      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      QueryResult result = await _client.query(
+        QueryOptions(
+          document: QueryProfile.checkProfile,
+        ),
+      );
+
+      if (!result.hasErrors) {
+        bool isComplete = result.data.data["check"]["is_complete"];
+
+        if (isComplete) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/home', (_) => false);
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/user/update_profile', (_) => false);
+        }
+      }
+    } catch (error) {
+      print(error);
       MessageDialog.showMsgDialog(context, "Login with google", error);
     }
-
   }
 
   void _onLoginWithFacebook() async {
     FirebaseUser userInfo;
-    try{
+    try {
       userInfo = await _loginBloc.onLoginWithFacebook();
       var token = await userInfo.getIdToken();
-      print(token);
-      Navigator.pushNamedAndRemoveUntil(context, '/user/update_profile', ( _ ) => false);
-    } catch(error) {
+      await sharedPreferenceService.getSharedPreferencesInstance();
+      await sharedPreferenceService.setToken(token.token);
+
+      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      QueryResult result = await _client.query(
+        QueryOptions(
+          document: QueryProfile.checkProfile,
+        ),
+      );
+
+      if (!result.hasErrors) {
+        bool isComplete = result.data.data["check"]["is_complete"];
+
+        if (isComplete) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/home', (_) => false);
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/user/update_profile', (_) => false);
+        }
+      }
+    } catch (error) {
       MessageDialog.showMsgDialog(context, "Login with facebook", error);
     }
-
   }
 
   @override
@@ -74,46 +135,50 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10,),
-                  child: StreamBuilder<Object>(
-                    stream: _loginBloc.emailStream,
-                    builder: (context, snapshot) {
-                      return TextField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          errorText: snapshot.hasError ? snapshot.error : null,
-                          labelText: 'Email',
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(
-                            Icons.email,
-                          )
-                        ),
-                      );
-                    }
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
                   ),
+                  child: StreamBuilder<Object>(
+                      stream: _loginBloc.emailStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.email,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical:10,),
-                  child: StreamBuilder<Object>(
-                    stream: _loginBloc.passwordStream,
-                    builder: (context, snapshot) {
-                      return TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            errorText: snapshot.hasError ? snapshot.error : null,
-                          labelText: 'Password',
-                          border: OutlineInputBorder(),
-                            prefixIcon: Icon(
-                              Icons.lock,
-                            )
-                        ),
-                      );
-                    }
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
                   ),
+                  child: StreamBuilder<Object>(
+                      stream: _loginBloc.passwordStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              errorText:
+                                  snapshot.hasError ? snapshot.error : null,
+                              labelText: 'Password',
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                              )),
+                        );
+                      }),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10,),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
@@ -122,18 +187,21 @@ class _LoginState extends State<Login> {
                           Navigator.pushNamed(context, '/auth/forgot_password');
                         },
                         child: Text(
-                            'Forgot password',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 16,
-                            ),
+                          'Forgot password',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10,),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                  ),
                   child: SizedBox(
                     height: 50,
                     width: double.infinity,
@@ -157,7 +225,10 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10,),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                  ),
                   child: SizedBox(
                     height: 50,
                     width: double.infinity,
@@ -186,7 +257,10 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10,),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                  ),
                   child: SizedBox(
                     height: 50,
                     width: double.infinity,
@@ -215,11 +289,13 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10,),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                  ),
                   child: Row(
                     children: <Widget>[
                       Text(
-                          'You don\'t have account?  ',
+                        'You don\'t have account?  ',
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -229,11 +305,11 @@ class _LoginState extends State<Login> {
                           Navigator.pushNamed(context, '/auth/register');
                         },
                         child: Text(
-                            'Create new account',
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 16,
-                              ),
+                          'Create new account',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ],
@@ -252,5 +328,4 @@ class _LoginState extends State<Login> {
     _loginBloc.dispose();
     super.dispose();
   }
-
 }
