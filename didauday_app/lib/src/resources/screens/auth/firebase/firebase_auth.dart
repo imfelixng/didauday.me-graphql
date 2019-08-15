@@ -68,13 +68,8 @@ class FBAuth {
 
   Future register(
       String email,
-      String password,
-      String firstName,
-      String lastName,
-      int birthday,
-      String gender,
-      String address,
-      String phoneNumber) async {
+      String password
+  ) async {
     FirebaseUser user;
     try {
       user = (await _fbAuth.createUserWithEmailAndPassword(

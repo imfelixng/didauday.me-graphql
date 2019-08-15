@@ -30,6 +30,8 @@ dependencies:
   flutter_google_places:
   google_sign_in:
   flutter_facebook_login:
+  graphql_flutter:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
