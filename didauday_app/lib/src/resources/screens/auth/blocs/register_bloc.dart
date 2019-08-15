@@ -9,29 +9,14 @@ class RegisterBloc {
   StreamController _passwordController = new StreamController();
   StreamController _confirmPasswordController = new StreamController();
 
-  StreamController _firstNameController = new StreamController();
-  StreamController _lastNameController = new StreamController();
-  StreamController _birthdayController = new StreamController();
-  StreamController _genderController = new StreamController();
-  StreamController _addressController = new StreamController();
-  StreamController _phoneNumberController = new StreamController();
-
   Stream get emailStream => _emailController.stream;
   Stream get passwordStream => _passwordController.stream;
   Stream get confirmPasswordStream => _confirmPasswordController.stream;
-
-  Stream get firstNameStream => _firstNameController.stream;
-  Stream get lastNameStream => _lastNameController.stream;
-  Stream get birthdayStream => _birthdayController.stream;
-  Stream get genderStream => _genderController.stream;
-  Stream get addressStream => _addressController.stream;
-  Stream get phoneNumberStream => _phoneNumberController.stream;
 
 
 
   bool isValidDataRegister(
       String email, String password, String confirmPassword,
-      String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
   ) {
 
     if (!RegisterValidate.isValidEmail(email)) {
@@ -55,62 +40,22 @@ class RegisterBloc {
     _confirmPasswordController.sink.add("");
     _passwordController.sink.add("");
 
-    if (!RegisterValidate.isValidFirstName(firstName)) {
-      _firstNameController.sink.addError("First name is invalid");
-      return false;
-    }
-    _firstNameController.sink.add("");
-
-    if (!RegisterValidate.isValidLastName(lastName)) {
-      _lastNameController.sink.addError("Last name is invalid");
-      return false;
-    }
-    _lastNameController.sink.add("");
-
-    if (!RegisterValidate.isValidBirthday(birthday)) {
-      _birthdayController.sink.addError("Birthday is invalid");
-      return false;
-    }
-    _birthdayController.sink.add("");
-
-    if (!RegisterValidate.isValidAddress(address)) {
-      _addressController.sink.addError("Address is invalid");
-      return false;
-    }
-    _addressController.sink.add("");
-
-    if (!RegisterValidate.isValidPhoneNumber(phoneNumber)) {
-      _phoneNumberController.sink.addError("Phone number is invalid");
-      return false;
-    }
-    _phoneNumberController.sink.add("");
-
     return true;
 
   }
 
 
-  Future onRegister(String email, String password,
-      String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
-      ) {
+  Future onRegister(String email, String password) {
 
-    int _birthday = birthday.millisecondsSinceEpoch;
 
     FBAuth fbAuth = FBAuth();
-    return fbAuth.register(email, password, firstName, lastName, _birthday, gender, address, phoneNumber);
+    return fbAuth.register(email, password);
   }
 
   void dispose() {
     _emailController.close();
     _passwordController.close();
     _confirmPasswordController.close();
-
-    _firstNameController.close();
-    _lastNameController.close();
-    _birthdayController.close();
-    _genderController.close();
-    _addressController.close();
-    _phoneNumberController.close();
   }
 
 }
