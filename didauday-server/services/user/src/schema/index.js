@@ -13,6 +13,7 @@ const userSchema = gql`
   # type
   type Profile @key(fields: "_id") {
     _id: ID!
+    email: String!
     firstname: String!
     lastname: String!
     birthday: Int!

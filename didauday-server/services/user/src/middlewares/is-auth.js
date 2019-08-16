@@ -1,11 +1,26 @@
-import serviceAccount from "./keys/serviceAccountKey.json";
+import { fbAdmin } from '../configs/firebase';
 
-import fbAdmin from 'firebase-admin';
+const isAuth = async (req) => {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader ? authHeader.split(' ')[1] : '';
 
-fbAdmin.initializeApp(
-    {
-    credential: fbAdmin.credential.cert(serviceAccount),
-    databaseURL: 'https://didauday.firebaseio.com'
+    if (!token || token === '') {
+        throw new Error('Authentication is required');
     }
-);
 
+    console.log(token);
+
+    let decodedToken = null;
+    try {
+        decodedToken = await fbAdmin.auth().verifyIdToken(token);
+    } catch (error) {
+        console.log(error);
+        throw new Error('Authentication is required');
+    }
+    const uid = decodedToken.uid;
+    return uid;
+}
+
+export {
+    isAuth
+}

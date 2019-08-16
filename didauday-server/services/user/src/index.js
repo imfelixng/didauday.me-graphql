@@ -1,11 +1,21 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { buildFederatedSchema } from '@apollo/federation';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
+import './configs/db/mongo';
+import neo4j from './configs/db/neo4j';
+
+import Profile from './models/mongo/profile';
+import Role from './models/mongo/profile';
 
 const PORT = process.env.PORT || 5002;
+
+const mongo = {
+  Profile,
+  Role,
+}
 
 const server = new ApolloServer({
   schema: buildFederatedSchema([
@@ -15,7 +25,11 @@ const server = new ApolloServer({
     }
   ]),
   context: async ({ req }) => {
-    return { req };
+    return {
+      req,
+      neo4j,
+      mongo
+    };
   },
 });
 

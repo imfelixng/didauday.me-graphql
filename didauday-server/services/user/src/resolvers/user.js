@@ -1,6 +1,25 @@
+import {
+  isAuth
+} from '../middlewares/is-auth';
+
 const resolvers = {
   Query: {
-    checkProfile: (parent, args, context, info) => {
+    checkProfile: async (parent, args, {
+      req
+    }, info) => {
+      let uid = null;
+      try {
+        uid = await isAuth(req);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+
+      if (uid) {
+        return {
+          is_complete: true,
+        }
+      }
+
       return {
         is_complete: false,
       }
