@@ -1,5 +1,5 @@
 const { ApolloServer } = require("apollo-server-express");
-const { ApolloGateway } = require("@apollo/gateway");
+const { ApolloGateway, RemoteGraphQLDataSource } = require("@apollo/gateway");
 const express = require("express");
 
 const tourUrl = process.env.TOUR_URL || "http://localhost:5001/graphql";
@@ -18,7 +18,19 @@ const services = [
   }
 ];
 
-const gateway = new ApolloGateway({ serviceList: services });
+const gateway = new ApolloGateway(
+  {
+    serviceList: services,
+    buildService: ({ name, url }) => {
+      return new RemoteGraphQLDataSource({
+        url,
+        willSendRequest({ request, context }) {
+          request.http.headers.set('authorization', context.authorization);
+        },
+      });
+    },  
+  }
+);
 
 (async () => {
   const { schema, executor } = await gateway.load();
@@ -27,8 +39,10 @@ const gateway = new ApolloGateway({ serviceList: services });
     schema,
     executor,
     tracing: true,
-    introspectionHeaders: {
-      'auth-header': "please.add.me.to.schema.call"
+    context: ({req}) => {
+      return {
+        authorization: req.headers.authorization,
+      }
     }
   });
   const app = express();
