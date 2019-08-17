@@ -1,3 +1,5 @@
 databases/mongo/db
 databases/neo4j/db
 databases/redis/db
+
+.DS_Store
