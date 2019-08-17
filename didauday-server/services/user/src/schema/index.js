@@ -51,6 +51,7 @@ const userSchema = gql`
     birthday: Int!
     gender: GenderType!
     address: String!
+    avatar: String
     phone_number: String!
     role: Int
   }

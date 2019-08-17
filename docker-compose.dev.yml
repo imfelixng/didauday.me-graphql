@@ -66,6 +66,25 @@ services:
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
     restart: always
+  move-data:
+    build:
+      context: ./didauday-server/services/move-data
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/move-data:/app
+    depends_on:
+      - mongo
+      - neo4j
+    environment:
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway
