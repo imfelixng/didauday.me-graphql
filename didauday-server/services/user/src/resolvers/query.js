@@ -2,6 +2,8 @@ import {
   isAuth
 } from '../middlewares/is-auth';
 
+import * as helps from '../helpers/firebase';
+
 const resolvers = {
   Query: {
     checkProfile: async (parent, args, {
@@ -47,6 +49,22 @@ const resolvers = {
 
       return {
         is_complete: false,
+      }
+    },
+    checkAccount: async (
+      parent, { data }, {
+        req, mongo
+      }, info
+    ) => {
+      const { email } = data;
+      let user = null;
+      try {
+        user = await helps.getUserByEmail(email);
+      } catch (error) {
+        user = null;
+      }
+      return {
+        is_exist: user !== null,
       }
     }
   },

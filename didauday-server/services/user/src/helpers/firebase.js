@@ -1,12 +1,16 @@
 import { fbAdmin } from '../configs/firebase';
 
-const getUserByUid = async (uid) => {
+const getUserByEmail = async (email) => {
     let user = null;
     try {
-        user = await fbAdmin.auth();
+        user = await fbAdmin.auth().getUserByEmail(email);
     } catch (error) {
-        console.log(error);
         user = null;
     }
+    return user;
+}
+
+export {
+    getUserByEmail,
 }
 

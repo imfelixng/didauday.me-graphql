@@ -4,6 +4,7 @@ const userSchema = gql`
   extend type Query {
     me: Profile!
     checkProfile: CheckProfilePayload!
+    checkAccount(data: CheckAccountInput!): CheckAccountPayload!
   }
 
   extend type Mutation {
@@ -39,6 +40,9 @@ const userSchema = gql`
     is_complete: Boolean!
   }
 
+  type CheckAccountPayload {
+    is_exist: Boolean!
+  }
 
   # input
   input UpdateProfileInput {
@@ -49,6 +53,10 @@ const userSchema = gql`
     address: String!
     phone_number: String!
     role: Int
+  }
+
+  input CheckAccountInput {
+    email: String!
   }
 
   # enum
