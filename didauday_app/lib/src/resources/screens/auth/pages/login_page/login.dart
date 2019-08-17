@@ -68,6 +68,7 @@ class _LoginState extends State<Login> {
     try {
       userInfo = await _loginBloc.onLoginWithGoogle();
     } catch (error) {
+      print(error);
       MessageDialog.showMsgDialog(
         context,
         "Login with google",

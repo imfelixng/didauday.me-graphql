@@ -35,7 +35,7 @@ class FBAuth {
       final FirebaseUser user = (await _fbAuth.signInWithCredential(credential)).user;
       return user;
     } catch(error) {
-      throw _errorLoginSocial(error.code);
+      throw _errorLoginSocial(error?.code);
     }
   }
 
@@ -62,6 +62,7 @@ class FBAuth {
           break;
       }
     } catch(error) {
+      print(error);
       throw _errorLoginSocial(error.code);
     }
   }
