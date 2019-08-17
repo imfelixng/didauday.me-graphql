@@ -6,7 +6,7 @@ import '../../shared_preferences_service.dart';
 class GraphQLConfiguration {
 
   static HttpLink httpLink = HttpLink(
-    uri: "http://192.168.1.46:5000/graphql",
+    uri: "http://192.168.1.30:5000/graphql",
   );
 
   static AuthLink authLink =

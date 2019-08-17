@@ -66,6 +66,7 @@ class _LoginState extends State<Login> {
     try {
       userInfo = await _loginBloc.onLoginWithGoogle();
       var token = await userInfo.getIdToken();
+
       await sharedPreferenceService.getSharedPreferencesInstance();
       await sharedPreferenceService.setToken(token.token);
 
@@ -75,6 +76,9 @@ class _LoginState extends State<Login> {
           document: QueryProfile.checkProfile,
         ),
       );
+
+
+      print(result.errors);
 
       if (!result.hasErrors) {
         bool isComplete = result.data.data["check"]["is_complete"];
