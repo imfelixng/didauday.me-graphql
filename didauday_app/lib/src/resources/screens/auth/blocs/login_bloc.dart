@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../validators/login_validate.dart';
 
@@ -29,17 +30,17 @@ class LoginBloc {
 
   }
 
-  Future onLogin(String email, String password) {
+  Future<FirebaseUser> onLogin(String email, String password) {
     FBAuth fbAuth = FBAuth();
     return fbAuth.login(email, password);
   }
 
-  Future onLoginWithGoogle() {
+  Future<FirebaseUser> onLoginWithGoogle() {
     FBAuth fbAuth = FBAuth();
     return fbAuth.loginWithGoogle();
   }
 
-  Future onLoginWithFacebook() {
+  Future<FirebaseUser> onLoginWithFacebook() {
     FBAuth fbAuth = FBAuth();
     return fbAuth.loginWithFacebook();
   }

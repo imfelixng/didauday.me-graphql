@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'resources/screens/auth/auth.dart';
 import 'resources/screens/auth/pages/forgot_password_page/forgot_password.dart';
 import 'resources/screens/auth/pages/login_page/login.dart';
@@ -11,12 +13,25 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Auth(),
-      routes: {
-        '/auth/login': (context) => Login(),
-        '/auth/register': (context) => Register(),
-        '/auth/forgot_password': (context) => ForgotPassword(),
-        '/home': (context) => Home(),
-        '/user/update_profile': (context) => UpdateProfile(),
+      onGenerateRoute: (settings) {
+        var name = settings.name;
+        if (name == '/auth/login') {
+          return CupertinoPageRoute(builder: (context) => Login());
+        }
+        if (name == '/auth/register') {
+          return CupertinoPageRoute(builder: (context) => Register());
+        }
+        if (name == '/auth/forgot_password') {
+          return CupertinoPageRoute(builder: (context) => ForgotPassword());
+        }
+        if (name == '/home') {
+          return CupertinoPageRoute(builder: (context) => Home());
+        }
+
+        if (name == '/user/update_profile') {
+          return CupertinoPageRoute(builder: (context) => UpdateProfile());
+        }
+        return null;
       },
     );
   }

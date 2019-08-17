@@ -21,7 +21,7 @@ class FBAuth {
     throw "You must be verified your account.";
   }
 
-  Future loginWithGoogle() async {
+  Future<FirebaseUser> loginWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     try {

@@ -27,105 +27,105 @@ class _LoginState extends State<Login> {
     var password = _passwordController.text;
     if (_loginBloc.isValidDataLogin(email, password)) {
       LoadingDialog.showLoadingDialog(context, "Logging in. Please wait...");
-      FirebaseUser userInfo;
       try {
-        userInfo = await _loginBloc.onLogin(email, password);
-        var token = await userInfo.getIdToken();
+        final userInfo = await _loginBloc.onLogin(email, password);
+        await _saveToken(userInfo);
 
-        await sharedPreferenceService.getSharedPreferencesInstance();
-        await sharedPreferenceService.setToken(token.token);
-
-        GraphQLClient _client = graphQLConfiguration.clientToQuery();
-        QueryResult result = await _client.query(
-          QueryOptions(
-            document: QueryProfile.checkProfile,
-          ),
-        );
-
-        if (!result.hasErrors) {
-          bool isComplete = result.data.data["check"]["is_complete"];
-          LoadingDialog.hideLoadingDialog(context);
-          if (isComplete) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/home', (_) => false);
-          } else {
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/user/update_profile', (_) => false);
-          }
-        }
-
+        await _checkProfile();
       } catch (error) {
         LoadingDialog.hideLoadingDialog(context);
-        MessageDialog.showMsgDialog(context, "Login", error);
+        MessageDialog.showMsgDialog(context, "Login", error.toString());
       }
+    }
+  }
+
+  Future _checkProfile() async {
+    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    QueryResult result = await _client.query(
+      QueryOptions(
+        document: QueryProfile.checkProfile,
+      ),
+    );
+    print('Result=$result');
+
+    if (!result.hasErrors) {
+      bool isComplete = result.data.data["check"]["is_complete"];
+      if (isComplete) {
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/user/update_profile', (_) => false);
+      }
+    } else {
+      MessageDialog.showMsgDialog(
+          context, "Login", result.errors[0].toString());
     }
   }
 
   void _onLoginWithGoogle() async {
     FirebaseUser userInfo;
+
     try {
       userInfo = await _loginBloc.onLoginWithGoogle();
-      var token = await userInfo.getIdToken();
-
-      await sharedPreferenceService.getSharedPreferencesInstance();
-      await sharedPreferenceService.setToken(token.token);
-
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
-      QueryResult result = await _client.query(
-        QueryOptions(
-          document: QueryProfile.checkProfile,
-        ),
-      );
-
-
-      print(result.errors);
-
-      if (!result.hasErrors) {
-        bool isComplete = result.data.data["check"]["is_complete"];
-
-        if (isComplete) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/home', (_) => false);
-        } else {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/user/update_profile', (_) => false);
-        }
-      }
     } catch (error) {
-      print(error);
-      MessageDialog.showMsgDialog(context, "Login with google", error);
+      MessageDialog.showMsgDialog(
+        context,
+        "Login with google",
+        error.toString(),
+      );
+      return;
+    }
+
+    await _saveToken(userInfo);
+
+    try {
+      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      await _checkProfile();
+      LoadingDialog.hideLoadingDialog(context);
+    } catch (error) {
+      LoadingDialog.hideLoadingDialog(context);
+      MessageDialog.showMsgDialog(
+        context,
+        "Login with google",
+        error.toString(),
+      );
     }
   }
 
   void _onLoginWithFacebook() async {
     FirebaseUser userInfo;
+
     try {
-      userInfo = await _loginBloc.onLoginWithFacebook();
-      var token = await userInfo.getIdToken();
-      await sharedPreferenceService.getSharedPreferencesInstance();
-      await sharedPreferenceService.setToken(token.token);
-
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
-      QueryResult result = await _client.query(
-        QueryOptions(
-          document: QueryProfile.checkProfile,
-        ),
-      );
-
-      if (!result.hasErrors) {
-        bool isComplete = result.data.data["check"]["is_complete"];
-
-        if (isComplete) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/home', (_) => false);
-        } else {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/user/update_profile', (_) => false);
-        }
-      }
+      userInfo = await _loginBloc.onLoginWithGoogle();
     } catch (error) {
-      MessageDialog.showMsgDialog(context, "Login with facebook", error);
+      MessageDialog.showMsgDialog(
+        context,
+        "Login with google",
+        error.toString(),
+      );
+      return;
     }
+
+    await _saveToken(userInfo);
+
+    try {
+      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      await _checkProfile();
+      LoadingDialog.hideLoadingDialog(context);
+    } catch (error) {
+      LoadingDialog.hideLoadingDialog(context);
+      MessageDialog.showMsgDialog(
+        context,
+        "Login with facebook",
+        error.toString(),
+      );
+    }
+  }
+
+  Future _saveToken(FirebaseUser userInfo) async {
+    var token = await userInfo.getIdToken();
+    await sharedPreferenceService.getSharedPreferencesInstance();
+    await sharedPreferenceService.setToken(token.token);
   }
 
   @override
@@ -138,6 +138,19 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: 128,
+                  height: 128,
+                  child: FlutterLogo(
+                    size: 128,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
@@ -179,27 +192,22 @@ class _LoginState extends State<Login> {
                         );
                       }),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/auth/forgot_password');
-                        },
-                        child: Text(
-                          'Forgot password',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16,
-                          ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/auth/forgot_password');
+                      },
+                      child: Text(
+                        'Forgot password',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 16,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -245,14 +253,14 @@ class _LoginState extends State<Login> {
                             FontAwesomeIcons.google,
                             color: Colors.white,
                           ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text(
-                            'Login with Google',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                          Expanded(
+                            child: Text(
+                              'Login with Google',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ],
@@ -277,14 +285,14 @@ class _LoginState extends State<Login> {
                             FontAwesomeIcons.facebookF,
                             color: Colors.white,
                           ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text(
-                            'Login with Facebook',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                          Expanded(
+                            child: Text(
+                              'Login with Facebook',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ],
@@ -292,32 +300,28 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        'You don\'t have account?  ',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'You don\'t have account?',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/auth/register');
+                      },
+                      child: Text(
+                        'Create new account',
                         style: TextStyle(
+                          color: Colors.green,
                           fontSize: 16,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/auth/register');
-                        },
-                        child: Text(
-                          'Create new account',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
