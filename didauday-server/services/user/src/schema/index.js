@@ -7,21 +7,21 @@ const userSchema = gql`
   }
 
   extend type Mutation {
-    UpdateProfile(data: UpdateProfileInput!): ProfilePayload!
+    updateProfile(data: UpdateProfileInput!): ProfilePayload!
   }
 
   # type
   type Profile @key(fields: "_id") {
     _id: ID!
-    email: String!
     firstname: String!
     lastname: String!
     birthday: Int!
     gender: GenderType!
     address: String!
     phone_number: String!
-    role: Role
-    is_complete: Boolean
+    avatar: String!
+    role: Int!
+    is_complete: Boolean!
   }
 
   type Role @key(fields: "code"){

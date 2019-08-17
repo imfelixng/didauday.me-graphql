@@ -17,8 +17,8 @@ const isAuth = async (req) => {
         console.log(error);
         throw new Error('Authentication is required');
     }
-    const uid = decodedToken.uid;
-    return uid;
+
+    return decodedToken;
 }
 
 export {

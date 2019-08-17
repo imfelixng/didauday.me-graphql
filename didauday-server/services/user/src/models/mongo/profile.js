@@ -39,10 +39,15 @@ const profileSchema = new Schema({
     type: String,
     required: true,
   },
+  is_complete: {
+    type: Boolean,
+    default: false,
+  },
   role: {
     type: Number,
     ref: 'Role',
     enum: [0, 1, 2],
+    default: 2,
   },
   email_paypal: {
     type: String,
