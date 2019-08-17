@@ -46,10 +46,9 @@ class _LoginState extends State<Login> {
         document: QueryProfile.checkProfile,
       ),
     );
-    print('Result=$result');
 
     if (!result.hasErrors) {
-      bool isComplete = result.data.data["check"]["is_complete"];
+      bool isComplete = result.data.data["checkProfile"]["is_complete"];
       if (isComplete) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
       } else {
@@ -72,7 +71,7 @@ class _LoginState extends State<Login> {
       MessageDialog.showMsgDialog(
         context,
         "Login with google",
-        error.toString(),
+        error,
       );
       return;
     }
@@ -80,15 +79,12 @@ class _LoginState extends State<Login> {
     await _saveToken(userInfo);
 
     try {
-      LoadingDialog.showLoadingDialog(context, 'Loading...');
       await _checkProfile();
-      LoadingDialog.hideLoadingDialog(context);
     } catch (error) {
-      LoadingDialog.hideLoadingDialog(context);
       MessageDialog.showMsgDialog(
         context,
         "Login with google",
-        error.toString(),
+        error,
       );
     }
   }
@@ -97,12 +93,12 @@ class _LoginState extends State<Login> {
     FirebaseUser userInfo;
 
     try {
-      userInfo = await _loginBloc.onLoginWithGoogle();
+      userInfo = await _loginBloc.onLoginWithFacebook();
     } catch (error) {
       MessageDialog.showMsgDialog(
         context,
-        "Login with google",
-        error.toString(),
+        "Login with facebook",
+        error,
       );
       return;
     }
@@ -110,15 +106,12 @@ class _LoginState extends State<Login> {
     await _saveToken(userInfo);
 
     try {
-      LoadingDialog.showLoadingDialog(context, 'Loading...');
       await _checkProfile();
-      LoadingDialog.hideLoadingDialog(context);
     } catch (error) {
-      LoadingDialog.hideLoadingDialog(context);
       MessageDialog.showMsgDialog(
         context,
         "Login with facebook",
-        error.toString(),
+        error,
       );
     }
   }

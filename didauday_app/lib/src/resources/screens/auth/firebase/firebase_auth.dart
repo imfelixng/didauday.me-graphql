@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FBAuth {
   FirebaseAuth _fbAuth = FirebaseAuth.instance;
 
-  Future login(String email, String password) async {
+  Future<FirebaseUser> login(String email, String password) async {
     FirebaseUser user;
     try {
       user = (
@@ -39,11 +39,10 @@ class FBAuth {
     }
   }
 
-  Future loginWithFacebook() async {
+  Future<FirebaseUser> loginWithFacebook() async {
     var fbLogin = FacebookLogin();
     FacebookLoginResult result;
     try {
-      print("==================");
       result = await fbLogin.logInWithReadPermissions(
           ['email', 'public_profile']);
       switch (result.status) {
@@ -61,13 +60,13 @@ class FBAuth {
           throw _errorLoginSocial("UNKNOWN ERROR");
           break;
       }
+      return null;
     } catch(error) {
-      print(error);
       throw _errorLoginSocial(error.code);
     }
   }
 
-  Future register(
+  Future<FirebaseUser> register(
       String email,
       String password
   ) async {
