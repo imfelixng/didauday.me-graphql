@@ -5,6 +5,6 @@ import { moveDataPerson } from './helpers/move-data-func';
 
 import schedule from 'node-schedule';
  
-schedule.scheduleJob('* * * * *', function(){
+schedule.scheduleJob('0 0 * * *', function(){
     moveDataPerson();
 });
