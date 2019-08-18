@@ -14,7 +14,7 @@ export default {
         type: 'string',
     },
     birthday: {
-        type: 'string',
+        type: 'number',
     },
     avatar: {
         type: 'string',
@@ -46,7 +46,7 @@ export default {
         type: 'datetime',
         default: () => new Date,
     },
-    updateAt: {
+    updatedAt: {
         type: 'datetime',
         default: () => new Date,
     }
