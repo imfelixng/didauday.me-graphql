@@ -1,7 +1,10 @@
+import 'package:didauday_app/src/core/services/graphql/config/config.dart';
+import 'package:didauday_app/src/core/services/graphql/mutation/mutation_profile.dart';
 import 'package:didauday_app/src/resources/screens/user/blocs/update_profile_bloc.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
 import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,12 +14,11 @@ class UpdateProfile extends StatefulWidget {
 }
 
 class _UpdateProfileState extends State<UpdateProfile> {
-  final DateFormat format = DateFormat("dd/MM/yyyy");
+  final DateFormat format = DateFormat("dd/MM/yyy");
 
   var _valueGender = 'MALE';
   DateTime _valueBirthday;
 
-  TextEditingController _emailController = TextEditingController();
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _birthdayController = TextEditingController();
@@ -25,9 +27,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   UpdateProfileBloc _updateProfileBloc = UpdateProfileBloc();
 
+  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
   void _onUpdate() async {
-    var email = _emailController.text;
     var firstName = _firstNameController.text;
     var lastName = _lastNameController.text;
     var birthday = _valueBirthday;
@@ -36,8 +38,46 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
     var gender = _valueGender;
 
-    if (_updateProfileBloc.isValidDataUpdate(email, firstName, lastName, birthday, gender, address, phoneNumber)) {
-      print('oke');
+    if (_updateProfileBloc.isValidDataUpdate(firstName, lastName, birthday, gender, address, phoneNumber)) {
+      LoadingDialog.showLoadingDialog(context, "Updating profile. Please wait...");
+      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      QueryResult result;
+
+      int birthday = _valueBirthday.millisecondsSinceEpoch ~/ 1000;
+
+      try {
+        result = await _client.mutate(
+          MutationOptions(
+            document: MutationProfile.updateProfile,
+            variables: {
+              "input": {
+                "firstname": firstName,
+                "lastname": lastName,
+                "birthday": birthday,
+                "address": address,
+                "phone_number": phoneNumber,
+                "gender": gender
+              }
+            }
+          ),
+        );
+      } catch(error) {
+        LoadingDialog.hideLoadingDialog(context);
+        MessageDialog.showMsgDialog(
+            context, "Update profile", "You have an occour. Please try again later.");
+        return;
+      }
+
+      if (!result.hasErrors) {
+        var profile = result.data.data["updateProfile"]["user_info"];
+        LoadingDialog.hideLoadingDialog(context);
+          Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+      } else {
+        print(result.errors);
+        LoadingDialog.hideLoadingDialog(context);
+        MessageDialog.showMsgDialog(
+            context, "Update profile", result.errors.toString());
+      }
     }
 
   }
@@ -70,26 +110,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: StreamBuilder<Object>(
-                      stream: _updateProfileBloc.emailStream,
-                      builder: (context, snapshot) {
-                        return TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                              errorText:
-                              snapshot.hasError ? snapshot.error : null,
-                              labelText: 'Email',
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(
-                                Icons.email,
-                              )),
-                        );
-                      }),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
