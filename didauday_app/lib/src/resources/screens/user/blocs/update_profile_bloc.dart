@@ -4,7 +4,6 @@ import 'package:didauday_app/src/resources/screens/user/validators/update_profil
 
 
 class UpdateProfileBloc {
-  StreamController _emailController = new StreamController();
   StreamController _firstNameController = new StreamController();
   StreamController _lastNameController = new StreamController();
   StreamController _birthdayController = new StreamController();
@@ -12,7 +11,6 @@ class UpdateProfileBloc {
   StreamController _addressController = new StreamController();
   StreamController _phoneNumberController = new StreamController();
 
-  Stream get emailStream => _emailController.stream;
   Stream get firstNameStream => _firstNameController.stream;
   Stream get lastNameStream => _lastNameController.stream;
   Stream get birthdayStream => _birthdayController.stream;
@@ -23,15 +21,8 @@ class UpdateProfileBloc {
 
 
   bool isValidDataUpdate(
-      String email,
       String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
       ) {
-
-    if (!UpdateProfileValidate.isValidEmail(email)) {
-      _emailController.sink.addError("Email is invalid");
-      return false;
-    }
-    _emailController.sink.add("");
 
     if (!UpdateProfileValidate.isValidFirstName(firstName)) {
       _firstNameController.sink.addError("First name is invalid");
@@ -67,17 +58,7 @@ class UpdateProfileBloc {
 
   }
 
-
-  Future onUpdate(String email,
-      String firstName, String lastName, DateTime birthday, String gender, String address, String phoneNumber,
-      ) {
-
-    int _birthday = birthday.millisecondsSinceEpoch;
-
-  }
-
   void dispose() {
-    _emailController.close();
     _firstNameController.close();
     _lastNameController.close();
     _birthdayController.close();
