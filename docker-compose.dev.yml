@@ -29,20 +29,61 @@ services:
     volumes:
       - /app/node_modules
       - ./didauday-server/services/tour:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
     environment:
       - PORT=5001
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
     restart: always
-  auth:
+  user:
     build:
-      context: ./didauday-server/services/auth
+      context: ./didauday-server/services/user
       dockerfile: Dockerfile.dev
     ports:
       - "5002:5002"
     volumes:
       - /app/node_modules
-      - ./didauday-server/services/auth:/app
+      - ./didauday-server/services/user:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
     environment:
       - PORT=5002
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  move-data:
+    build:
+      context: ./didauday-server/services/move-data
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/move-data:/app
+    depends_on:
+      - mongo
+      - neo4j
+    environment:
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
     restart: always
   server:
     build:
@@ -55,10 +96,10 @@ services:
       - ./didauday-server/gateway:/app
     depends_on:
       - tour
-      - auth
+      - user
     environment:
       - TOUR_URL=http://tour:5001/graphql
-      - AUTH_URL=http://auth:5002/graphql
+      - USER_URL=http://user:5002/graphql
       - PORT=5000
     restart: always
   mongo:
