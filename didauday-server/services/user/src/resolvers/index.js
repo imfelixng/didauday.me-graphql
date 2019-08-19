@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
 
-import userResolver from './user.js';
+import queryResolver from './query.js';
+import mutationResolver from './mutation.js';
 
 const rootResolvers = {};
 
-const resolvers = merge(rootResolvers, userResolver);
+const resolvers = merge(rootResolvers, queryResolver, mutationResolver);
 
 export default resolvers;

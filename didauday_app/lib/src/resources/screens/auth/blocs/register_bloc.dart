@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
 import 'package:didauday_app/src/resources/screens/auth/validators/register_validate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class RegisterBloc {
@@ -45,7 +46,7 @@ class RegisterBloc {
   }
 
 
-  Future onRegister(String email, String password) {
+  Future<FirebaseUser> onRegister(String email, String password) {
 
 
     FBAuth fbAuth = FBAuth();
