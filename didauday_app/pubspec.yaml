@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,12 +26,14 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   intl:
-  font_awesome_flutter:
   flutter_google_places:
   google_sign_in:
   flutter_facebook_login:
   graphql_flutter:
   shared_preferences:
+  bottom_navy_bar: ^5.1.0
+  font_awesome_flutter: ^8.5.0
+  circular_reveal_animation: ^1.0.6
 
 dev_dependencies:
   flutter_test:
