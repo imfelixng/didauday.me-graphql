@@ -85,6 +85,19 @@ services:
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
     restart: always
+  crawl-data:
+    build:
+      context: ./didauday-server/services/crawl-data
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/crawl-data:/app
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway

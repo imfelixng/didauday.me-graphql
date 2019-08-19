@@ -1,0 +1,20 @@
+{
+  "name": "move-data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r esm ./src/index.js",
+    "dev": "nodemon -r esm ./src/index.js"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.6.9",
+    "neode": "^0.3.1",
+    "node-schedule": "^1.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
