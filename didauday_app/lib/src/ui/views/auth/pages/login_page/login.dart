@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
       MessageDialog.showMsgDialog(
         context,
         "Login with google",
-        error,
+        error.toString(),
       );
       return;
     }
@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
       MessageDialog.showMsgDialog(
         context,
         "Login with google",
-        error,
+        error.toString(),
       );
     }
   }
@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
       MessageDialog.showMsgDialog(
         context,
         "Login with facebook",
-        error,
+        error.toString(),
       );
       return;
     }
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
       MessageDialog.showMsgDialog(
         context,
         "Login with facebook",
-        error,
+        error.toString(),
       );
     }
   }

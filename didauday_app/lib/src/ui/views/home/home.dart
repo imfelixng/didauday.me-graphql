@@ -4,6 +4,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:didauday_app/src/core/models/flight.dart';
 import 'package:didauday_app/src/core/models/hotel.dart';
 import 'package:didauday_app/src/core/models/tour.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
@@ -28,6 +29,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       duration: const Duration(milliseconds: 400),
     );
     _chatBoxAnim = _chatBoxController;
+
+    FirebaseAuth.instance.currentUser().then((firebaseUser){
+      if(firebaseUser == null)
+      {
+        Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+      }
+    }).catchError((error) {
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+    });
+
   }
 
   @override
