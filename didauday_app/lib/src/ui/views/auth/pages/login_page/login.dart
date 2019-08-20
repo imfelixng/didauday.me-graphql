@@ -1,9 +1,9 @@
 import 'package:didauday_app/src/core/services/graphql/config/config.dart';
 import 'package:didauday_app/src/core/services/graphql/query/query_profile.dart';
 import 'package:didauday_app/src/core/services/shared_preferences_service.dart';
-import 'package:didauday_app/src/resources/screens/auth/blocs/login_bloc.dart';
-import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
-import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
+import 'package:didauday_app/src/ui/views/auth/blocs/login_bloc.dart';
+import 'package:didauday_app/src/ui/widgets/dialog/loading_dialog.dart';
+import 'package:didauday_app/src/ui/widgets/dialog/message_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

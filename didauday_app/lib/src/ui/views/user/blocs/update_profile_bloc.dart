@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:didauday_app/src/resources/screens/user/validators/update_profile_validate.dart';
+import 'package:didauday_app/src/ui/views/user/validators/update_profile_validate.dart';
 
 
 class UpdateProfileBloc {

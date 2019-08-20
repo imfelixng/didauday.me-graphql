@@ -1,6 +1,6 @@
-import 'package:didauday_app/src/resources/screens/auth/blocs/forgot_password_bloc.dart';
-import 'package:didauday_app/src/resources/widgets/dialog/loading_dialog.dart';
-import 'package:didauday_app/src/resources/widgets/dialog/message_dialog.dart';
+import 'package:didauday_app/src/ui/views/auth/blocs/forgot_password_bloc.dart';
+import 'package:didauday_app/src/ui/widgets/dialog/loading_dialog.dart';
+import 'package:didauday_app/src/ui/widgets/dialog/message_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {

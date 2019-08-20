@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
-import 'package:didauday_app/src/resources/screens/auth/validators/forgot_password_validate.dart';
+import 'package:didauday_app/src/ui/views/auth/firebase/firebase_auth.dart';
+import 'package:didauday_app/src/ui/views/auth/validators/forgot_password_validate.dart';
 
 class ForgotPasswordBloc {
   StreamController _emailController = new StreamController();

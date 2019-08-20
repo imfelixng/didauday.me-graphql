@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:didauday_app/src/resources/screens/auth/firebase/firebase_auth.dart';
+import 'package:didauday_app/src/ui/views/auth/firebase/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../validators/login_validate.dart';
