@@ -49,7 +49,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Di Dau Day'),
+        title: Text('Đi Đâu Đây'),
       ),
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -205,7 +205,7 @@ class _ChatBotState extends State<ChatBot> {
       UserItem('Hello hbhabdhbhdbhadBA'),
       UserItem(
           'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Fucking...'),
+      BotTextItem('hbhabdhbhdbhadBA...'),
       BotListHotel([]),
       BotListFlight([]),
       UserItem('Hello'),
@@ -223,7 +223,7 @@ class _ChatBotState extends State<ChatBot> {
       UserItem('Hello hbhabdhbhdbhadBA'),
       UserItem(
           'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Fucking...'),
+      BotTextItem('Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
       BotListHotel([]),
       BotListFlight([]),
       UserItem('Hello'),
@@ -241,7 +241,7 @@ class _ChatBotState extends State<ChatBot> {
       UserItem('Hello hbhabdhbhdbhadBA'),
       UserItem(
           'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Fucking...'),
+      BotTextItem('Hello hbhabdhbhdbhadBA...'),
       BotListHotel([]),
       BotListFlight([]),
       UserItem('Hello'),
@@ -259,7 +259,7 @@ class _ChatBotState extends State<ChatBot> {
       UserItem('Hello hbhabdhbhdbhadBA'),
       UserItem(
           'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Fucking...'),
+      BotTextItem('Hello hbhabdhbhdbhadBA...'),
       BotListHotel([]),
       BotListFlight([]),
       UserItem('Hello'),
@@ -279,7 +279,7 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
@@ -299,25 +299,23 @@ class _ChatBotState extends State<ChatBot> {
           if (item is UserItem) {
             return Row(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Spacer(
-                  flex: 1,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 8, top: 8),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Color(0xfffd5739),
-                      borderRadius: _randomBorderRadius(true),
-                    ),
-                    child: Text(
-                      item.text,
-                      textAlign: TextAlign.left,
-                      softWrap: true,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
+                Container(
+                  margin: const EdgeInsets.only(right: 8, top: 8),
+                  padding: const EdgeInsets.all(10),
+                  constraints: BoxConstraints(
+                    maxWidth: 250,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xfffd5739),
+                    borderRadius: _randomBorderRadius(true),
+                  ),
+                  child: Text(
+                    item.text,
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 )
               ],
@@ -325,22 +323,28 @@ class _ChatBotState extends State<ChatBot> {
           }
 
           if (item is BotTextItem) {
-            return Container(
-              margin: EdgeInsets.only(
-                left: 8,
-                top: 8,
-                right: MediaQuery.of(context).size.width * 0.3,
-              ),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xffcdcdcd),
-                borderRadius: _randomBorderRadius(false),
-              ),
-              child: Text(
-                item.text,
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.title.copyWith(fontSize: 16),
-              ),
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(left: 8, top: 8),
+                  padding: const EdgeInsets.all(8),
+                  constraints: BoxConstraints(
+                    maxWidth: 250,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xfff5f5f5),
+                    borderRadius: _randomBorderRadius(true),
+                  ),
+                  child: Text(
+                    item.text,
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                )
+              ],
             );
           }
 
