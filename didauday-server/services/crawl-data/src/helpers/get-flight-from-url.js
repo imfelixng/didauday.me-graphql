@@ -45,7 +45,19 @@ const getTicketOneWay = async (flightDate, airports) => {
     json: true,
   };
 
-  return rp(options);
+  let data = null;
+
+  try {
+    data = await rp(options);
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!data) {
+    return [];
+  }
+
+  return data.data.searchResults;
 };
 
 const getTicketReturn = async (flightDates, airports) => {
