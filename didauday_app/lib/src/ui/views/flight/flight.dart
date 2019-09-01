@@ -143,10 +143,11 @@ class _FlightPageState extends State<FlightPage> {
                           )),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     SizedBox(
                         width: double.infinity,
+                        height: 40,
                         child: RaisedButton(
                           color: Colors.deepOrange,
                           onPressed: () {
