@@ -1,4 +1,8 @@
-import 'package:didauday_app/src/ui/views/home/home.dart';
+import 'package:didauday_app/src/ui/views/explore/explore.dart';
+import 'package:didauday_app/src/ui/views/flight/flight.dart';
+import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_detail.dart';
+import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
+import 'package:didauday_app/src/ui/views/flight/pages/flight_search/flight_search.dart';
 import 'package:didauday_app/src/ui/widgets/check_network/check_network.dart';
 import 'package:flutter/material.dart';
 import 'package:didauday_app/src/ui/views/auth/auth.dart';
@@ -13,30 +17,56 @@ class Router {
     switch (settings.name) {
       case '/auth':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: Auth()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Auth()));
         }
       case '/auth/login':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: Login()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Login()));
         }
       case '/auth/register':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: Register()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Register()));
         }
       case '/auth/forgot_password':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: ForgotPassword()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: ForgotPassword()));
         }
       case '/home':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: Home()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Explore()));
         }
       case '/user/update_profile':
         {
-          return MaterialPageRoute(builder: (context) => CheckNetwork(child: UpdateProfile()));
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: UpdateProfile()));
+        }
+      case '/flight':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: FlightPage()));
+        }
+      case '/flight/search':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: FlightSearch()));
+        }
+      case '/flight/search/filter':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: FlightFilter()));
+        }
+      case '/flight/detail':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: FlightDetail()));
         }
       default:
-        return MaterialPageRoute(builder: (_) {
+        return CupertinoPageRoute(builder: (_) {
           return Scaffold(
             body: Center(
               child: Text('No route defined for ${settings.name}'),

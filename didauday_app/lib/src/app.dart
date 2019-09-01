@@ -1,4 +1,4 @@
-import 'package:didauday_app/src/ui/views/home/home.dart';
+import 'package:didauday_app/src/ui/views/explore/explore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
     return StreamProvider<ConnectivityStatus>(
         builder: (context) => ConnectivityService().connectionStatusController.stream,
     child: MaterialApp(
-      home: Home(),
+      home: Explore(),
       onGenerateRoute: Router.generateRoute,
     )
     );
