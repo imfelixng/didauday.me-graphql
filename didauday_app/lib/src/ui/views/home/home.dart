@@ -70,31 +70,36 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                      color: Colors.lightBlue,
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black12,
-                                          offset: Offset(2, 2),
-                                          blurRadius: 4,
-                                        )
-                                      ]),
-                                  child: Icon(
-                                    Icons.flight,
-                                    color: Colors.white,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/flight');
+                              },
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                        color: Colors.lightBlue,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                          )
+                                        ]),
+                                    child: Icon(
+                                      Icons.flight,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text('Flights')
-                              ],
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text('Flights')
+                                ],
+                              ),
                             ),
                             SizedBox(
                               width: 40,
