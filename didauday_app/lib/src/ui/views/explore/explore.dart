@@ -1,20 +1,19 @@
-import 'dart:math';
-
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:didauday_app/src/ui/helpers/image_mock.dart';
 import 'package:didauday_app/src/ui/views/chatbot/chatbot.dart';
+import 'package:didauday_app/src/ui/widgets/drawer/drawer_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 
-class Home extends StatefulWidget {
+class Explore extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _ExploreState createState() => _ExploreState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _ExploreState extends State<Explore> with SingleTickerProviderStateMixin {
   var _showChatBox = false;
 
   Animation<double> _chatBoxAnim;
@@ -49,7 +48,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text('Đi Đâu Đây'),
+        actions: <Widget>[
+          Icon(Icons.shopping_cart),
+          SizedBox(width: 10,),
+        ],
       ),
+      drawer: DrawerApp(),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
