@@ -47,13 +47,18 @@ class _FlightPageState extends State<FlightPage> {
                 ),
                 Column(
                   children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
                     TextField(
                       decoration: InputDecoration(
                           hintText: 'Enter from city',
                           labelText: 'From',
                           prefixIcon: Icon(
                             Icons.flight_takeoff,
-                          )),
+                          ),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -64,7 +69,9 @@ class _FlightPageState extends State<FlightPage> {
                           labelText: 'To',
                           prefixIcon: Icon(
                             Icons.flight_land,
-                          )),
+                          ),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -77,7 +84,8 @@ class _FlightPageState extends State<FlightPage> {
                                 labelText: 'Deparute on',
                                 prefixIcon: Icon(
                                   Icons.date_range,
-                                )),
+                                ),
+                              border: OutlineInputBorder(),),
                             onTap: () async {
                               DateTime picked = await showDatePicker(
                                 context: context,
@@ -100,7 +108,7 @@ class _FlightPageState extends State<FlightPage> {
                                 labelText: 'Date',
                                 prefixIcon: Icon(
                                   Icons.date_range,
-                                )),
+                                ),border: OutlineInputBorder(),),
                             onTap: () async {
                               final List<DateTime> picked =
                                   await DateRagePicker.showDatePicker(
@@ -128,7 +136,7 @@ class _FlightPageState extends State<FlightPage> {
                           labelText: 'Seat type',
                           prefixIcon: Icon(
                             Icons.airline_seat_recline_normal,
-                          )),
+                          ),border: OutlineInputBorder(),),
                     ),
                     SizedBox(
                       height: 10,
@@ -140,7 +148,7 @@ class _FlightPageState extends State<FlightPage> {
                           labelText: 'Passenger number',
                           prefixIcon: Icon(
                             Icons.people,
-                          )),
+                          ),border: OutlineInputBorder(),),
                     ),
                     SizedBox(
                       height: 20,

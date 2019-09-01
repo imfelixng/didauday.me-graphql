@@ -79,153 +79,158 @@ class _FlightSearchState extends State<FlightSearch> {
                   physics: BouncingScrollPhysics(),
                   itemCount: 20,
                   itemBuilder: (context, index) {
-                    return Container(
-                      width: 320,
-                      margin: EdgeInsets.only(
-                        bottom:
-                       19 != index ? 10 : 0,
-                      ),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 200,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/flight/detail');
+                      },
+                      child: Container(
+                        width: 320,
+                        margin: EdgeInsets.only(
+                          bottom:
+                         19 != index ? 10 : 0,
+                        ),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: 200,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              '8:00 am',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight:
+                                                FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              'DND',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                  color: Colors.black38),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Icon(
+                                              Icons.flight_takeoff,
+                                            ),
+                                            Text('----------')
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: <Widget>[
+                                            Text(
+                                              '2:00 pm',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight:
+                                                FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              'SGN',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                  color: Colors.black38),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
                                     children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            '8:00 am',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            'DND',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                color: Colors.black38),
-                                          ),
-                                        ],
+                                      Icon(
+                                        Icons.access_time,
+                                        color: Colors.grey[400],
+                                        size: 20,
                                       ),
-                                      Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.flight_takeoff,
-                                          ),
-                                          Text('----------')
-                                        ],
+                                      SizedBox(
+                                        width: 5,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: <Widget>[
-                                          Text(
-                                            '2:00 pm',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.bold,
-                                            ),
+                                      RichText(
+                                        text: TextSpan(
+                                          text: 'Duration : ',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
                                           ),
-                                          Text(
-                                            'SGN',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                color: Colors.black38),
-                                          ),
-                                        ],
-                                      )
+                                          children: <TextSpan>[
+                                            TextSpan(text: '17h 15m', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black)),
+                                            TextSpan(text: ' | ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                            TextSpan(text: 'Non-stop',),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.access_time,
-                                      color: Colors.grey[400],
-                                      size: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Duration : ',
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                        ),
-                                        children: <TextSpan>[
-                                          TextSpan(text: '17h 15m', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black)),
-                                          TextSpan(text: ' | ', style: TextStyle(fontWeight: FontWeight.bold)),
-                                          TextSpan(text: 'Non-stop',),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  height: 20,
-                                  alignment: Alignment.centerLeft,
-                                  child:
-                                  Image.network(index != 1 ? ImageMock.logo_vn : ImageMock.logo_vj),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.pink,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Text(
-                                '\$ 253',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white,
-                                ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    height: 20,
+                                    alignment: Alignment.centerLeft,
+                                    child:
+                                    Image.network(index != 1 ? ImageMock.logo_vn : ImageMock.logo_vj),
+                                  ),
+                                ],
                               ),
                             ),
-                          )
-                        ],
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text(
+                                  '\$ 253',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
