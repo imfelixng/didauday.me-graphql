@@ -36,6 +36,7 @@ dependencies:
   circular_reveal_animation:
   connectivity:
   provider:
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:

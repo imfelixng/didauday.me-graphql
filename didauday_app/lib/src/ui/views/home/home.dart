@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:didauday_app/src/core/models/flight.dart';
-import 'package:didauday_app/src/core/models/hotel.dart';
-import 'package:didauday_app/src/core/models/tour.dart';
+import 'package:didauday_app/src/ui/helpers/image_mock.dart';
+import 'package:didauday_app/src/ui/views/chatbot/chatbot.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 
@@ -19,6 +19,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   Animation<double> _chatBoxAnim;
   AnimationController _chatBoxController;
+  bool tourTrend = true;
 
   @override
   void initState() {
@@ -30,15 +31,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
     _chatBoxAnim = _chatBoxController;
 
-    FirebaseAuth.instance.currentUser().then((firebaseUser){
-      if(firebaseUser == null)
-      {
+    FirebaseAuth.instance.currentUser().then((firebaseUser) {
+      if (firebaseUser == null) {
         Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
       }
     }).catchError((error) {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
     });
-
   }
 
   @override
@@ -51,42 +50,728 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         title: Text('Đi Đâu Đây'),
       ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        color: Colors.white,
-        child: Stack(
-          children: <Widget>[
-            IgnorePointer(
-              ignoring: _showChatBox,
-              child: ListView.builder(
-                itemCount: 100,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text('Title'),
-                    subtitle: Text('Subtile'),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: bottomMargin,
-              child: Container(
-                child: CircularRevealAnimation(
-                  child: ChatBot(),
-                  animation: _chatBoxAnim,
-                  minRadius: 0,
-                  maxRadius: 1000,
-                  center: Offset(
-                    width - 16,
-                    height - bottomMargin,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Container(
+            color: Colors.white,
+            child: Stack(
+              children: <Widget>[
+                IgnorePointer(
+                  ignoring: _showChatBox,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    color: Colors.grey[100],
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Colors.lightBlue,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4,
+                                        )
+                                      ]),
+                                  child: Icon(
+                                    Icons.flight,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text('Flights')
+                              ],
+                            ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueAccent,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4,
+                                        )
+                                      ]),
+                                  child: Icon(
+                                    Icons.business,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text('Hotels')
+                              ],
+                            ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4,
+                                        )
+                                      ]),
+                                  child: Icon(
+                                    Icons.card_travel,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text('Tour')
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Popular Destination',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                  height: 180,
+                                  child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 3,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        width: 250,
+                                        margin: EdgeInsets.only(
+                                            right: index != 2 ? 20 : 0),
+                                        child: Stack(
+                                          children: <Widget>[
+                                            Container(
+                                              height: 180,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      ImageMock.img_city),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              left: 0,
+                                              bottom: 0,
+                                              width: 250,
+                                              height: 100,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  gradient: LinearGradient(
+                                                    begin:
+                                                        Alignment.bottomCenter,
+                                                    end: Alignment.topCenter,
+                                                    colors: [
+                                                      Colors.black,
+                                                      Colors.black
+                                                          .withOpacity(0.01),
+                                                    ],
+                                                  ),
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      'TP. Hồ Chí Minh',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      'Việt Nam',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {},
+                                                          child: Text(
+                                                            '40 Tours',
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        FlatButton(
+                                                          onPressed: () {},
+                                                          child: Text(
+                                                            '40 Hotels',
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Treding',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            tourTrend = true;
+                                          });
+                                        },
+                                        color: tourTrend
+                                            ? Colors.green
+                                            : Colors.transparent,
+                                        child: Text(
+                                          'Tour',
+                                          style: TextStyle(
+                                            color: tourTrend
+                                                ? Colors.white
+                                                : Colors.black38,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            tourTrend = false;
+                                          });
+                                        },
+                                        color: !tourTrend
+                                            ? Colors.green
+                                            : Colors.transparent,
+                                        child: Text(
+                                          'Hotel',
+                                          style: TextStyle(
+                                            color: !tourTrend
+                                                ? Colors.white
+                                                : Colors.black38,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                height: 330,
+                                child: tourTrend
+                                    ? ListView.builder(
+                                        physics: BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: 3,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            width: 250,
+                                            margin: EdgeInsets.only(
+                                                right: index != 2 ? 20 : 0),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Stack(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 180,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              ImageMock
+                                                                  .img_tour),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        5)),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      right: 0,
+                                                      top: 0,
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          vertical: 5,
+                                                          horizontal: 10,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          5)),
+                                                        ),
+                                                        child: Text(
+                                                          '-20%',
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft: Radius
+                                                                .circular(5),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                  ),
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.location_on,
+                                                            size: 20,
+                                                            color: Colors
+                                                                .grey[300],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'Đà Nẵng, Việt Nam',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black54,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'American Parks Trail end Rapid City',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        maxLines: 2,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: <Widget>[
+                                                          RatingBar(
+                                                            initialRating: 4.5,
+                                                            itemSize: 20,
+                                                            allowHalfRating:
+                                                                true,
+                                                            itemBuilder:
+                                                                (context, _) =>
+                                                                    Icon(
+                                                              Icons.star,
+                                                              color:
+                                                                  Colors.amber,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text('12 reviews')
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: <Widget>[
+                                                          Row(
+                                                            children: <Widget>[
+                                                              Icon(
+                                                                Icons
+                                                                    .access_time,
+                                                                size: 20,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              Text('6 days')
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: <Widget>[
+                                                              Text(
+                                                                '\$500',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .lineThrough,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                'From \$400',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : ListView.builder(
+                                        physics: BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: 3,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            width: 250,
+                                            margin: EdgeInsets.only(
+                                                right: index != 2 ? 20 : 0),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Stack(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 180,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              ImageMock
+                                                                  .img_hotel),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        5)),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      right: 0,
+                                                      top: 0,
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          vertical: 5,
+                                                          horizontal: 10,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          5)),
+                                                        ),
+                                                        child: Text(
+                                                          '-20%',
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      left: 10,
+                                                      bottom: 10,
+                                                      child: RatingBar(
+                                                        initialRating: 4.5,
+                                                        itemSize: 20,
+                                                        allowHalfRating: true,
+                                                        itemBuilder:
+                                                            (context, _) =>
+                                                                Icon(
+                                                          Icons.star,
+                                                          color: Colors.amber,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft: Radius
+                                                                .circular(5),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                  ),
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Text(
+                                                        'American Parks Trail end Rapid City',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        maxLines: 2,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.location_on,
+                                                            size: 20,
+                                                            color: Colors
+                                                                .grey[300],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'Đà Nẵng, Việt Nam',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black54,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Text('4.6/5 Excellent',
+                                                          style: TextStyle(
+                                                            color: Colors.blue,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontSize: 15,
+                                                          ),),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Container(
+                                                            height: 5,
+                                                            width: 5,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.grey,
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text('12 reviews')
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'From \$400 /night',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            '\$500',
+                                                            style:
+                                                            TextStyle(
+                                                              color: Colors
+                                                                  .red,
+                                                              decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+                Positioned(
+                  left: 16,
+                  right: 16,
+                  top: 16,
+                  bottom: bottomMargin,
+                  child: Container(
+                    child: CircularRevealAnimation(
+                      child: ChatBot(),
+                      animation: _chatBoxAnim,
+                      minRadius: 0,
+                      maxRadius: 1000,
+                      center: Offset(
+                        width - 16,
+                        height - bottomMargin,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: IgnorePointer(
@@ -97,13 +782,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           onItemSelected: (i) {},
           items: [
             BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
+              icon: Icon(Icons.explore),
+              title: Text('Explore'),
               activeColor: Colors.red,
             ),
             BottomNavyBarItem(
               icon: Icon(Icons.favorite),
-              title: Text('Saved'),
+              title: Text('Favourite'),
               activeColor: Colors.purpleAccent,
             ),
             BottomNavyBarItem(
@@ -152,272 +837,4 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       _chatBoxController.reverse();
     }
   }
-}
-
-abstract class ChatBotItem {}
-
-class UserItem implements ChatBotItem {
-  final String text;
-
-  UserItem(this.text);
-}
-
-abstract class BotItem implements ChatBotItem {}
-
-class BotTextItem implements BotItem {
-  final String text;
-
-  BotTextItem(this.text);
-}
-
-class BotListHotel implements BotItem {
-  final List<Hotel> hotels;
-
-  BotListHotel(this.hotels);
-}
-
-class BotListFlight implements BotItem {
-  final List<Flight> flights;
-
-  BotListFlight(this.flights);
-}
-
-class BotListTour implements BotItem {
-  final List<Tour> tours;
-
-  BotListTour(this.tours);
-}
-
-class ChatBot extends StatefulWidget {
-  @override
-  _ChatBotState createState() => _ChatBotState();
-}
-
-class _ChatBotState extends State<ChatBot> {
-  List<ChatBotItem> chatItems;
-
-  @override
-  void initState() {
-    super.initState();
-
-    chatItems = <ChatBotItem>[
-      UserItem('Hello'),
-      UserItem('Hello hbhabdhbhdbhadBA'),
-      UserItem(
-          'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('hbhabdhbhdbhadBA...'),
-      BotListHotel([]),
-      BotListFlight([]),
-      UserItem('Hello'),
-      BotListTour(
-        [
-          Tour(
-            description: null,
-            images: <String>[],
-            name: null,
-            price: null,
-          )
-        ],
-      ),
-      UserItem('Hello'),
-      UserItem('Hello hbhabdhbhdbhadBA'),
-      UserItem(
-          'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotListHotel([]),
-      BotListFlight([]),
-      UserItem('Hello'),
-      BotListTour(
-        [
-          Tour(
-            description: null,
-            images: <String>[],
-            name: null,
-            price: null,
-          )
-        ],
-      ),
-      UserItem('Hello'),
-      UserItem('Hello hbhabdhbhdbhadBA'),
-      UserItem(
-          'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Hello hbhabdhbhdbhadBA...'),
-      BotListHotel([]),
-      BotListFlight([]),
-      UserItem('Hello'),
-      BotListTour(
-        [
-          Tour(
-            description: null,
-            images: <String>[],
-            name: null,
-            price: null,
-          )
-        ],
-      ),
-      UserItem('Hello'),
-      UserItem('Hello hbhabdhbhdbhadBA'),
-      UserItem(
-          'Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 Hello 12345678 '),
-      BotTextItem('Hello hbhabdhbhdbhadBA...'),
-      BotListHotel([]),
-      BotListFlight([]),
-      UserItem('Hello'),
-      BotListTour(
-        [
-          Tour(
-            description: null,
-            images: <String>[],
-            name: null,
-            price: null,
-          )
-        ],
-      )
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 1000,
-          ),
-        ],
-      ),
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: chatItems.length,
-        itemBuilder: (context, index) {
-          final item = chatItems[index];
-
-          if (item is UserItem) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(right: 8, top: 8),
-                  padding: const EdgeInsets.all(10),
-                  constraints: BoxConstraints(
-                    maxWidth: 250,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xfffd5739),
-                    borderRadius: _randomBorderRadius(true),
-                  ),
-                  child: Text(
-                    item.text,
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                )
-              ],
-            );
-          }
-
-          if (item is BotTextItem) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(left: 8, top: 8),
-                  padding: const EdgeInsets.all(8),
-                  constraints: BoxConstraints(
-                    maxWidth: 250,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xfff5f5f5),
-                    borderRadius: _randomBorderRadius(true),
-                  ),
-                  child: Text(
-                    item.text,
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                )
-              ],
-            );
-          }
-
-          return Container(width: 0, height: 0);
-        },
-      ),
-    );
-  }
-}
-
-BorderRadius _randomBorderRadius(bool right) {
-  final index = Random().nextInt(4);
-  // 4 -> 10
-  if (index == 0) {
-    return BorderRadius.only(
-      topLeft: Radius.circular(10),
-      topRight: Radius.circular(10),
-      bottomLeft: Radius.circular(10),
-      bottomRight: Radius.circular(10),
-    );
-  }
-  // 2 -> 10, 2 -> 0
-  if (index == 1) {
-    if (!right) {
-      return BorderRadius.only(
-        topLeft: Radius.circular(2),
-        bottomLeft: Radius.circular(2),
-        bottomRight: Radius.circular(10),
-        topRight: Radius.circular(10),
-      );
-    } else {
-      return BorderRadius.only(
-        topLeft: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
-        bottomRight: Radius.circular(2),
-        topRight: Radius.circular(2),
-      );
-    }
-  }
-  // top 10
-  if (index == 2) {
-    if (right) {
-      return BorderRadius.only(
-        topLeft: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
-        bottomRight: Radius.circular(10),
-        topRight: Radius.circular(2),
-      );
-    } else {
-      return BorderRadius.only(
-        topLeft: Radius.circular(10),
-        bottomLeft: Radius.circular(2),
-        bottomRight: Radius.circular(10),
-        topRight: Radius.circular(10),
-      );
-    }
-  }
-  if (index == 3) {
-    if (right) {
-      return BorderRadius.only(
-        topLeft: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
-        bottomRight: Radius.circular(2),
-        topRight: Radius.circular(10),
-      );
-    } else {
-      return BorderRadius.only(
-        topLeft: Radius.circular(2),
-        bottomLeft: Radius.circular(10),
-        bottomRight: Radius.circular(10),
-        topRight: Radius.circular(10),
-      );
-    }
-  }
-  return null;
 }
