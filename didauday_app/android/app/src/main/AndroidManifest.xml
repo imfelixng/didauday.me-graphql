@@ -8,6 +8,7 @@
          FlutterApplication and put your custom class here. -->
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="io.flutter.app.FlutterApplication"
@@ -36,6 +37,8 @@
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC5yRfVGkhc6CGI6uVcbOnlaVq5tSpVaJM"/>
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=

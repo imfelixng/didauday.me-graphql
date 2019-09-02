@@ -35,9 +35,7 @@ class _TourPageState extends State<TourPage> {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           color: Colors.grey[200],
           child: Column(
             children: <Widget>[
@@ -48,13 +46,14 @@ class _TourPageState extends State<TourPage> {
                 child: Column(
                   children: <Widget>[
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Popular Tour',
+                          'Popular tour',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -63,168 +62,214 @@ class _TourPageState extends State<TourPage> {
                       height: 10,
                     ),
                     Container(
-                        height: 330,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: 250,
-                              margin:
-                                  EdgeInsets.only(right: index != 2 ? 20 : 0),
-                              child: Column(
-                                children: <Widget>[
-                                  Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 180,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                ImageMock.img_tour),
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
+                      height: 350,
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            width: 250,
+                            margin: EdgeInsets.only(
+                                right: index != 2 ? 20 : 0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(3, 3),
+                                    blurRadius: 6,
+                                  )
+                                ]
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 180,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              ImageMock
+                                                  .img_tour),
+                                          fit: BoxFit.cover,
                                         ),
+                                        borderRadius:
+                                        BorderRadius.only(
+                                            topLeft: Radius
+                                                .circular(
+                                                5),
+                                            topRight: Radius
+                                                .circular(
+                                                5)),
                                       ),
-                                      Positioned(
-                                        right: 0,
-                                        top: 0,
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 10,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(5)),
-                                          ),
-                                          child: Text(
-                                            '-20%',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5)),
                                     ),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.location_on,
-                                              size: 20,
-                                              color: Colors.grey[300],
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              'Đà Nẵng, Việt Nam',
-                                              style: TextStyle(
-                                                color: Colors.black54,
-                                              ),
-                                            ),
-                                          ],
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: Container(
+                                        padding: EdgeInsets
+                                            .symmetric(
+                                          vertical: 5,
+                                          horizontal: 10,
                                         ),
-                                        SizedBox(
-                                          height: 5,
+                                        decoration:
+                                        BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                          BorderRadius.only(
+                                              topRight: Radius
+                                                  .circular(
+                                                  5)),
                                         ),
-                                        Text(
-                                          'American Parks Trail end Rapid City',
+                                        child: Text(
+                                          '-20%',
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
                                           ),
-                                          maxLines: 2,
                                         ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            RatingBar(
-                                              initialRating: 4.5,
-                                              itemSize: 20,
-                                              allowHalfRating: true,
-                                              itemBuilder: (context, _) => Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text('12 reviews')
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.access_time,
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text('6 days')
-                                              ],
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: <Widget>[
-                                                Text(
-                                                  '\$500',
-                                                  style: TextStyle(
-                                                    color: Colors.red,
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'From \$400',
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        )),
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.only(
+                                        bottomLeft: Radius
+                                            .circular(5),
+                                        bottomRight:
+                                        Radius.circular(
+                                            5)),
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on,
+                                            size: 20,
+                                            color: Colors
+                                                .grey[300],
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Đà Nẵng, Việt Nam',
+                                            style: TextStyle(
+                                              color: Colors
+                                                  .black54,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        'American Parks Trail end Rapid City',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight:
+                                          FontWeight.w600,
+                                        ),
+                                        maxLines: 2,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          RatingBar(
+                                            initialRating: 4.5,
+                                            itemSize: 20,
+                                            allowHalfRating:
+                                            true,
+                                            itemBuilder:
+                                                (context, _) =>
+                                                Icon(
+                                                  Icons.star,
+                                                  color:
+                                                  Colors.amber,
+                                                ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text('12 reviews')
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons
+                                                    .access_time,
+                                                size: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text('6 days')
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .end,
+                                            children: <Widget>[
+                                              Text(
+                                                '\$500',
+                                                style:
+                                                TextStyle(
+                                                  color: Colors
+                                                      .red,
+                                                  decoration:
+                                                  TextDecoration
+                                                      .lineThrough,
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'From \$400',
+                                                style:
+                                                TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -235,13 +280,14 @@ class _TourPageState extends State<TourPage> {
                 child: Column(
                   children: <Widget>[
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Recommendation for you',
+                          'Recommend for you',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -250,170 +296,219 @@ class _TourPageState extends State<TourPage> {
                       height: 10,
                     ),
                     Container(
-                        height: 330,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: 250,
-                              margin:
-                                  EdgeInsets.only(right: index != 2 ? 20 : 0),
-                              child: Column(
-                                children: <Widget>[
-                                  Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 180,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                ImageMock.img_tour),
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
+                      height: 350,
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            width: 250,
+                            margin: EdgeInsets.only(
+                                right: index != 2 ? 20 : 0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(3, 3),
+                                    blurRadius: 6,
+                                  )
+                                ]
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 180,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              ImageMock
+                                                  .img_tour),
+                                          fit: BoxFit.cover,
                                         ),
+                                        borderRadius:
+                                        BorderRadius.only(
+                                            topLeft: Radius
+                                                .circular(
+                                                5),
+                                            topRight: Radius
+                                                .circular(
+                                                5)),
                                       ),
-                                      Positioned(
-                                        right: 0,
-                                        top: 0,
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 10,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(5)),
-                                          ),
-                                          child: Text(
-                                            '-20%',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5)),
                                     ),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.location_on,
-                                              size: 20,
-                                              color: Colors.grey[300],
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              'Đà Nẵng, Việt Nam',
-                                              style: TextStyle(
-                                                color: Colors.black54,
-                                              ),
-                                            ),
-                                          ],
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: Container(
+                                        padding: EdgeInsets
+                                            .symmetric(
+                                          vertical: 5,
+                                          horizontal: 10,
                                         ),
-                                        SizedBox(
-                                          height: 5,
+                                        decoration:
+                                        BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                          BorderRadius.only(
+                                              topRight: Radius
+                                                  .circular(
+                                                  5)),
                                         ),
-                                        Text(
-                                          'American Parks Trail end Rapid City',
+                                        child: Text(
+                                          '-20%',
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
                                           ),
-                                          maxLines: 2,
                                         ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            RatingBar(
-                                              initialRating: 4.5,
-                                              itemSize: 20,
-                                              allowHalfRating: true,
-                                              itemBuilder: (context, _) => Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text('12 reviews')
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.access_time,
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text('6 days')
-                                              ],
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: <Widget>[
-                                                Text(
-                                                  '\$500',
-                                                  style: TextStyle(
-                                                    color: Colors.red,
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'From \$400',
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        )),
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.only(
+                                        bottomLeft: Radius
+                                            .circular(5),
+                                        bottomRight:
+                                        Radius.circular(
+                                            5)),
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on,
+                                            size: 20,
+                                            color: Colors
+                                                .grey[300],
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Đà Nẵng, Việt Nam',
+                                            style: TextStyle(
+                                              color: Colors
+                                                  .black54,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        'American Parks Trail end Rapid City',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight:
+                                          FontWeight.w600,
+                                        ),
+                                        maxLines: 2,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          RatingBar(
+                                            initialRating: 4.5,
+                                            itemSize: 20,
+                                            allowHalfRating:
+                                            true,
+                                            itemBuilder:
+                                                (context, _) =>
+                                                Icon(
+                                                  Icons.star,
+                                                  color:
+                                                  Colors.amber,
+                                                ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text('12 reviews')
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons
+                                                    .access_time,
+                                                size: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text('6 days')
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .end,
+                                            children: <Widget>[
+                                              Text(
+                                                '\$500',
+                                                style:
+                                                TextStyle(
+                                                  color: Colors
+                                                      .red,
+                                                  decoration:
+                                                  TextDecoration
+                                                      .lineThrough,
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'From \$400',
+                                                style:
+                                                TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
               )
             ],
           ),

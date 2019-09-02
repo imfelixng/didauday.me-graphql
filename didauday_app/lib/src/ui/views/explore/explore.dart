@@ -13,7 +13,6 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
       color: Colors.grey[100],
       child: Column(
         children: <Widget>[
@@ -125,25 +124,24 @@ class _ExploreState extends State<Explore> {
           Container(
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Popular Destination',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10,),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Popular Destination',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
+                    ],
+                  ),
                 ),
                 Container(
-                    height: 180,
+                    height: 200,
                     child: ListView.builder(
+                      padding: EdgeInsets.all(10),
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: 3,
@@ -157,6 +155,7 @@ class _ExploreState extends State<Explore> {
                               Container(
                                 height: 180,
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                   image: DecorationImage(
                                     image: NetworkImage(
                                         ImageMock.img_city),
@@ -164,6 +163,13 @@ class _ExploreState extends State<Explore> {
                                   ),
                                   borderRadius:
                                   BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black38,
+                                      offset: Offset(3, 3),
+                                      blurRadius: 6,
+                                    )
+                                  ]
                                 ),
                               ),
                               Positioned(
@@ -251,81 +257,93 @@ class _ExploreState extends State<Explore> {
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           Container(
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Treding',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10,),
+                  child: Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Treding',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            setState(() {
-                              tourTrend = true;
-                            });
-                          },
-                          color: tourTrend
-                              ? Colors.green
-                              : Colors.transparent,
-                          child: Text(
-                            'Tour',
-                            style: TextStyle(
-                              color: tourTrend
-                                  ? Colors.white
-                                  : Colors.black38,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                      Row(
+                        children: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                tourTrend = true;
+                              });
+                            },
+                            color: tourTrend
+                                ? Colors.green
+                                : Colors.transparent,
+                            child: Text(
+                              'Tour',
+                              style: TextStyle(
+                                color: tourTrend
+                                    ? Colors.white
+                                    : Colors.black38,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            setState(() {
-                              tourTrend = false;
-                            });
-                          },
-                          color: !tourTrend
-                              ? Colors.green
-                              : Colors.transparent,
-                          child: Text(
-                            'Hotel',
-                            style: TextStyle(
-                              color: !tourTrend
-                                  ? Colors.white
-                                  : Colors.black38,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                          FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                tourTrend = false;
+                              });
+                            },
+                            color: !tourTrend
+                                ? Colors.green
+                                : Colors.transparent,
+                            child: Text(
+                              'Hotel',
+                              style: TextStyle(
+                                color: !tourTrend
+                                    ? Colors.white
+                                    : Colors.black38,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 Container(
-                  height: 330,
+                  height: 350,
                   child: tourTrend
                       ? ListView.builder(
+                    padding: EdgeInsets.all(10),
                     physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return Container(
                         width: 250,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                offset: Offset(3, 3),
+                                blurRadius: 6,
+                              )
+                            ]
+                        ),
                         margin: EdgeInsets.only(
                             right: index != 2 ? 20 : 0),
                         child: Column(
@@ -514,6 +532,7 @@ class _ExploreState extends State<Explore> {
                     },
                   )
                       : ListView.builder(
+                    padding: EdgeInsets.all(10),
                     physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
@@ -522,6 +541,17 @@ class _ExploreState extends State<Explore> {
                         width: 250,
                         margin: EdgeInsets.only(
                             right: index != 2 ? 20 : 0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                offset: Offset(3, 3),
+                                blurRadius: 6,
+                              )
+                            ]
+                        ),
                         child: Column(
                           children: <Widget>[
                             Stack(
@@ -709,7 +739,10 @@ class _ExploreState extends State<Explore> {
                 ),
               ],
             ),
-          )
+          ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );

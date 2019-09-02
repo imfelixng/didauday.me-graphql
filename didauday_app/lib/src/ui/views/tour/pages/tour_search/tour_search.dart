@@ -78,142 +78,148 @@ class _TourSearchState extends State<TourSearch> {
             ),
             Expanded(
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
                 itemCount: 20,
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(2, 2),
-                            blurRadius: 4,
-                          )
-                        ]),
-                    margin: EdgeInsets.only(bottom: index != 19 ? 15 : 0),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          height: 150,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5)),
-                              image: DecorationImage(
-                                image: NetworkImage(ImageMock.img_tour),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width - 150 - 20,
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.location_on,
-                                    color: Colors.grey[400],
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text('Da Nang, Viet Nam')
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'New York: Museum of Modern Art',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  RatingBar(
-                                    initialRating: 3.5,
-                                    itemSize: 20,
-                                    allowHalfRating: true,
-                                    tapOnlyMode: true,
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text('12 reviews'),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '\$ 50',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        '\$100',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.red,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 5,
-                                    ),
-                                    child: Text(
-                                      '-50%',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/tour/detail');
+                    },
+                    child: Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                            )
+                          ]),
+                      margin: EdgeInsets.only(bottom: index != 19 ? 15 : 0),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            height: 150,
+                            width: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5)),
+                                image: DecorationImage(
+                                  image: NetworkImage(ImageMock.img_tour),
+                                  fit: BoxFit.cover,
+                                )),
                           ),
-                        )
-                      ],
+                          Container(
+                            width: MediaQuery.of(context).size.width - 150 - 20,
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.grey[400],
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text('Da Nang, Viet Nam')
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'New York: Museum of Modern Art',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    RatingBar(
+                                      initialRating: 3.5,
+                                      itemSize: 20,
+                                      allowHalfRating: true,
+                                      tapOnlyMode: true,
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text('12 reviews'),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          '\$ 50',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          '\$100',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.red,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(3),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 5,
+                                      ),
+                                      child: Text(
+                                        '-50%',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },

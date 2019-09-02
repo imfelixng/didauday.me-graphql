@@ -40,6 +40,8 @@ dependencies:
   flutter_rating_bar:
   date_range_picker:
   flutter_dotenv:
+  carousel_slider:
+  google_maps_flutter:
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_deta
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_search/flight_search.dart';
 import 'package:didauday_app/src/ui/views/home/home.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_detail/tour_detail.dart';
 import 'package:didauday_app/src/ui/views/tour/pages/tour_filter/tour_filter.dart';
 import 'package:didauday_app/src/ui/views/tour/pages/tour_search/tour_search.dart';
 import 'package:didauday_app/src/ui/views/tour/tour.dart';
@@ -82,6 +83,11 @@ class Router {
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: TourFilter()));
+        }
+      case '/tour/detail':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourDetail()));
         }
       default:
         return CupertinoPageRoute(builder: (_) {
