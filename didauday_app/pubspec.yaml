@@ -24,6 +24,7 @@ dependencies:
   intro_slider:
   firebase_core:
   firebase_auth:
+
   intl:
   flutter_google_places:
   google_sign_in:
@@ -37,6 +38,7 @@ dependencies:
   provider:
   flutter_rating_bar:
   date_range_picker:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
