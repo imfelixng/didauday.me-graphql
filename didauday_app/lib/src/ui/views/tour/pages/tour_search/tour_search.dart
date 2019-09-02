@@ -151,6 +151,7 @@ class _TourSearchState extends State<TourSearch> {
                                     initialRating: 3.5,
                                     itemSize: 20,
                                     allowHalfRating: true,
+                                    tapOnlyMode: true,
                                     itemBuilder: (context, _) => Icon(
                                       Icons.star,
                                       color: Colors.amber,
