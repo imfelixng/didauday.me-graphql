@@ -86,31 +86,36 @@ class _ExploreState extends State<Explore> {
               SizedBox(
                 width: 40,
               ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(2, 2),
-                            blurRadius: 4,
-                          )
-                        ]),
-                    child: Icon(
-                      Icons.card_travel,
-                      color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/tour');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                            )
+                          ]),
+                      child: Icon(
+                        Icons.card_travel,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text('Tour')
-                ],
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text('Tours')
+                  ],
+                ),
               ),
             ],
           ),

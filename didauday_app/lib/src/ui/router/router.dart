@@ -3,6 +3,8 @@ import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_deta
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_search/flight_search.dart';
 import 'package:didauday_app/src/ui/views/home/home.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_search/tour_search.dart';
+import 'package:didauday_app/src/ui/views/tour/tour.dart';
 import 'package:didauday_app/src/ui/widgets/check_network/check_network.dart';
 import 'package:flutter/material.dart';
 import 'package:didauday_app/src/ui/views/auth/auth.dart';
@@ -64,6 +66,16 @@ class Router {
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: FlightDetail()));
+        }
+      case '/tour':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourPage()));
+        }
+      case '/tour/search':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourSearch()));
         }
       default:
         return CupertinoPageRoute(builder: (_) {
