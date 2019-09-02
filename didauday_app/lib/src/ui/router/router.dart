@@ -1,8 +1,8 @@
-import 'package:didauday_app/src/ui/views/explore/explore.dart';
 import 'package:didauday_app/src/ui/views/flight/flight.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_detail.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_search/flight_search.dart';
+import 'package:didauday_app/src/ui/views/home/home.dart';
 import 'package:didauday_app/src/ui/widgets/check_network/check_network.dart';
 import 'package:flutter/material.dart';
 import 'package:didauday_app/src/ui/views/auth/auth.dart';
@@ -38,7 +38,7 @@ class Router {
       case '/home':
         {
           return CupertinoPageRoute(
-              builder: (context) => CheckNetwork(child: Explore()));
+              builder: (context) => CheckNetwork(child: Home()));
         }
       case '/user/update_profile':
         {
