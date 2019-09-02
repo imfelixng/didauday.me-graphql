@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:didauday_app/src/ui/helpers/image_mock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_maps_webservice/places.dart';
 
 class TourPage extends StatefulWidget {
   @override
@@ -13,33 +18,29 @@ class _TourPageState extends State<TourPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search Tours'),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/tour/search');
+            },
+            child: Icon(
+              Icons.search,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: 10,
           ),
           color: Colors.grey[200],
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: TextField(
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Search',
-                    hintText: 'Input destination name',
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                  onSubmitted: (keyword) {
-                    Navigator.pushNamed(context, '/tour/search');
-                  },
-                ),
-              ),
               SizedBox(
                 height: 20,
               ),
