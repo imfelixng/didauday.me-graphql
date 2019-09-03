@@ -1,4 +1,6 @@
 import 'package:didauday_app/src/ui/helpers/image_mock.dart';
+import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/widgets/dialog_info.dart';
+import 'package:didauday_app/src/ui/widgets/custom/bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -186,7 +188,12 @@ class _FlightDetailState extends State<FlightDetail> {
                   ),
                   RaisedButton(
                     onPressed: () {
-
+                      Navigator.of(context).push(CupertinoPageRoute(
+                          builder: (BuildContext context) {
+                            return DialogInfo();
+                          },
+                          fullscreenDialog: true
+                      ));
                     },
                     color: Colors.deepOrange,
                     child: Text('BOOK NOW', style: TextStyle(color: Colors.white),),
@@ -196,7 +203,7 @@ class _FlightDetailState extends State<FlightDetail> {
             ),
           ),
         ],
-      )
+      ),
     );
   }
 }

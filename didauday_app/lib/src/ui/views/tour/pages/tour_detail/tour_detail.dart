@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:didauday_app/src/ui/helpers/image_mock.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_detail/widgets/dialog_info.dart';
 import 'package:didauday_app/src/ui/views/tour/pages/tour_detail/widgets/place_map_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,9 +18,6 @@ class _TourDetailState extends State<TourDetail> {
   GoogleMapController mapController;
   final LatLng _center = const LatLng(16.0544, 108.2022);
   final Set<Marker> _markers = Set();
-
-
-  bool _isShowMapView = false;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -44,16 +43,10 @@ class _TourDetailState extends State<TourDetail> {
     });
   }
 
-  void _onClosePlaceMapView() {
-    setState(() {
-      _isShowMapView = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isShowMapView ? PlaceMapView(onClose: _onClosePlaceMapView,) : Stack(
+      body: Stack(
         children: <Widget>[
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -358,9 +351,12 @@ class _TourDetailState extends State<TourDetail> {
                           myLocationButtonEnabled: false,
                           mapToolbarEnabled: false,
                           onTap: (latLng) {
-                            setState(() {
-                              _isShowMapView = true;
-                            });
+                            Navigator.of(context).push(CupertinoPageRoute(
+                                builder: (BuildContext context) {
+                                  return PlaceMapView();
+                                },
+                                fullscreenDialog: true
+                            ));
                           },
                           markers: _markers,
                         ),
@@ -663,7 +659,149 @@ class _TourDetailState extends State<TourDetail> {
                   ),
                   RaisedButton(
                     onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            padding: EdgeInsets.all(10),
+                            constraints: BoxConstraints(
+                              maxHeight: 220,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5,),
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(3),
+                                          ),
+                                          child: Text('-20%', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: <TextSpan>[
+                                              TextSpan(text: 'From  ',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              TextSpan(text: '\$500',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red,
+                                                  decoration: TextDecoration.lineThrough,
+                                                ),
+                                              ),
+                                              TextSpan(text: '  \$400',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    RaisedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.of(context).push(CupertinoPageRoute(
+                                            builder: (BuildContext context) {
+                                              return DialogInfo();
+                                            },
+                                            fullscreenDialog: true
+                                        ));
+                                      },
+                                      color: Colors.deepOrange,
+                                      child: Text('Check', style: TextStyle(color: Colors.white),),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Date',
+                                      hintText: 'Chọn ngày khởi hành'
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text('Person',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        RaisedButton(
+                                          color: Colors.blue,
+                                          onPressed: () {
 
+                                          },
+                                          child: Text('-',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text('1',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        RaisedButton(
+                                          color: Colors.blue,
+                                          onPressed: () {
+
+                                          },
+                                          child: Text('+',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
                     },
                     color: Colors.deepOrange,
                     child: Text('BOOK NOW', style: TextStyle(color: Colors.white),),

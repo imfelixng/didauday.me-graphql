@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceMapView extends StatefulWidget {
-  final Function onClose;
-  PlaceMapView({this.onClose});
   @override
   _PlaceMapViewState createState() => _PlaceMapViewState();
 }
@@ -39,30 +37,22 @@ class _PlaceMapViewState extends State<PlaceMapView> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 11.0,
-            ),
-            myLocationButtonEnabled: false,
-            mapToolbarEnabled: false,
-            markers: _markers,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Places location'),
+      ),
+      body: Container(
+        color: Colors.white,
+        child: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 11.0,
           ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: GestureDetector(
-              onTap: () {
-                widget.onClose();
-              },
-              child: Icon(Icons.close, size: 30,),
-            ),
-          )
-        ],
+          myLocationButtonEnabled: false,
+          mapToolbarEnabled: false,
+          markers: _markers,
+        ),
       ),
     );
   }
