@@ -1,3 +1,5 @@
+import 'package:didauday_app/src/ui/views/tour/pages/tour_review/tour_add_review.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -16,7 +18,14 @@ class _TourReviewListState extends State<TourReviewList> {
         actions: <Widget>[
           Container(
             margin: EdgeInsets.all(10),
-            child: FlatButton.icon(onPressed: () {}, icon: Icon(Icons.add, color: Colors.white,), label: Text('Add', style: TextStyle(color: Colors.white),)),
+            child: FlatButton.icon(onPressed: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (BuildContext context) {
+                    return TourAddReview();
+                  },
+                  fullscreenDialog: true
+              ));
+            }, icon: Icon(Icons.add, color: Colors.white,), label: Text('Write', style: TextStyle(color: Colors.white),)),
           )
         ],
       ),
