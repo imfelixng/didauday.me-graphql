@@ -331,7 +331,7 @@ class _TourDetailState extends State<TourDetail> {
                         height: 20,
                       ),
                       Text(
-                        'Place\'s Location',
+                        'Place\'s location',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -359,6 +359,279 @@ class _TourDetailState extends State<TourDetail> {
                             ));
                           },
                           markers: _markers,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Reviews',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 150,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[300], width: 1),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(text: '3.2', style: TextStyle(fontSize: 30)),
+                                  TextSpan(text: '/5'),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text('Very Good', style: TextStyle(fontSize: 16,),),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(text: 'Based on ', style: TextStyle(fontSize: 16)),
+                                  TextSpan(text: '3 reviews', style: TextStyle(color: Colors.blue,)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(color: Colors.grey[300]),
+                                )
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(Icons.account_circle, size: 48,),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('An Nguyen Quang', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                                    RatingBar(
+                                                      initialRating: 4,
+                                                      itemSize: 20,
+                                                      itemBuilder:
+                                                          (context, _) =>
+                                                          Icon(
+                                                            Icons.star,
+                                                            color:
+                                                            Colors.amber,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Good', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Best choise'),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    child: Text('22/09/2019', style: TextStyle(fontSize: 16),),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: Colors.grey[300]),
+                                  )
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(Icons.account_circle, size: 48,),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('An Nguyen Quang', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                                    RatingBar(
+                                                      initialRating: 4,
+                                                      itemSize: 20,
+                                                      itemBuilder:
+                                                          (context, _) =>
+                                                          Icon(
+                                                            Icons.star,
+                                                            color:
+                                                            Colors.amber,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Good', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Best choise'),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    child: Text('22/09/2019', style: TextStyle(fontSize: 16),),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: Colors.grey[300]),
+                                  )
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(Icons.account_circle, size: 48,),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('An Nguyen Quang', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                                    RatingBar(
+                                                      initialRating: 4,
+                                                      itemSize: 20,
+                                                      itemBuilder:
+                                                          (context, _) =>
+                                                          Icon(
+                                                            Icons.star,
+                                                            color:
+                                                            Colors.amber,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Good', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text('Best choise'),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    child: Text('22/09/2019', style: TextStyle(fontSize: 16),),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/tour/detail/reviews');
+                              },
+                              child: Text('View all reviews',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
