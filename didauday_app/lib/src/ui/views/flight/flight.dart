@@ -33,8 +33,18 @@ class _FlightPageState extends State<FlightPage> {
                 width: double.infinity,
                 child: CupertinoSegmentedControl<int>(
                   children: {
-                    0: Container(child: Text('One way'),),
-                    1: Text('Road trip'),
+                    0: Container(
+                      height: 30,
+                      child: Center(child: Text('One Way', style: TextStyle(
+                        fontSize: 16,
+                      ),),),
+                    ),
+                    1: Container(
+                height: 30,
+                child: Center(child: Text('Road Trip', style: TextStyle(
+                fontSize: 16,
+                ),),),
+                ),
                   },
                   onValueChanged: (int newValue) {
                     setState(() {

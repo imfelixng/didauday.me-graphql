@@ -1,8 +1,13 @@
-import 'package:didauday_app/src/ui/views/explore/explore.dart';
 import 'package:didauday_app/src/ui/views/flight/flight.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_detail.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_search/flight_search.dart';
+import 'package:didauday_app/src/ui/views/home/home.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_detail/tour_detail.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_filter/tour_filter.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_review/tour_review.dart';
+import 'package:didauday_app/src/ui/views/tour/pages/tour_search/tour_search.dart';
+import 'package:didauday_app/src/ui/views/tour/tour.dart';
 import 'package:didauday_app/src/ui/widgets/check_network/check_network.dart';
 import 'package:flutter/material.dart';
 import 'package:didauday_app/src/ui/views/auth/auth.dart';
@@ -38,7 +43,7 @@ class Router {
       case '/home':
         {
           return CupertinoPageRoute(
-              builder: (context) => CheckNetwork(child: Explore()));
+              builder: (context) => CheckNetwork(child: Home()));
         }
       case '/user/update_profile':
         {
@@ -64,6 +69,31 @@ class Router {
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: FlightDetail()));
+        }
+      case '/tour':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourPage()));
+        }
+      case '/tour/search':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourSearch()));
+        }
+      case '/tour/search/filter':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourFilter()));
+        }
+      case '/tour/detail':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourDetail()));
+        }
+      case '/tour/detail/reviews':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: TourReviewList()));
         }
       default:
         return CupertinoPageRoute(builder: (_) {

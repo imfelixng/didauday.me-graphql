@@ -27,6 +27,7 @@ dependencies:
 
   intl:
   flutter_google_places:
+  google_maps_webservice: ^0.0.14
   google_sign_in:
   flutter_facebook_login:
   graphql_flutter:
@@ -38,7 +39,10 @@ dependencies:
   provider:
   flutter_rating_bar:
   date_range_picker:
-  cloud_firestore:
+  flutter_dotenv:
+  carousel_slider:
+  google_maps_flutter:
+  percent_indicator: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +64,7 @@ flutter:
     - assets/images/photo_eraser.png
     - assets/images/photo_pencil.png
     - assets/images/photo_ruler.png
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

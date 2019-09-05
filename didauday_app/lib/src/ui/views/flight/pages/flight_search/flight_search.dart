@@ -75,6 +75,7 @@ class _FlightSearchState extends State<FlightSearch> {
             ),
             Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 10,),
                 physics: BouncingScrollPhysics(),
                 itemCount: 20,
                 itemBuilder: (context, index) {
@@ -90,8 +91,15 @@ class _FlightSearchState extends State<FlightSearch> {
                       ),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                            )
+                          ],
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
