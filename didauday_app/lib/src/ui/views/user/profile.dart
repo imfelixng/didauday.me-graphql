@@ -64,7 +64,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 FlatButton(
                   onPressed: () {
-
+                    Navigator.pushNamed(context, '/user/my_booking');
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 FlatButton(
                   onPressed: () {
-
+                    Navigator.pushNamed(context, '/user/change_password');
                   },
                   child: Container(
                     decoration: BoxDecoration(
