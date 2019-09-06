@@ -8,13 +8,16 @@ import 'package:didauday_app/src/ui/views/tour/pages/tour_filter/tour_filter.dar
 import 'package:didauday_app/src/ui/views/tour/pages/tour_review/tour_review.dart';
 import 'package:didauday_app/src/ui/views/tour/pages/tour_search/tour_search.dart';
 import 'package:didauday_app/src/ui/views/tour/tour.dart';
+import 'package:didauday_app/src/ui/views/user/pages/change_password.dart';
+import 'package:didauday_app/src/ui/views/user/pages/my_booking.dart';
+import 'package:didauday_app/src/ui/views/user/pages/personal_info.dart';
 import 'package:didauday_app/src/ui/widgets/check_network/check_network.dart';
 import 'package:flutter/material.dart';
 import 'package:didauday_app/src/ui/views/auth/auth.dart';
 import 'package:didauday_app/src/ui/views/auth/pages/forgot_password_page/forgot_password.dart';
 import 'package:didauday_app/src/ui/views/auth/pages/login_page/login.dart';
 import 'package:didauday_app/src/ui/views/auth/pages/register_page/register.dart';
-import 'package:didauday_app/src/ui/views/user/pages/update_profile/update_profile.dart';
+import 'package:didauday_app/src/ui/views/user/pages/update_profile.dart';
 import 'package:flutter/cupertino.dart';
 
 class Router {
@@ -45,10 +48,25 @@ class Router {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: Home()));
         }
+      case '/user/personal_info':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: PersonalInfo()));
+        }
       case '/user/update_profile':
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: UpdateProfile()));
+        }
+      case '/user/my_booking':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: MyBooking()));
+        }
+      case '/user/change_password':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: ChangePassword()));
         }
       case '/flight':
         {

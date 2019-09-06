@@ -38,8 +38,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
     var gender = _valueGender;
 
-    if (_updateProfileBloc.isValidDataUpdate(firstName, lastName, birthday, gender, address, phoneNumber)) {
-      LoadingDialog.showLoadingDialog(context, "Updating profile. Please wait...");
+    if (_updateProfileBloc.isValidDataUpdate(
+        firstName, lastName, birthday, gender, address, phoneNumber)) {
+      LoadingDialog.showLoadingDialog(
+          context, "Updating profile. Please wait...");
       GraphQLClient _client = graphQLConfiguration.clientToQuery();
       QueryResult result;
 
@@ -47,31 +49,28 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
       try {
         result = await _client.mutate(
-          MutationOptions(
-            document: MutationProfile.updateProfile,
-            variables: {
-              "input": {
-                "firstname": firstName,
-                "lastname": lastName,
-                "birthday": birthday,
-                "address": address,
-                "phone_number": phoneNumber,
-                "gender": gender
-              }
+          MutationOptions(document: MutationProfile.updateProfile, variables: {
+            "input": {
+              "firstname": firstName,
+              "lastname": lastName,
+              "birthday": birthday,
+              "address": address,
+              "phone_number": phoneNumber,
+              "gender": gender
             }
-          ),
+          }),
         );
-      } catch(error) {
+      } catch (error) {
         LoadingDialog.hideLoadingDialog(context);
-        MessageDialog.showMsgDialog(
-            context, "Update profile", "You have an occour. Please try again later.");
+        MessageDialog.showMsgDialog(context, "Update profile",
+            "You have an occour. Please try again later.");
         return;
       }
 
       if (!result.hasErrors) {
         var profile = result.data.data["updateProfile"]["user_info"];
         LoadingDialog.hideLoadingDialog(context);
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
       } else {
         print(result.errors);
         LoadingDialog.hideLoadingDialog(context);
@@ -79,28 +78,32 @@ class _UpdateProfileState extends State<UpdateProfile> {
             context, "Update profile", result.errors.toString());
       }
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     Future _selectDate() async {
       DateTime picked = await showDatePicker(
           context: context,
           initialDate: new DateTime.now(),
           firstDate: new DateTime(1900),
-          lastDate: new DateTime(2100)
-      );
-      if(picked != null) setState(() {
-        _birthdayController.text = format.format(picked);
-        _valueBirthday = picked;
-      });
+          lastDate: new DateTime(2100));
+      if (picked != null)
+        setState(() {
+          _birthdayController.text = format.format(picked);
+          _valueBirthday = picked;
+        });
     }
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Update Profile'),
+        actions: <Widget>[
+          Container(
+            margin: EdgeInsets.all(10),
+            child: FlatButton.icon(onPressed: _onUpdate, icon: Icon(Icons.save, color: Colors.white,), label: Text('Save', style: TextStyle(color: Colors.white),)),
+          )
+        ],
       ),
       body: SafeArea(
         child: Container(
@@ -121,7 +124,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           controller: _firstNameController,
                           decoration: InputDecoration(
                               errorText:
-                              snapshot.hasError ? snapshot.error : null,
+                                  snapshot.hasError ? snapshot.error : null,
                               labelText: 'First name',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(
@@ -141,7 +144,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           controller: _lastNameController,
                           decoration: InputDecoration(
                               errorText:
-                              snapshot.hasError ? snapshot.error : null,
+                                  snapshot.hasError ? snapshot.error : null,
                               labelText: 'Last name',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(
@@ -160,7 +163,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         controller: _birthdayController,
                         decoration: InputDecoration(
                             errorText:
-                            snapshot.hasError ? snapshot.error : null,
+                                snapshot.hasError ? snapshot.error : null,
                             labelText: 'Birthday',
                             border: OutlineInputBorder(),
                             suffixIcon: Icon(
@@ -235,7 +238,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           controller: _addressController,
                           decoration: InputDecoration(
                               errorText:
-                              snapshot.hasError ? snapshot.error : null,
+                                  snapshot.hasError ? snapshot.error : null,
                               labelText: 'Address',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(
@@ -249,41 +252,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     vertical: 10,
                   ),
                   child: StreamBuilder<Object>(
-                      stream: _updateProfileBloc.phoneNumberStream,
-                      builder: (context, snapshot) {
-                        return TextField(
-                          controller: _phoneNumberController,
-                          decoration: InputDecoration(
-                            errorText:
-                            snapshot.hasError ? snapshot.error : null,
-                            labelText: 'Phone number',
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(
-                              Icons.phone,
-                            ),
+                    stream: _updateProfileBloc.phoneNumberStream,
+                    builder: (context, snapshot) {
+                      return TextField(
+                        controller: _phoneNumberController,
+                        decoration: InputDecoration(
+                          errorText: snapshot.hasError ? snapshot.error : null,
+                          labelText: 'Phone number',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.phone,
                           ),
-                        );
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: RaisedButton(
-                      color: Color(0xfffd5739),
-                      onPressed: _onUpdate,
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -298,5 +280,4 @@ class _UpdateProfileState extends State<UpdateProfile> {
   void dispose() {
     super.dispose();
   }
-
 }
