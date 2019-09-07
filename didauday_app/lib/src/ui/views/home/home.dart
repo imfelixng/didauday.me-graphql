@@ -58,8 +58,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         title: Text('Đi Đâu Đây'),
         actions: <Widget>[
-          Icon(Icons.shopping_cart),
-          SizedBox(width: 10,),
+          IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {
+            Navigator.pushNamed(context, '/cart');
+          },),
         ],
       ),
       drawer: DrawerApp(),

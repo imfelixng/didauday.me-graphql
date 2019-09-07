@@ -1,3 +1,4 @@
+import 'package:didauday_app/src/ui/views/cart/cart.dart';
 import 'package:didauday_app/src/ui/views/flight/flight.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_detail.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
@@ -46,7 +47,7 @@ class Router {
       case '/home':
         {
           return CupertinoPageRoute(
-              builder: (context) => CheckNetwork(child: Home()));
+              builder: (context) => CheckNetwork(child: Home(),));
         }
       case '/user/personal_info':
         {
@@ -112,6 +113,11 @@ class Router {
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: TourReviewList()));
+        }
+      case '/cart':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Cart()));
         }
       default:
         return CupertinoPageRoute(builder: (_) {
