@@ -69,10 +69,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: <Widget>[
             IgnorePointer(
               ignoring: _showChatBox,
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: widgets[selectBottomTab],
-              ),
+              child: widgets[selectBottomTab],
             ),
             Positioned(
               left: 15,

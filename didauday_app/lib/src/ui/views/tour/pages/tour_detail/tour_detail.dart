@@ -79,18 +79,20 @@ class _TourDetailState extends State<TourDetail> {
                     Positioned(
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal: 10,
                           vertical: 10,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
+                            IconButton(
+                              onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Icon(Icons.arrow_back, color: Colors.white,),),
-                            Icon(Icons.favorite, color: Colors.red),
+                              icon: Icon(Icons.arrow_back, color: Colors.white,),),
+                            IconButton(
+                              onPressed: () {},
+                                icon: Icon(Icons.favorite, color: Colors.red)),
                           ],
                         ),
                       ),

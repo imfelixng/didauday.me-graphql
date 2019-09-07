@@ -23,14 +23,11 @@ class _TourSearchState extends State<TourSearch> {
       appBar: AppBar(
         title: Text('Search Results'),
         actions: <Widget>[
-          GestureDetector(
-            onTap: () {
+          IconButton(
+            onPressed: () {
               Navigator.pushNamed(context, '/tour/search/filter');
             },
-            child: Icon(Icons.filter_list),
-          ),
-          SizedBox(
-            width: 10,
+            icon: Icon(Icons.filter_list),
           ),
         ],
       ),

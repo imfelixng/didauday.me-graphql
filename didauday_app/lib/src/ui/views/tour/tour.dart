@@ -19,16 +19,13 @@ class _TourPageState extends State<TourPage> {
       appBar: AppBar(
         title: Text('Search Tours'),
         actions: <Widget>[
-          GestureDetector(
-            onTap: () {
+          IconButton(
+            onPressed: () {
               Navigator.pushNamed(context, '/tour/search');
             },
-            child: Icon(
+            icon: Icon(
               Icons.search,
             ),
-          ),
-          SizedBox(
-            width: 10,
           ),
         ],
       ),
