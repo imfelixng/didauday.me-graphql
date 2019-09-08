@@ -55,9 +55,9 @@ const tourSchema = new Schema(
         itineraries: {
             type: [
                 {
-                    location: {
+                    place: {
                         type: mongoose.Schema.Types.ObjectId,
-                        ref: 'Location',
+                        ref: 'Place',
                         required: true,
                     },
                     description: {
@@ -77,7 +77,7 @@ const tourSchema = new Schema(
             required: true,
         },
         owner: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Profile',
             required: true,
         },

@@ -9,7 +9,7 @@ const resolvers = {
       }
       return tours;
     },
-    tour: async (parents, { data: { tour_id } }, { mongo }, info) => {
+    tour: async (parents, { tour_id }, { mongo }, info) => {
       let tour = null;
       try {
         tour = await mongo.Tour.findById(tour_id);

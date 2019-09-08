@@ -5,12 +5,14 @@ import {
 const tourSchema = gql `
 
   extend type Query {
-    tour(data: TourInput!): Tour
+    tour(tour_id: ID!): Tour
     tours(filter: TourFilter, pagi: TourPagi): [Tour]!
   }
 
   extend type Mutation {
     createTour(data: CreateTourInput!): Tour!
+    updateTour(tour_id: ID!, data: UpdateTourInput!): Tour!
+    deleteTour(tour_id: ID!): Tour!
   }
 
   type Tour @key(fields: "_id") {
@@ -25,7 +27,7 @@ const tourSchema = gql `
     images: [String!]!
     rate: Float!
     num_review: Int!
-    departure_day: String!
+    departure_day: Int!
     city: [City!]!
     itineraries: [Itinerary!]!
     available: Int
@@ -53,10 +55,6 @@ const tourSchema = gql `
     _id: ID! @external
   }
 
-  input TourInput {
-    tour_id: ID!
-  }
-
   input TourFilter {
     keyword: String
     start_day: Int
@@ -72,6 +70,12 @@ const tourSchema = gql `
     total: Int
   }
 
+  input ItineraryInput {
+    place: ID!
+    description: String!
+    image: String!
+  }
+
   input CreateTourInput {
     name: String!
     duration: String!
@@ -81,9 +85,23 @@ const tourSchema = gql `
     language_tour: String!
     description: String!
     images: [String!]!
-    departure_day: String!
-    city: [City!]!
-    itineraries: [Itinerary!]!
+    departure_day: Int!
+    city: [ID!]!
+    itineraries: [ItineraryInput!]!
+  }
+
+  input UpdateTourInput {
+    name: String!
+    duration: String!
+    tour_type: String!
+    group_size: Int!
+    price: Float!
+    language_tour: String!
+    description: String!
+    images: [String!]!
+    departure_day: Int!
+    city: [ID!]!
+    itineraries: [ItineraryInput!]!
   }
 
 `;
