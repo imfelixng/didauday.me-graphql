@@ -22,7 +22,7 @@ const j = schedule.scheduleJob('0 0 1 * *', function(){
     // clearCollection(Airport);
 
     crawlFlightData();
-    saveDataToDB(Provider, providers);
-    saveDataToDB(City, cities);
-    saveDataToDB(Airport, airports);
+    saveDataToDB(Provider, providers, "provider");
+    saveDataToDB(City, cities, 'city');
+    saveDataToDB(Airport, airports, 'airport');
 })()
