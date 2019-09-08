@@ -1,30 +1,109 @@
-import { gql } from 'apollo-server';
+import {
+  gql
+} from 'apollo-server';
 
-const tourSchema = gql`
+const tourSchema = gql `
 
-  # A post entry
-  type Post @key(fields: "id") {
-    id: Int!
-    # The posts' title
-    title: String
-    # The posts' actual content
-    content: String
-  }
-
-  type Identifier {
-    # a unique hash to identify the running node process
-    hash: String
-  }
-
-  # Queries from post service
   extend type Query {
-    # List of all our posts
-    allPosts: [Post]
-    # A single post
-    post(id: Int!): Post
-    # infos identifying running process
-    identifier: Identifier
+    tour(tour_id: ID!): Tour
+    tours(filter: TourFilter, pagi: TourPagi): [Tour]!
   }
+
+  extend type Mutation {
+    createTour(data: CreateTourInput!): Tour!
+    updateTour(tour_id: ID!, data: UpdateTourInput!): Tour!
+    deleteTour(tour_id: ID!): Tour!
+  }
+
+  type Tour @key(fields: "_id") {
+    _id: ID!
+    name: String!
+    duration: String!
+    tour_type: String!
+    group_size: Int!
+    price: Float!
+    language_tour: String!
+    description: String!
+    images: [String!]!
+    rate: Float!
+    num_review: Int!
+    departure_day: Int!
+    city: [City!]!
+    itineraries: [Itinerary!]!
+    available: Int
+    owner: Profile!
+    createdAt: String!
+    updateAt: String!
+  }
+
+  type Itinerary {
+    _id: ID!
+    place: Place!
+    description: String!
+    image: String!
+  }
+
+  type City @key(fields: "_id") {
+    _id: ID!
+  }
+
+  type Place @key(fields: "_id") {
+    _id: ID!
+  }
+
+  extend type Profile @key(fields: "_id") {
+    _id: ID! @external
+  }
+
+  input TourFilter {
+    keyword: String
+    start_day: Int
+    end_day: Int
+    min_price: Int
+    max_price: Int
+    review_score: [Int]!
+  }
+
+  input TourPagi {
+    current_page: Int
+    limit: Int
+    total: Int
+  }
+
+  input ItineraryInput {
+    place: ID!
+    description: String!
+    image: String!
+  }
+
+  input CreateTourInput {
+    name: String!
+    duration: String!
+    tour_type: String!
+    group_size: Int!
+    price: Float!
+    language_tour: String!
+    description: String!
+    images: [String!]!
+    departure_day: Int!
+    city: [ID!]!
+    itineraries: [ItineraryInput!]!
+  }
+
+  input UpdateTourInput {
+    name: String!
+    duration: String!
+    tour_type: String!
+    group_size: Int!
+    price: Float!
+    language_tour: String!
+    description: String!
+    images: [String!]!
+    departure_day: Int!
+    city: [ID!]!
+    itineraries: [ItineraryInput!]!
+  }
+
 `;
 
 export default tourSchema;

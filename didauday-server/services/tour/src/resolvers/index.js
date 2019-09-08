@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
 
-import tourResolver from './tour.js';
+import queryResolver from './query.js';
+import mutationResolver from './mutation.js';
 
 const rootResolvers = {};
 
-const resolvers = merge(rootResolvers, tourResolver);
+const resolvers = merge(rootResolvers, queryResolver, mutationResolver);
 
 export default resolvers;
