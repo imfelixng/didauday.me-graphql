@@ -92,7 +92,7 @@ const cities = [
     },
     {
         name: "Bắc Ninh",
-        zipcode: "790000",
+        zipcode: "790001",
         country: "Việt Nam",
         location: {
             type: "Point",

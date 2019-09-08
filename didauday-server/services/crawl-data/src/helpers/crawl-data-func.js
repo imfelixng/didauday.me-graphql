@@ -114,9 +114,20 @@ const saveTicketToDB = async (tickets) => {
       }
     }
   };
-const saveDataToDB = async (model, datas) => {
+const saveDataToDB = async (model, datas, type) => {
     const asyncArr = datas.map(data => {
-        return model.create(data);
+        const where = {
+          "provider": {
+            code: data.code
+          },
+          "city": {
+            zipcode: data.zipcode
+          },
+          "airport": {
+            airport_code: data.airport_code
+          }
+        }
+        return model.findOneAndUpdate(where[type], data, { upsert: true });
     });
 
     try {

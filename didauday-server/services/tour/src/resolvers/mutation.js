@@ -61,7 +61,7 @@ const resolvers = {
 
             let tourUpdated = null;
             try {
-                tourUpdated = await mongo.Tour.findByIdAndUpdate(tour_id, { ...data });
+                tourUpdated = await mongo.Tour.findByIdAndUpdate(tour_id, { ...data }, { new: true });
             } catch (error) {
                 console.log(error);
                 throw 'Can\'t update tour. Please try again later';
@@ -70,21 +70,8 @@ const resolvers = {
             if (!tourUpdated) {
                 throw 'Can\'t update tour. Please try again later';
             }
-
-            let tour = null;
-
-            try {
-                tour = await mongo.Tour.findById(tour_id);
-            } catch (error) {
-                console.log(error);
-                throw 'Can\'t update tour. Please try again later';
-            }
-
-            if (!tour) {
-                throw 'Can\'t update tour. Please try again later';
-            }
-
-            return tour;
+            
+            return tourUpdated;
         },
         deleteTour: async (parent,
             {
