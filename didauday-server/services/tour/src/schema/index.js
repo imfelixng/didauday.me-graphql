@@ -6,7 +6,7 @@ const tourSchema = gql `
 
   extend type Query {
     tour(tour_id: ID!): Tour
-    tours(filter: TourFilter, pagi: TourPagi): [Tour]!
+    tours(filter: FilterTourInput, pagi: PagiTourInput): [Tour]!
   }
 
   extend type Mutation {
@@ -55,7 +55,7 @@ const tourSchema = gql `
     _id: ID! @external
   }
 
-  input TourFilter {
+  input FilterTourInput {
     keyword: String
     start_day: Int
     end_day: Int
@@ -64,7 +64,7 @@ const tourSchema = gql `
     review_score: [Int]!
   }
 
-  input TourPagi {
+  input PagiTourInput {
     current_page: Int
     limit: Int
     total: Int

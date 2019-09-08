@@ -4,6 +4,7 @@ const express = require("express");
 
 const tourUrl = process.env.TOUR_URL || "http://localhost:5001/graphql";
 const userUrl = process.env.USER_URL || "http://localhost:5002/graphql";
+const flightUrl = process.env.FLIGHT_URL || "http://localhost:5003/graphql";
 
 const PORT = process.env.PORT || 5000;
 
@@ -15,6 +16,10 @@ const services = [
   {
     name: "user",
     url: userUrl
+  },
+  {
+    name: "flight",
+    url: flightUrl
   }
 ];
 
