@@ -12,14 +12,14 @@ import providers from './data/mock/provider.js';
 
 
 const j = schedule.scheduleJob('0 0 1 * *', function(){
-    // crawlFlightData();
+    crawlFlightData();
 });
 
 (async () => {
     await mongoConnection;
-    clearCollection(Provider);
-    clearCollection(City);
-    clearCollection(Airport);
+    // clearCollection(Provider);
+    // clearCollection(City);
+    // clearCollection(Airport);
 
     crawlFlightData();
     saveDataToDB(Provider, providers);
