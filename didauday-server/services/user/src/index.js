@@ -5,7 +5,6 @@ import typeDefs from './schema';
 import resolvers from './resolvers';
 
 import './configs/db/mongo';
-import neo4j from './configs/db/neo4j';
 
 import Profile from './models/mongo/profile';
 import Role from './models/mongo/profile';
@@ -27,7 +26,6 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     return {
       req,
-      neo4j,
       mongo
     };
   },
