@@ -43,12 +43,12 @@ const tourSchema = gql `
     image: String!
   }
 
-  type City @key(fields: "_id") {
-    _id: ID!
+  extend type City @key(fields: "_id") {
+    _id: ID! @external
   }
 
-  type Place @key(fields: "_id") {
-    _id: ID!
+  extend type Place @key(fields: "_id") {
+    _id: ID! @external
   }
 
   extend type Profile @key(fields: "_id") {
