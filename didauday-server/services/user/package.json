@@ -8,7 +8,7 @@
     "dev": "nodemon -r esm ./src/index.js"
   },
   "dependencies": {
-    "@apollo/federation": "^0.8.0",
+    "@apollo/federation": "latest",
     "apollo-server": "^2.6.3",
     "dotenv": "^8.0.0",
     "esm": "^3.2.25",

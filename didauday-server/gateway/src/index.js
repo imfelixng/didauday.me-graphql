@@ -7,6 +7,8 @@ const userUrl = process.env.USER_URL || "http://localhost:5002/graphql";
 const flightUrl = process.env.FLIGHT_URL || "http://localhost:5003/graphql";
 const placeUrl = process.env.PLACE_URL || "http://localhost:5004/graphql";
 const hotelUrl = process.env.HOTEL_URL || "http://localhost:5005/graphql";
+const reviewUrl = process.env.REVIEW_URL || "http://localhost:5006/graphql";
+const favoriteUrl = process.env.FAVORITE_URL || "http://localhost:5007/graphql";
 
 const PORT = process.env.PORT || 5000;
 
@@ -30,6 +32,10 @@ const services = [
   {
     name: "hotel",
     url: hotelUrl
+  },
+  {
+    name: "review",
+    url: reviewUrl
   }
 ];
 

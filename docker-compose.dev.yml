@@ -167,6 +167,29 @@ services:
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
     restart: always
+  review:
+    build:
+      context: ./didauday-server/services/review
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5006:5006"
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/review:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5006
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway
@@ -182,12 +205,14 @@ services:
       - flight
       - place
       - hotel
+      - review
     environment:
       - TOUR_URL=http://tour:5001/graphql
       - USER_URL=http://user:5002/graphql
       - FLIGHT_URL=http://flight:5003/graphql
       - PLACE_URL=http://place:5004/graphql
       - HOTEL_URL=http://hotel:5005/graphql
+      - REVIEW_URL=http://review:5006/graphql
       - PORT=5000
     restart: always
   mongo:
