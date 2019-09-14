@@ -92,6 +92,132 @@ services:
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
     restart: always
+  place:
+    build:
+      context: ./didauday-server/services/place
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/place:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5004
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  hotel:
+    build:
+      context: ./didauday-server/services/hotel
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/hotel:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5005
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  review:
+    build:
+      context: ./didauday-server/services/review
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/review:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5006
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  favorite:
+    build:
+      context: ./didauday-server/services/favorite
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/favorite:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5007
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  discount:
+    build:
+      context: ./didauday-server/services/discount
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/discount:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5007
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
+  booking:
+    build:
+      context: ./didauday-server/services/booking
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./didauday-server/services/booking:/app
+    depends_on:
+      - mongo
+      - neo4j
+      - redis
+    environment:
+      - PORT=5007
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=annq
+      - NEO4J_PORT=7687
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_DB_NAME=didauday
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway
@@ -103,10 +229,22 @@ services:
       - tour
       - user
       - flight
+      - place
+      - hotel
+      - review
+      - favorite
+      - discount
+      - booking
     environment:
       - TOUR_URL=http://tour:5001/graphql
       - USER_URL=http://user:5002/graphql
       - FLIGHT_URL=http://flight:5003/graphql
+      - PLACE_URL=http://place:5004/graphql
+      - HOTEL_URL=http://hotel:5005/graphql
+      - REVIEW_URL=http://review:5006/graphql
+      - FAVORITE_URL=http://favorite:5007/graphql
+      - DISCOUNT_URL=http://discount:5008/graphql
+      - BOOKING_URL=http://booking:5009/graphql
       - PORT=5000
     restart: always
   mongo:
