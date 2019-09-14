@@ -1,4 +1,4 @@
-import serviceAccount from "./keys/serviceAccountKey.json";
+import serviceAccount from "./keys/serviceAccountKey.json.js";
 
 import admin from 'firebase-admin';
 

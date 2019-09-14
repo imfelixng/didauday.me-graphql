@@ -1,6 +1,6 @@
 const resolvers = {
   Query: {
-    allFavorites: (parent, _, { mongo }, info) => {
+    allBookings: (parent, _, { mongo }, info) => {
       return [];
     }
   },

@@ -10,7 +10,7 @@ const tourSchema = gql `
     airports: AirportsPayload!
   }
 
-  type Flight {
+  type Flight @key(fields: "_id") {
     _id: ID!
     name: String!
     start_location: AirPort!

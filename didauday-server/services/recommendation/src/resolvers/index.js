@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 
-import queryResolver from './query.js';
-import mutationResolver from './mutation.js';
+import queryResolver from './query.js.js.js.js';
+import mutationResolver from './mutation.js.js.js.js';
 
 const rootResolvers = {};
 
