@@ -1,4 +1,5 @@
 import 'package:didauday_app/src/ui/views/cart/cart.dart';
+import 'package:didauday_app/src/ui/views/cart/pages/check_out/check_out.dart';
 import 'package:didauday_app/src/ui/views/flight/flight.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_detail/flight_detail.dart';
 import 'package:didauday_app/src/ui/views/flight/pages/flight_filter/flight_filter.dart';
@@ -118,6 +119,11 @@ class Router {
         {
           return CupertinoPageRoute(
               builder: (context) => CheckNetwork(child: Cart()));
+        }
+      case '/check_out':
+        {
+          return CupertinoPageRoute(
+              builder: (context) => CheckNetwork(child: Checkout()));
         }
       default:
         return CupertinoPageRoute(builder: (_) {

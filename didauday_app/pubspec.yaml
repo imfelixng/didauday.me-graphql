@@ -43,7 +43,7 @@ dependencies:
   carousel_slider:
   google_maps_flutter:
   percent_indicator: ^2.1.1
-
+  braintree_payment:
 dev_dependencies:
   flutter_test:
     sdk: flutter
