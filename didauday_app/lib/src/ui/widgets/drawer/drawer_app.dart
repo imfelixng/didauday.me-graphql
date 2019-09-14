@@ -1,3 +1,6 @@
+import 'package:didauday_app/src/ui/widgets/dialog/loading_dialog.dart';
+import 'package:didauday_app/src/ui/widgets/dialog/message_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DrawerApp extends StatelessWidget {
@@ -41,8 +44,16 @@ class DrawerApp extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.lock_open, color: Colors.white,),
                 title: Text('Logout', style: TextStyle(color: Colors.white, fontSize: 16,),),
-                onTap: () {
-                  Navigator.pop(context);
+                onTap: () async {
+                  LoadingDialog.showLoadingDialog(context, 'Logging out...');
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    LoadingDialog.hideLoadingDialog(context);
+                    Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+                  } catch (error) {
+                    LoadingDialog.hideLoadingDialog(context);
+                    MessageDialog.showMsgDialog(context, 'Logout', error.toString());
+                  }
                 },
               ),
             ],
