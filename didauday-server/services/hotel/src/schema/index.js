@@ -72,12 +72,8 @@ const tourSchema = gql `
     updateAt: String!
   }
 
-  type Location {
-    _id: ID!
-    type_location: TypeLocation!
-    coordinates: [Float!]!
-    createdAt: String!
-    updateAt: String!
+  extend type Location @key(fields: "_id") {
+    _id: ID @external
   }
 
   extend type Profile @key(fields: "_id") {

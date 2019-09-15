@@ -5,10 +5,10 @@ import {
 const placeSchema = gql `
 
   extend type Query {
-    city(city_id: ID!): City
-    cities(filter: FilterCityInput, pagi: PagiCityInput): [City]!
-    place(place_id: ID!): Place
-    places(filter: FilterPlaceInput, pagi: PagiPlaceInput): [Place]!
+    city(city_id: ID!): City!
+    cities(filter: FilterCityInput, pagi: PagiCityInput): CitiesPayload!
+    place(place_id: ID!): Place!
+    places(filter: FilterPlaceInput, pagi: PagiPlaceInput): PlacesPayload!
   }
 
   type City @key(fields: "_id") {
@@ -33,12 +33,26 @@ const placeSchema = gql `
     updateAt: String!
   }
 
-  type Location {
-    _id: ID!
-    type_location: TypeLocation!
+  type Location @key(fields: "_id") {
+    _id: ID
+    type: TypeLocation!
     coordinates: [Float!]!
-    createdAt: String!
-    updateAt: String!
+  }
+
+  type CitiesPayload {
+    _meta: Pagination!
+    data: [City]!
+  }
+
+  type PlacesPayload {
+    _meta: Pagination!
+    data: [Place]!
+  }
+
+  type Pagination {
+    current: Int!
+    limit: Int!
+    total: Int!
   }
 
   input FilterCityInput {
@@ -46,9 +60,7 @@ const placeSchema = gql `
   }
 
   input PagiCityInput {
-    current_page: Int
-    limit: Int
-    total: Int
+    current: Int!
   }
 
   input FilterPlaceInput {
@@ -57,9 +69,7 @@ const placeSchema = gql `
   }
 
   input PagiPlaceInput {
-    current_page: Int
-    limit: Int
-    total: Int
+    current: Int
   }
 
   enum TypeLocation {
