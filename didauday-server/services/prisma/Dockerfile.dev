@@ -5,15 +5,10 @@ WORKDIR /app
 # install prisma cli
 RUN npm install -g prisma
 
-COPY package.json .
-
-RUN npm install
-
 COPY . .
 
-EXPOSE 4466
-
 # allow execution for entrypoint scripts
-RUN chmod +x ./entrypoint.sh
+# USER ROOT
+# CMD ["chmod", "+x" ,"/app/entrypoint.sh"]
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "./entrypoint.sh"]
