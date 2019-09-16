@@ -9,22 +9,36 @@ import {
 } from './convert-money';
 
 import Flight from '../models/mongo/flight';
+import City from '../models/mongo/city';
+import Airport from '../models/mongo/airport';
+import Provider from '../models/mongo/provider';
 
 import airports from '../data/mock/airport';
 
 const saveTicketToDB = async (tickets) => {
     console.log('Crawl data start!');
-    const asyncArr = tickets.map(ticket => Flight.findOneAndUpdate(
-      { flight_id: ticket.flight_id },
-      ticket,
-      { upsert: true },
-    ));
+    const asyncArr = tickets.map(async (ticket) => {
+      const providerItem = await Provider.findOne({ code: ticket.provider_code });
+      const startLocationItem = await Airport.findOne({ airport_code: ticket.start_location_code });
+      const endLocationitem = await Airport.findOne({ airport_code: ticket.end_location_code });
+
+      const data = {
+        ...ticket,
+        provider: providerItem._id,
+        start_location: startLocationItem.airport_code,
+        end_location: endLocationitem.airport_code,
+      }
+
+      return Flight.findOneAndUpdate(
+        { flight_id: ticket.flight_id },
+        data,
+        { upsert: true },
+      );
+    });
 
     try {
       await Promise.all(asyncArr);
-      console.log('ok');
     } catch (error) {
-      console.log(error.message);
       console.log('Save to db failed');
     }
 
@@ -63,14 +77,12 @@ const saveTicketToDB = async (tickets) => {
               rawTickets = [];
             }
 
-            console.log(rawTickets.length);
-
             let tickets = rawTickets.map((ticket) => {
               if (ticket.connectingFlightRoutes.length === 1) {
                 const segment = ticket.connectingFlightRoutes[0].segments[0];
   
-                const start_location = ticket.connectingFlightRoutes[0].departureAirport;
-                const end_location = ticket.connectingFlightRoutes[0].arrivalAirport;
+                const start_location_code = ticket.connectingFlightRoutes[0].departureAirport;
+                const end_location_code = ticket.connectingFlightRoutes[0].arrivalAirport;
                 const date_start = moment(`${segment.departureDate.day}/${segment.departureDate.month}/${segment.departureDate.year}`, 'DD/MM/YYYY').valueOf() / 1000;
                 const date_end = moment(`${segment.arrivalDate.day}/${segment.arrivalDate.month}/${segment.arrivalDate.year}`, 'DD/MM/YYYY').valueOf() / 1000;
                 
@@ -83,18 +95,18 @@ const saveTicketToDB = async (tickets) => {
                   minute: parseInt(segment.arrivalTime.minute, 10),
                 };
                 const price = parseInt(convertMoneyToUSD(parseInt(ticket.desktopPrice.amount, 10)));
-                const provider = segment.airlineCode;
+                const provider_code = segment.airlineCode;
                 const flight_id = ticket.flightId;
                 const name = `${start_location} -> ${end_location}`;
                 return {
-                  start_location,
-                  end_location,
+                  start_location: start_location_code,
+                  end_location: end_location_code,
                   date_start,
                   time_start,
                   date_end,
                   time_end,
                   price,
-                  provider,
+                  provider_code,
                   flight_id,
                   name
                 };
@@ -106,7 +118,7 @@ const saveTicketToDB = async (tickets) => {
               try {
                 await saveTicketToDB(tickets);
               } catch (error) {
-                console.log(error.message);
+                console.log("Save failed");
               }
             }
           }
@@ -114,28 +126,77 @@ const saveTicketToDB = async (tickets) => {
       }
     }
   };
-const saveDataToDB = async (model, datas, type) => {
-    const asyncArr = datas.map(data => {
-        const where = {
-          "provider": {
-            code: data.code
-          },
-          "city": {
-            zipcode: data.zipcode
-          },
-          "airport": {
-            airport_code: data.airport_code
-          }
-        }
-        return model.findOneAndUpdate(where[type], data, { upsert: true });
-    });
 
-    try {
-        await Promise.all(asyncArr);
-        console.log('Success');
-    } catch (error) {
-        console.log('Create failed');
-    }
+const saveDataToDB = async (model, datas, type) => {
+  let asyncArr = [];
+
+  if (type === 'city') {
+    asyncArr = datas.map(data => {
+      const where = {
+        "provider": {
+          code: data.code
+        },
+        "city": {
+          zipcode: data.zipcode
+        },
+        "airport": {
+          airport_code: data.airport_code,
+        }
+      }
+      return model.findOneAndUpdate(where[type], data, { upsert: true });
+    });
+  }
+
+  if (type === 'provider') {
+    asyncArr = datas.map(data => {
+      const where = {
+        "provider": {
+          code: data.code
+        },
+        "city": {
+          zipcode: data.zipcode
+        },
+        "airport": {
+          airport_code: data.airport_code,
+        }
+      }
+      return model.findOneAndUpdate(where[type], data, { upsert: true });
+    });
+  }
+
+  if (type === 'airport') {
+    asyncArr = datas.map(async (data) => {
+      const where = {
+        "provider": {
+          code: data.code
+        },
+        "city": {
+          zipcode: data.zipcode
+        },
+        "airport": {
+          airport_code: data.airport_code,
+        }
+      }
+      const cityItem = await City.findOne({ zipcode: data.city_zipcode });
+      if (cityItem) {
+        const dataItem = {
+          ...data,
+          city: cityItem._id,
+        }
+        return model.findOneAndUpdate(where[type], dataItem, { upsert: true });
+      }
+      return null;
+    });
+  }
+
+
+  try {
+      await Promise.all(asyncArr);
+      console.log('Success ' + type);
+  } catch (error) {
+    console.log(error);
+      console.log('Create failed');
+  }
 }
 
 const crawlFlightData = async () => {
@@ -145,7 +206,7 @@ const crawlFlightData = async () => {
     try {
         await getDataOneWay();
     } catch (error) {
-        console.log(error.message);
+        console.log("Get data failed");
     }
 }
 

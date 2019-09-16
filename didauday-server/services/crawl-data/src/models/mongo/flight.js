@@ -8,13 +8,21 @@ const FlightSchema = new Schema({
     required: true,
   },
   start_location: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Airport',
     required: true,
   },
+  start_location_code: {
+    type: Number,
+    required: true,
+  },
   end_location: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Airport',
+    required: true,
+  },
+  end_location_code: {
+    type: Number,
     required: true,
   },
   time_start: {
@@ -37,9 +45,13 @@ const FlightSchema = new Schema({
     type: Number,
   },
   provider: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Provider',
     required: true,
+  },
+  provider_code: {
+    type: String,
+    required: false,
   },
   flight_id: {
     type: String,

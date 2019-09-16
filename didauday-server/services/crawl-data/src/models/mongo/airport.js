@@ -12,8 +12,12 @@ const AirportSchema = new Schema({
     required: true,
   },
   city: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     ref: 'City',
+    required: true,
+  },
+  city_zipcode: {
+    type: Number,
     required: true,
   },
 });
