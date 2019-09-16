@@ -264,6 +264,7 @@ services:
       context: ./didauday-server/services/prisma
       dockerfile: Dockerfile.dev
     volumes:
+      - /app/node_modules
       - ./didauday-server/services/prisma:/app
     depends_on:
       - prisma
@@ -312,7 +313,8 @@ services:
         databases:
           default:
             connector: mongo
-            uri: mongodb://mongo:27017/didauday
+            uri: mongodb://mongo:27017
+            database: didauday
   mongo:
     image: mongo
     ports:

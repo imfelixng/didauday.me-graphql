@@ -1,0 +1,13 @@
+{
+    "name": "prisma-server",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+      "start": "prisma deploy",
+      "dev": "prisma deploy"
+    },
+    "dependencies": {
+      "prisma": "latest"
+    }
+  }
+  

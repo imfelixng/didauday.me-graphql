@@ -2,12 +2,10 @@ FROM node:alpine
 
 WORKDIR /app
 
-# install prisma cli
-RUN npm install -g prisma
+COPY package.json .
+
+RUN npm install
 
 COPY . .
 
-# allow execution for entrypoint scripts
-RUN chmod +x ./entrypoint.sh
-
-ENTRYPOINT ["./entrypoint.sh"]
+CMD [ "npm", "start" ]
