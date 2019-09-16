@@ -23,7 +23,7 @@ const placeSchema = new Schema({
     required: true,
   },
   city: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'City',
     required: true,
   },

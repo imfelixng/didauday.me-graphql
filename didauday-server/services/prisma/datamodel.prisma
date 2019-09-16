@@ -1,0 +1,4 @@
+type Test {
+  id: ID! @id
+  name: String!
+}
