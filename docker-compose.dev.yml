@@ -259,6 +259,15 @@ services:
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
     restart: always
+  prisma-server:
+    build:
+      context: ./didauday-server/services/prisma
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./didauday-server/services/prisma:/app
+    depends_on:
+      - prisma
+    restart: always
   server:
     build:
       context: ./didauday-server/gateway
@@ -290,6 +299,20 @@ services:
       - BOOKING_URL=http://booking:5009/graphql
       - PORT=5000
     restart: always
+  prisma:
+    image: prismagraphql/prisma:1.34
+    restart: always
+    ports:
+      - '4466:4466'
+    depends_on:
+      - mongo
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        databases:
+          default:
+            connector: mongo
+            uri: mongodb://mongo:27017/didauday
   mongo:
     image: mongo
     ports:

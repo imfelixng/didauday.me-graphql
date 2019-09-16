@@ -1,0 +1,3 @@
+endpoint: http://prisma:4466
+datamodel: datamodel.prisma
+databaseType: document
