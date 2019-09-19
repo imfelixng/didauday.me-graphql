@@ -3,11 +3,13 @@
     "version": "1.0.0",
     "license": "MIT",
     "scripts": {
-      "start": "prisma deploy",
-      "dev": "prisma deploy"
+      "start": "prisma deploy && node index.js",
+      "dev": "prisma deploy && node index.js",
+      "deploy": "prisma deploy"
     },
     "dependencies": {
-      "prisma": "latest"
+      "prisma": "latest",
+      "express": "latest"
     }
   }
   

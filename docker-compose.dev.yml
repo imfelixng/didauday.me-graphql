@@ -1,25 +1,25 @@
 version: '3'
 services:
-  web:
-    build:
-      context: ./didauday-web
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3000:3000"
-    volumes:
-      - /app/node_modules
-      - ./didauday-web:/app
-    restart: always
-  dashboard:
-    build:
-      context: ./didauday-dashboard
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4000:4000"
-    volumes:
-      - /app/node_modules
-      - ./didauday-dashboard:/app
-    restart: always
+  # web:
+  #   build:
+  #     context: ./didauday-web
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./didauday-web:/app
+  #   restart: always
+  # dashboard:
+  #   build:
+  #     context: ./didauday-dashboard
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./didauday-dashboard:/app
+  #   restart: always
   tour:
     build:
       context: ./didauday-server/services/tour
@@ -56,6 +56,8 @@ services:
       - mongo
       - neo4j
       - redis
+      - prisma-server
+      - prisma
     environment:
       - PORT=5002
       - NEO4J_PROTOCOL=bolt
@@ -65,6 +67,8 @@ services:
       - NEO4J_PORT=7687
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB_NAME=didauday
+      - PRISMA_URL=http://prisma:4466
+      - PRISMA_SCHEMA_URL=http://prisma-server:4444/schema/prisma.graphql
     restart: always
   flight:
     build:
@@ -263,12 +267,14 @@ services:
     build:
       context: ./didauday-server/services/prisma
       dockerfile: Dockerfile.dev
+    ports:
+      - "4444:4444"
     volumes:
       - /app/node_modules
       - ./didauday-server/services/prisma:/app
     depends_on:
       - prisma
-    restart: always
+    restart: on-failure
   server:
     build:
       context: ./didauday-server/gateway

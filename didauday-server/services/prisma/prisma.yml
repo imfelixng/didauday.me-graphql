@@ -1,3 +1,7 @@
 endpoint: http://prisma:4466
 datamodel: datamodel.prisma
 databaseType: document
+
+generate:
+  - generator: graphql-schema
+    output: ./generated/schema/prisma.graphql

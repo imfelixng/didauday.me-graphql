@@ -1,8 +1,8 @@
 type Booking {
   _id: ID! @id
-  booking_items: [BookingItem!]!
+  booking_items: [BookingItem!]! @relation(link: INLINE)
   total_price: Float!
-  buyer: Profile!
+  buyer: Profile! @relation(link: INLINE)
   status: Boolean
   is_choose: Boolean
   paymentID: String!
@@ -17,12 +17,12 @@ type BookingItem {
   price: Float!
   coupon_code: String
   is_checkout: Boolean
-  room: Room
-  flight: Flight
-  tour: Tour
+  room: Room @relation(link: INLINE)
+  flight: Flight @relation(link: INLINE)
+  tour: Tour @relation(link: INLINE)
   date_start: String
   date_end: String
-  customers: [Customer!]!
+  customers: [Customer!]! @relation(link: INLINE)
   quantity: Int!
 }
 
@@ -54,17 +54,17 @@ type AirPort {
   name: String!
   airport_code: String!
   city_zipcode: Int!
-  city: City!
+  city: City! @relation(link: INLINE)
 }
 
 type CouponCode {
   _id: ID! @id
   type_couponcode: TypeCouponCode!
-  hotel: Hotel
-  tour: Tour
+  hotel: Hotel @relation(link: INLINE)
+  tour: Tour @relation(link: INLINE)
   percent: Float!
   code: String!
-  creater: Profile
+  creater: Profile @relation(link: INLINE)
   date_start: String!
   date_end: String!
   quantity: Int!
@@ -77,9 +77,9 @@ type Discount {
   name: String!
   type_discount: TypeDiscount!
   percent: Float!
-  creater: Profile!
-  hotel: Hotel
-  tour: Tour
+  creater: Profile! @relation(link: INLINE)
+  hotel: Hotel @relation(link: INLINE)
+  tour: Tour @relation(link: INLINE)
   date_start: String!
   date_end: String!
   status: Boolean
@@ -88,22 +88,22 @@ type Discount {
 type Favorite {
   _id: ID! @id
   type_favorite: TypeFavorite!
-  favoritor: Profile
-  hotel: Hotel
-  tour: Tour
+  favoritor: Profile @relation(link: INLINE)
+  hotel: Hotel @relation(link: INLINE)
+  tour: Tour @relation(link: INLINE)
 }
 
 type Flight {
   _id: ID! @id
   name: String!
-  start_location: AirPort! @relation(name: "FlightToAirPort")
-  end_location: AirPort! @relation(name: "FlightToAirPort")
-  time_start: TimeFlight! @relation(name: "FlightToTime")
-  time_end: TimeFlight! @relation(name: "FlightToTime")
+  start_location: AirPort! @relation(name: "FlightStartLocationToAirport", link: INLINE)
+  end_location: AirPort! @relation(name: "FlightEndLocationToAirport", link: INLINE)
+  time_start: TimeFlight! @relation(name: "FlightTimeStart")
+  time_end: TimeFlight! @relation(name: "FlightTimeEnd")
   price: Float!
   date_start: String!
   date_end: String!
-  provider: Provider
+  provider: Provider @relation(link: INLINE)
   flight_id: String!
 }
 
@@ -120,14 +120,15 @@ type Hotel {
   rate: Float
   num_review: Int
   address: String!
-  city: City!
+  city: City! @relation(link: INLINE)
   facilities: [Facility!]!
   images: [String!]!
   rules: [Rule!]!
   location: Location!
-  rooms: [Room]!
-  owner: Profile!
+  rooms: [Room]! @relation(link: INLINE)
+  owner: Profile! @relation(link: INLINE)
   isOpen: Boolean
+  reviews: [Review!]! @relation(link: INLINE)
 }
 
 type Facility @embedded {
@@ -148,30 +149,29 @@ type Place {
   name: String!
   location: Location!
   address: String!
-  city: City!
+  city: City! @relation(link: INLINE)
   image: String!
 }
 
 type Message {
   _id: ID! @id
   type_message: TypeMessage!
-  partner: Profile @relation(name: "MessageToProfile")
-  member: Profile! @relation(name: "MessageToProfile")
+  partner: Profile @relation(name: "MessagePartnerToProfile", link: INLINE)
+  member: Profile! @relation(name: "MessageMemberToProfile", link: INLINE)
   content: String!
-  recommendations: [Recommendation]
 }
 
 type Recommendation {
   _id: ID! @id
   type_recommendation: TypeRecommendation!
-  hotel: Hotel
-  tour: Tour
-  flight: Flight
+  hotel: Hotel @relation(link: INLINE)
+  tour: Tour @relation(link: INLINE)
+  flight: Flight @relation(link: INLINE)
 }
 
 type Notification {
   _id: ID! @id
-  reciever: Profile!
+  reciever: Profile! @relation(link: INLINE)
   title: String!
   content: String!
 }
@@ -196,7 +196,7 @@ type Payment {
 
 type Permission {
   _id: ID! @id
-  role: Role!
+  role: Role! @relation(link: INLINE)
   resource: String!
   action: String!
   possession: TypePossession!
@@ -215,11 +215,13 @@ type Profile {
   birthday: String!
   avatar: String
   gender: Boolean!
-  city: City!
+  address: String!
   email: String!
   phone_number: String!
-  role: Role!
-  email_paypal: String
+  role: Int @default(value: 2)
+  is_complete: Boolean
+  favorites: [Favorite!]!
+  bookings: [Booking!]!
 }
 
 type Provider {
@@ -230,13 +232,12 @@ type Provider {
 
 type Review {
   _id: ID! @id
-  reviewer: Profile
+  reviewer: Profile @relation(link: INLINE)
   content: String!
   title: String!
   rate_star: Int!
   type: TypeReview!
   hotel: Hotel
-  room: Room
   tour: Tour
 }
 
@@ -279,13 +280,14 @@ type Tour {
   language_tour: String!
   description: String!
   images: [String!]!
-  rate: Float!
-  num_review: Int!
+  rate: Float @default(value: 0.0)
+  num_review: Int @default(value: 0)
   departure_day: String!
-  city: City
+  city: City! @relation(link: INLINE)
   itineraries: [Itinerary!]!
   available: Int
-  owner: Profile!
+  owner: Profile! @relation(link: INLINE)
+  reviews: [Review!]! @relation(link: INLINE)
 }
 
 type Itinerary @embedded {
