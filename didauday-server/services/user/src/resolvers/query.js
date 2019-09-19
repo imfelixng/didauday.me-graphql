@@ -7,7 +7,8 @@ import * as helps from '../helpers/firebase';
 const resolvers = {
   Query: {
     checkProfile: async (parent, args, {
-      req, mongo
+      req, mongo,
+      prisma,
     }, info) => {
       let user = null;
       try {
@@ -52,9 +53,7 @@ const resolvers = {
       }
     },
     checkAccount: async (
-      parent, { data }, {
-        req, mongo
-      }, info
+      parent, { data }, ctx, info
     ) => {
       const { email } = data;
       let user = null;
@@ -68,14 +67,6 @@ const resolvers = {
       }
     }
   },
-  Profile: {
-    __resolveReference(object) {
-      return {
-        ...object,
-        paypal: "12345"
-      }
-    }
-  }
 };
 
 export default resolvers;

@@ -1,6 +1,9 @@
 import { ApolloServer } from 'apollo-server';
 import { buildFederatedSchema } from '@apollo/federation';
 import { Prisma } from 'prisma-binding';
+const http = require('http');
+
+const fs = require('fs');
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
@@ -17,30 +20,34 @@ const mongo = {
   Role,
 }
 
-const prisma = new Prisma({
-  typeDefs: process.env.PRISMA_SCHEMA_URL,
-  endpoint: process.env.PRISMA_URL,
-  //secret:  'thisismysupersecret',
-});
+const file = fs.createWriteStream("schema.graphql");
 
-console.log(prisma);
-
-const server = new ApolloServer({
-  schema: buildFederatedSchema([
-    {
-      typeDefs,
-      resolvers
-    }
-  ]),
-  context: async ({ req }) => {
-    return {
-      req,
-      mongo,
-      prisma
-    };
-  },
-});
-
-server.listen({ port: PORT, path: '/graphql' }).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+http.get(process.env.PRISMA_SCHEMA_URL, function(response) {
+  response.pipe(file).once('finish', () => {
+    const prisma = new Prisma({
+      typeDefs: 'schema.graphql',
+      endpoint: process.env.PRISMA_URL,
+      //secret:  'thisismysupersecret',
+    });
+    
+    const server = new ApolloServer({
+      schema: buildFederatedSchema([
+        {
+          typeDefs,
+          resolvers
+        }
+      ]),
+      context: async ({ req }) => {
+        return {
+          req,
+          mongo,
+          prisma
+        };
+      },
+    });
+    
+    server.listen({ port: PORT, path: '/graphql' }).then(({ url }) => {
+      console.log(`🚀 Server ready at ${url}`);
+    });
+  });
 });

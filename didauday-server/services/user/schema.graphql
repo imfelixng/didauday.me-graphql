@@ -1,0 +1,6759 @@
+type AggregateAirPort {
+  count: Int!
+}
+
+type AggregateBooking {
+  count: Int!
+}
+
+type AggregateBookingItem {
+  count: Int!
+}
+
+type AggregateCity {
+  count: Int!
+}
+
+type AggregateCouponCode {
+  count: Int!
+}
+
+type AggregateCustomer {
+  count: Int!
+}
+
+type AggregateDiscount {
+  count: Int!
+}
+
+type AggregateFavorite {
+  count: Int!
+}
+
+type AggregateFlight {
+  count: Int!
+}
+
+type AggregateHotel {
+  count: Int!
+}
+
+type AggregateMessage {
+  count: Int!
+}
+
+type AggregateNotification {
+  count: Int!
+}
+
+type AggregatePassenger {
+  count: Int!
+}
+
+type AggregatePayment {
+  count: Int!
+}
+
+type AggregatePermission {
+  count: Int!
+}
+
+type AggregatePlace {
+  count: Int!
+}
+
+type AggregateProfile {
+  count: Int!
+}
+
+type AggregateProvider {
+  count: Int!
+}
+
+type AggregateRecommendation {
+  count: Int!
+}
+
+type AggregateReview {
+  count: Int!
+}
+
+type AggregateRole {
+  count: Int!
+}
+
+type AggregateRoom {
+  count: Int!
+}
+
+type AggregateTour {
+  count: Int!
+}
+
+type AirPort {
+  _id: ID!
+  name: String!
+  airport_code: String!
+  city_zipcode: Int!
+  city: City!
+}
+
+type AirPortConnection {
+  pageInfo: PageInfo!
+  edges: [AirPortEdge]!
+  aggregate: AggregateAirPort!
+}
+
+input AirPortCreateInput {
+  _id: ID
+  name: String!
+  airport_code: String!
+  city_zipcode: Int!
+  city: CityCreateOneInput!
+}
+
+input AirPortCreateOneInput {
+  create: AirPortCreateInput
+  connect: AirPortWhereUniqueInput
+}
+
+type AirPortEdge {
+  node: AirPort!
+  cursor: String!
+}
+
+enum AirPortOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  airport_code_ASC
+  airport_code_DESC
+  city_zipcode_ASC
+  city_zipcode_DESC
+}
+
+type AirPortPreviousValues {
+  _id: ID!
+  name: String!
+  airport_code: String!
+  city_zipcode: Int!
+}
+
+type AirPortSubscriptionPayload {
+  mutation: MutationType!
+  node: AirPort
+  updatedFields: [String!]
+  previousValues: AirPortPreviousValues
+}
+
+input AirPortSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AirPortWhereInput
+  AND: [AirPortSubscriptionWhereInput!]
+}
+
+input AirPortUpdateDataInput {
+  name: String
+  airport_code: String
+  city_zipcode: Int
+  city: CityUpdateOneRequiredInput
+}
+
+input AirPortUpdateInput {
+  name: String
+  airport_code: String
+  city_zipcode: Int
+  city: CityUpdateOneRequiredInput
+}
+
+input AirPortUpdateManyMutationInput {
+  name: String
+  airport_code: String
+  city_zipcode: Int
+}
+
+input AirPortUpdateOneRequiredInput {
+  create: AirPortCreateInput
+  update: AirPortUpdateDataInput
+  upsert: AirPortUpsertNestedInput
+  connect: AirPortWhereUniqueInput
+}
+
+input AirPortUpsertNestedInput {
+  update: AirPortUpdateDataInput!
+  create: AirPortCreateInput!
+}
+
+input AirPortWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  airport_code: String
+  airport_code_not: String
+  airport_code_in: [String!]
+  airport_code_not_in: [String!]
+  airport_code_lt: String
+  airport_code_lte: String
+  airport_code_gt: String
+  airport_code_gte: String
+  airport_code_contains: String
+  airport_code_not_contains: String
+  airport_code_starts_with: String
+  airport_code_not_starts_with: String
+  airport_code_ends_with: String
+  airport_code_not_ends_with: String
+  city_zipcode: Int
+  city_zipcode_not: Int
+  city_zipcode_in: [Int!]
+  city_zipcode_not_in: [Int!]
+  city_zipcode_lt: Int
+  city_zipcode_lte: Int
+  city_zipcode_gt: Int
+  city_zipcode_gte: Int
+  city: CityWhereInput
+  AND: [AirPortWhereInput!]
+}
+
+input AirPortWhereUniqueInput {
+  _id: ID
+}
+
+type Amenity {
+  _id: ID!
+  icon: String!
+  name: String!
+  status: Boolean
+}
+
+input AmenityCreateInput {
+  _id: ID
+  icon: String!
+  name: String!
+  status: Boolean
+}
+
+input AmenityCreateManyInput {
+  create: [AmenityCreateInput!]
+}
+
+input AmenityRestrictedWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [AmenityRestrictedWhereInput!]
+}
+
+input AmenityScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [AmenityScalarWhereInput!]
+  OR: [AmenityScalarWhereInput!]
+  NOT: [AmenityScalarWhereInput!]
+}
+
+input AmenityUpdateDataInput {
+  icon: String
+  name: String
+  status: Boolean
+}
+
+input AmenityUpdateManyDataInput {
+  icon: String
+  name: String
+  status: Boolean
+}
+
+input AmenityUpdateManyInput {
+  create: [AmenityCreateInput!]
+  update: [AmenityUpdateWithWhereUniqueNestedInput!]
+  upsert: [AmenityUpsertWithWhereUniqueNestedInput!]
+  delete: [AmenityWhereUniqueInput!]
+  deleteMany: [AmenityScalarWhereInput!]
+  updateMany: [AmenityUpdateManyWithWhereNestedInput!]
+}
+
+input AmenityUpdateManyWithWhereNestedInput {
+  where: AmenityScalarWhereInput!
+  data: AmenityUpdateManyDataInput!
+}
+
+input AmenityUpdateWithWhereUniqueNestedInput {
+  where: AmenityWhereUniqueInput!
+  data: AmenityUpdateDataInput!
+}
+
+input AmenityUpsertWithWhereUniqueNestedInput {
+  where: AmenityWhereUniqueInput!
+  update: AmenityUpdateDataInput!
+  create: AmenityCreateInput!
+}
+
+input AmenityWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [AmenityWhereInput!]
+}
+
+input AmenityWhereUniqueInput {
+  _id: ID
+}
+
+type Attribute {
+  _id: ID!
+  field: String!
+}
+
+input AttributeCreateInput {
+  _id: ID
+  field: String!
+}
+
+input AttributeCreateManyInput {
+  create: [AttributeCreateInput!]
+}
+
+input AttributeRestrictedWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  field: String
+  field_not: String
+  field_in: [String!]
+  field_not_in: [String!]
+  field_lt: String
+  field_lte: String
+  field_gt: String
+  field_gte: String
+  field_contains: String
+  field_not_contains: String
+  field_starts_with: String
+  field_not_starts_with: String
+  field_ends_with: String
+  field_not_ends_with: String
+  AND: [AttributeRestrictedWhereInput!]
+}
+
+input AttributeScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  field: String
+  field_not: String
+  field_in: [String!]
+  field_not_in: [String!]
+  field_lt: String
+  field_lte: String
+  field_gt: String
+  field_gte: String
+  field_contains: String
+  field_not_contains: String
+  field_starts_with: String
+  field_not_starts_with: String
+  field_ends_with: String
+  field_not_ends_with: String
+  AND: [AttributeScalarWhereInput!]
+  OR: [AttributeScalarWhereInput!]
+  NOT: [AttributeScalarWhereInput!]
+}
+
+input AttributeUpdateDataInput {
+  field: String
+}
+
+input AttributeUpdateManyDataInput {
+  field: String
+}
+
+input AttributeUpdateManyInput {
+  create: [AttributeCreateInput!]
+  update: [AttributeUpdateWithWhereUniqueNestedInput!]
+  upsert: [AttributeUpsertWithWhereUniqueNestedInput!]
+  delete: [AttributeWhereUniqueInput!]
+  deleteMany: [AttributeScalarWhereInput!]
+  updateMany: [AttributeUpdateManyWithWhereNestedInput!]
+}
+
+input AttributeUpdateManyWithWhereNestedInput {
+  where: AttributeScalarWhereInput!
+  data: AttributeUpdateManyDataInput!
+}
+
+input AttributeUpdateWithWhereUniqueNestedInput {
+  where: AttributeWhereUniqueInput!
+  data: AttributeUpdateDataInput!
+}
+
+input AttributeUpsertWithWhereUniqueNestedInput {
+  where: AttributeWhereUniqueInput!
+  update: AttributeUpdateDataInput!
+  create: AttributeCreateInput!
+}
+
+input AttributeWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  field: String
+  field_not: String
+  field_in: [String!]
+  field_not_in: [String!]
+  field_lt: String
+  field_lte: String
+  field_gt: String
+  field_gte: String
+  field_contains: String
+  field_not_contains: String
+  field_starts_with: String
+  field_not_starts_with: String
+  field_ends_with: String
+  field_not_ends_with: String
+  AND: [AttributeWhereInput!]
+}
+
+input AttributeWhereUniqueInput {
+  _id: ID
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Booking {
+  _id: ID!
+  booking_items(where: BookingItemWhereInput, orderBy: BookingItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BookingItem!]
+  total_price: Float!
+  buyer: Profile!
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String!
+  payerID: String
+  token_paypal: String!
+  url_paypal: String!
+}
+
+type BookingConnection {
+  pageInfo: PageInfo!
+  edges: [BookingEdge]!
+  aggregate: AggregateBooking!
+}
+
+input BookingCreateInput {
+  _id: ID
+  booking_items: BookingItemCreateManyInput
+  total_price: Float!
+  buyer: ProfileCreateOneWithoutBookingsInput!
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String!
+  payerID: String
+  token_paypal: String!
+  url_paypal: String!
+}
+
+input BookingCreateManyWithoutBuyerInput {
+  create: [BookingCreateWithoutBuyerInput!]
+  connect: [BookingWhereUniqueInput!]
+}
+
+input BookingCreateWithoutBuyerInput {
+  _id: ID
+  booking_items: BookingItemCreateManyInput
+  total_price: Float!
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String!
+  payerID: String
+  token_paypal: String!
+  url_paypal: String!
+}
+
+type BookingEdge {
+  node: Booking!
+  cursor: String!
+}
+
+type BookingItem {
+  _id: ID!
+  type_booking: TypeBooking!
+  price: Float!
+  coupon_code: String
+  is_checkout: Boolean
+  room: Room
+  flight: Flight
+  tour: Tour
+  date_start: String
+  date_end: String
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer!]
+  quantity: Int!
+}
+
+type BookingItemConnection {
+  pageInfo: PageInfo!
+  edges: [BookingItemEdge]!
+  aggregate: AggregateBookingItem!
+}
+
+input BookingItemCreateInput {
+  _id: ID
+  type_booking: TypeBooking!
+  price: Float!
+  coupon_code: String
+  is_checkout: Boolean
+  room: RoomCreateOneInput
+  flight: FlightCreateOneInput
+  tour: TourCreateOneInput
+  date_start: String
+  date_end: String
+  customers: CustomerCreateManyInput
+  quantity: Int!
+}
+
+input BookingItemCreateManyInput {
+  create: [BookingItemCreateInput!]
+  connect: [BookingItemWhereUniqueInput!]
+}
+
+type BookingItemEdge {
+  node: BookingItem!
+  cursor: String!
+}
+
+enum BookingItemOrderByInput {
+  _id_ASC
+  _id_DESC
+  type_booking_ASC
+  type_booking_DESC
+  price_ASC
+  price_DESC
+  coupon_code_ASC
+  coupon_code_DESC
+  is_checkout_ASC
+  is_checkout_DESC
+  date_start_ASC
+  date_start_DESC
+  date_end_ASC
+  date_end_DESC
+  quantity_ASC
+  quantity_DESC
+}
+
+type BookingItemPreviousValues {
+  _id: ID!
+  type_booking: TypeBooking!
+  price: Float!
+  coupon_code: String
+  is_checkout: Boolean
+  date_start: String
+  date_end: String
+  quantity: Int!
+}
+
+input BookingItemScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_booking: TypeBooking
+  type_booking_not: TypeBooking
+  type_booking_in: [TypeBooking!]
+  type_booking_not_in: [TypeBooking!]
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  coupon_code: String
+  coupon_code_not: String
+  coupon_code_in: [String!]
+  coupon_code_not_in: [String!]
+  coupon_code_lt: String
+  coupon_code_lte: String
+  coupon_code_gt: String
+  coupon_code_gte: String
+  coupon_code_contains: String
+  coupon_code_not_contains: String
+  coupon_code_starts_with: String
+  coupon_code_not_starts_with: String
+  coupon_code_ends_with: String
+  coupon_code_not_ends_with: String
+  is_checkout: Boolean
+  is_checkout_not: Boolean
+  date_start: String
+  date_start_not: String
+  date_start_in: [String!]
+  date_start_not_in: [String!]
+  date_start_lt: String
+  date_start_lte: String
+  date_start_gt: String
+  date_start_gte: String
+  date_start_contains: String
+  date_start_not_contains: String
+  date_start_starts_with: String
+  date_start_not_starts_with: String
+  date_start_ends_with: String
+  date_start_not_ends_with: String
+  date_end: String
+  date_end_not: String
+  date_end_in: [String!]
+  date_end_not_in: [String!]
+  date_end_lt: String
+  date_end_lte: String
+  date_end_gt: String
+  date_end_gte: String
+  date_end_contains: String
+  date_end_not_contains: String
+  date_end_starts_with: String
+  date_end_not_starts_with: String
+  date_end_ends_with: String
+  date_end_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  AND: [BookingItemScalarWhereInput!]
+  OR: [BookingItemScalarWhereInput!]
+  NOT: [BookingItemScalarWhereInput!]
+}
+
+type BookingItemSubscriptionPayload {
+  mutation: MutationType!
+  node: BookingItem
+  updatedFields: [String!]
+  previousValues: BookingItemPreviousValues
+}
+
+input BookingItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BookingItemWhereInput
+  AND: [BookingItemSubscriptionWhereInput!]
+}
+
+input BookingItemUpdateDataInput {
+  type_booking: TypeBooking
+  price: Float
+  coupon_code: String
+  is_checkout: Boolean
+  room: RoomUpdateOneInput
+  flight: FlightUpdateOneInput
+  tour: TourUpdateOneInput
+  date_start: String
+  date_end: String
+  customers: CustomerUpdateManyInput
+  quantity: Int
+}
+
+input BookingItemUpdateInput {
+  type_booking: TypeBooking
+  price: Float
+  coupon_code: String
+  is_checkout: Boolean
+  room: RoomUpdateOneInput
+  flight: FlightUpdateOneInput
+  tour: TourUpdateOneInput
+  date_start: String
+  date_end: String
+  customers: CustomerUpdateManyInput
+  quantity: Int
+}
+
+input BookingItemUpdateManyDataInput {
+  type_booking: TypeBooking
+  price: Float
+  coupon_code: String
+  is_checkout: Boolean
+  date_start: String
+  date_end: String
+  quantity: Int
+}
+
+input BookingItemUpdateManyInput {
+  create: [BookingItemCreateInput!]
+  update: [BookingItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [BookingItemUpsertWithWhereUniqueNestedInput!]
+  delete: [BookingItemWhereUniqueInput!]
+  connect: [BookingItemWhereUniqueInput!]
+  set: [BookingItemWhereUniqueInput!]
+  disconnect: [BookingItemWhereUniqueInput!]
+  deleteMany: [BookingItemScalarWhereInput!]
+  updateMany: [BookingItemUpdateManyWithWhereNestedInput!]
+}
+
+input BookingItemUpdateManyMutationInput {
+  type_booking: TypeBooking
+  price: Float
+  coupon_code: String
+  is_checkout: Boolean
+  date_start: String
+  date_end: String
+  quantity: Int
+}
+
+input BookingItemUpdateManyWithWhereNestedInput {
+  where: BookingItemScalarWhereInput!
+  data: BookingItemUpdateManyDataInput!
+}
+
+input BookingItemUpdateWithWhereUniqueNestedInput {
+  where: BookingItemWhereUniqueInput!
+  data: BookingItemUpdateDataInput!
+}
+
+input BookingItemUpsertWithWhereUniqueNestedInput {
+  where: BookingItemWhereUniqueInput!
+  update: BookingItemUpdateDataInput!
+  create: BookingItemCreateInput!
+}
+
+input BookingItemWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_booking: TypeBooking
+  type_booking_not: TypeBooking
+  type_booking_in: [TypeBooking!]
+  type_booking_not_in: [TypeBooking!]
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  coupon_code: String
+  coupon_code_not: String
+  coupon_code_in: [String!]
+  coupon_code_not_in: [String!]
+  coupon_code_lt: String
+  coupon_code_lte: String
+  coupon_code_gt: String
+  coupon_code_gte: String
+  coupon_code_contains: String
+  coupon_code_not_contains: String
+  coupon_code_starts_with: String
+  coupon_code_not_starts_with: String
+  coupon_code_ends_with: String
+  coupon_code_not_ends_with: String
+  is_checkout: Boolean
+  is_checkout_not: Boolean
+  room: RoomWhereInput
+  flight: FlightWhereInput
+  tour: TourWhereInput
+  date_start: String
+  date_start_not: String
+  date_start_in: [String!]
+  date_start_not_in: [String!]
+  date_start_lt: String
+  date_start_lte: String
+  date_start_gt: String
+  date_start_gte: String
+  date_start_contains: String
+  date_start_not_contains: String
+  date_start_starts_with: String
+  date_start_not_starts_with: String
+  date_start_ends_with: String
+  date_start_not_ends_with: String
+  date_end: String
+  date_end_not: String
+  date_end_in: [String!]
+  date_end_not_in: [String!]
+  date_end_lt: String
+  date_end_lte: String
+  date_end_gt: String
+  date_end_gte: String
+  date_end_contains: String
+  date_end_not_contains: String
+  date_end_starts_with: String
+  date_end_not_starts_with: String
+  date_end_ends_with: String
+  date_end_not_ends_with: String
+  customers_some: CustomerWhereInput
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  AND: [BookingItemWhereInput!]
+}
+
+input BookingItemWhereUniqueInput {
+  _id: ID
+}
+
+enum BookingOrderByInput {
+  _id_ASC
+  _id_DESC
+  total_price_ASC
+  total_price_DESC
+  status_ASC
+  status_DESC
+  is_choose_ASC
+  is_choose_DESC
+  paymentID_ASC
+  paymentID_DESC
+  payerID_ASC
+  payerID_DESC
+  token_paypal_ASC
+  token_paypal_DESC
+  url_paypal_ASC
+  url_paypal_DESC
+}
+
+type BookingPreviousValues {
+  _id: ID!
+  total_price: Float!
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String!
+  payerID: String
+  token_paypal: String!
+  url_paypal: String!
+}
+
+input BookingScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  total_price: Float
+  total_price_not: Float
+  total_price_in: [Float!]
+  total_price_not_in: [Float!]
+  total_price_lt: Float
+  total_price_lte: Float
+  total_price_gt: Float
+  total_price_gte: Float
+  status: Boolean
+  status_not: Boolean
+  is_choose: Boolean
+  is_choose_not: Boolean
+  paymentID: String
+  paymentID_not: String
+  paymentID_in: [String!]
+  paymentID_not_in: [String!]
+  paymentID_lt: String
+  paymentID_lte: String
+  paymentID_gt: String
+  paymentID_gte: String
+  paymentID_contains: String
+  paymentID_not_contains: String
+  paymentID_starts_with: String
+  paymentID_not_starts_with: String
+  paymentID_ends_with: String
+  paymentID_not_ends_with: String
+  payerID: String
+  payerID_not: String
+  payerID_in: [String!]
+  payerID_not_in: [String!]
+  payerID_lt: String
+  payerID_lte: String
+  payerID_gt: String
+  payerID_gte: String
+  payerID_contains: String
+  payerID_not_contains: String
+  payerID_starts_with: String
+  payerID_not_starts_with: String
+  payerID_ends_with: String
+  payerID_not_ends_with: String
+  token_paypal: String
+  token_paypal_not: String
+  token_paypal_in: [String!]
+  token_paypal_not_in: [String!]
+  token_paypal_lt: String
+  token_paypal_lte: String
+  token_paypal_gt: String
+  token_paypal_gte: String
+  token_paypal_contains: String
+  token_paypal_not_contains: String
+  token_paypal_starts_with: String
+  token_paypal_not_starts_with: String
+  token_paypal_ends_with: String
+  token_paypal_not_ends_with: String
+  url_paypal: String
+  url_paypal_not: String
+  url_paypal_in: [String!]
+  url_paypal_not_in: [String!]
+  url_paypal_lt: String
+  url_paypal_lte: String
+  url_paypal_gt: String
+  url_paypal_gte: String
+  url_paypal_contains: String
+  url_paypal_not_contains: String
+  url_paypal_starts_with: String
+  url_paypal_not_starts_with: String
+  url_paypal_ends_with: String
+  url_paypal_not_ends_with: String
+  AND: [BookingScalarWhereInput!]
+  OR: [BookingScalarWhereInput!]
+  NOT: [BookingScalarWhereInput!]
+}
+
+type BookingSubscriptionPayload {
+  mutation: MutationType!
+  node: Booking
+  updatedFields: [String!]
+  previousValues: BookingPreviousValues
+}
+
+input BookingSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BookingWhereInput
+  AND: [BookingSubscriptionWhereInput!]
+}
+
+input BookingUpdateInput {
+  booking_items: BookingItemUpdateManyInput
+  total_price: Float
+  buyer: ProfileUpdateOneRequiredWithoutBookingsInput
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String
+  payerID: String
+  token_paypal: String
+  url_paypal: String
+}
+
+input BookingUpdateManyDataInput {
+  total_price: Float
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String
+  payerID: String
+  token_paypal: String
+  url_paypal: String
+}
+
+input BookingUpdateManyMutationInput {
+  total_price: Float
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String
+  payerID: String
+  token_paypal: String
+  url_paypal: String
+}
+
+input BookingUpdateManyWithoutBuyerInput {
+  create: [BookingCreateWithoutBuyerInput!]
+  delete: [BookingWhereUniqueInput!]
+  connect: [BookingWhereUniqueInput!]
+  set: [BookingWhereUniqueInput!]
+  disconnect: [BookingWhereUniqueInput!]
+  update: [BookingUpdateWithWhereUniqueWithoutBuyerInput!]
+  upsert: [BookingUpsertWithWhereUniqueWithoutBuyerInput!]
+  deleteMany: [BookingScalarWhereInput!]
+  updateMany: [BookingUpdateManyWithWhereNestedInput!]
+}
+
+input BookingUpdateManyWithWhereNestedInput {
+  where: BookingScalarWhereInput!
+  data: BookingUpdateManyDataInput!
+}
+
+input BookingUpdateWithoutBuyerDataInput {
+  booking_items: BookingItemUpdateManyInput
+  total_price: Float
+  status: Boolean
+  is_choose: Boolean
+  paymentID: String
+  payerID: String
+  token_paypal: String
+  url_paypal: String
+}
+
+input BookingUpdateWithWhereUniqueWithoutBuyerInput {
+  where: BookingWhereUniqueInput!
+  data: BookingUpdateWithoutBuyerDataInput!
+}
+
+input BookingUpsertWithWhereUniqueWithoutBuyerInput {
+  where: BookingWhereUniqueInput!
+  update: BookingUpdateWithoutBuyerDataInput!
+  create: BookingCreateWithoutBuyerInput!
+}
+
+input BookingWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  booking_items_some: BookingItemWhereInput
+  total_price: Float
+  total_price_not: Float
+  total_price_in: [Float!]
+  total_price_not_in: [Float!]
+  total_price_lt: Float
+  total_price_lte: Float
+  total_price_gt: Float
+  total_price_gte: Float
+  buyer: ProfileWhereInput
+  status: Boolean
+  status_not: Boolean
+  is_choose: Boolean
+  is_choose_not: Boolean
+  paymentID: String
+  paymentID_not: String
+  paymentID_in: [String!]
+  paymentID_not_in: [String!]
+  paymentID_lt: String
+  paymentID_lte: String
+  paymentID_gt: String
+  paymentID_gte: String
+  paymentID_contains: String
+  paymentID_not_contains: String
+  paymentID_starts_with: String
+  paymentID_not_starts_with: String
+  paymentID_ends_with: String
+  paymentID_not_ends_with: String
+  payerID: String
+  payerID_not: String
+  payerID_in: [String!]
+  payerID_not_in: [String!]
+  payerID_lt: String
+  payerID_lte: String
+  payerID_gt: String
+  payerID_gte: String
+  payerID_contains: String
+  payerID_not_contains: String
+  payerID_starts_with: String
+  payerID_not_starts_with: String
+  payerID_ends_with: String
+  payerID_not_ends_with: String
+  token_paypal: String
+  token_paypal_not: String
+  token_paypal_in: [String!]
+  token_paypal_not_in: [String!]
+  token_paypal_lt: String
+  token_paypal_lte: String
+  token_paypal_gt: String
+  token_paypal_gte: String
+  token_paypal_contains: String
+  token_paypal_not_contains: String
+  token_paypal_starts_with: String
+  token_paypal_not_starts_with: String
+  token_paypal_ends_with: String
+  token_paypal_not_ends_with: String
+  url_paypal: String
+  url_paypal_not: String
+  url_paypal_in: [String!]
+  url_paypal_not_in: [String!]
+  url_paypal_lt: String
+  url_paypal_lte: String
+  url_paypal_gt: String
+  url_paypal_gte: String
+  url_paypal_contains: String
+  url_paypal_not_contains: String
+  url_paypal_starts_with: String
+  url_paypal_not_starts_with: String
+  url_paypal_ends_with: String
+  url_paypal_not_ends_with: String
+  AND: [BookingWhereInput!]
+}
+
+input BookingWhereUniqueInput {
+  _id: ID
+}
+
+type City {
+  _id: ID!
+  name: String!
+  zipcode: Int!
+  country: String!
+  location: Location!
+  image: String
+}
+
+type CityConnection {
+  pageInfo: PageInfo!
+  edges: [CityEdge]!
+  aggregate: AggregateCity!
+}
+
+input CityCreateInput {
+  _id: ID
+  name: String!
+  zipcode: Int!
+  country: String!
+  location: LocationCreateOneInput!
+  image: String
+}
+
+input CityCreateOneInput {
+  create: CityCreateInput
+  connect: CityWhereUniqueInput
+}
+
+type CityEdge {
+  node: City!
+  cursor: String!
+}
+
+enum CityOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  zipcode_ASC
+  zipcode_DESC
+  country_ASC
+  country_DESC
+  image_ASC
+  image_DESC
+}
+
+type CityPreviousValues {
+  _id: ID!
+  name: String!
+  zipcode: Int!
+  country: String!
+  image: String
+}
+
+type CitySubscriptionPayload {
+  mutation: MutationType!
+  node: City
+  updatedFields: [String!]
+  previousValues: CityPreviousValues
+}
+
+input CitySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CityWhereInput
+  AND: [CitySubscriptionWhereInput!]
+}
+
+input CityUpdateDataInput {
+  name: String
+  zipcode: Int
+  country: String
+  location: LocationUpdateOneRequiredInput
+  image: String
+}
+
+input CityUpdateInput {
+  name: String
+  zipcode: Int
+  country: String
+  location: LocationUpdateOneRequiredInput
+  image: String
+}
+
+input CityUpdateManyMutationInput {
+  name: String
+  zipcode: Int
+  country: String
+  image: String
+}
+
+input CityUpdateOneRequiredInput {
+  create: CityCreateInput
+  update: CityUpdateDataInput
+  upsert: CityUpsertNestedInput
+  connect: CityWhereUniqueInput
+}
+
+input CityUpsertNestedInput {
+  update: CityUpdateDataInput!
+  create: CityCreateInput!
+}
+
+input CityWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  zipcode: Int
+  zipcode_not: Int
+  zipcode_in: [Int!]
+  zipcode_not_in: [Int!]
+  zipcode_lt: Int
+  zipcode_lte: Int
+  zipcode_gt: Int
+  zipcode_gte: Int
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  location: LocationWhereInput
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  AND: [CityWhereInput!]
+}
+
+input CityWhereUniqueInput {
+  _id: ID
+}
+
+type CouponCode {
+  _id: ID!
+  type_couponcode: TypeCouponCode!
+  hotel: Hotel
+  tour: Tour
+  percent: Float!
+  code: String!
+  creater: Profile
+  date_start: String!
+  date_end: String!
+  quantity: Int!
+  available: Int
+  status: Boolean
+}
+
+type CouponCodeConnection {
+  pageInfo: PageInfo!
+  edges: [CouponCodeEdge]!
+  aggregate: AggregateCouponCode!
+}
+
+input CouponCodeCreateInput {
+  _id: ID
+  type_couponcode: TypeCouponCode!
+  hotel: HotelCreateOneInput
+  tour: TourCreateOneInput
+  percent: Float!
+  code: String!
+  creater: ProfileCreateOneInput
+  date_start: String!
+  date_end: String!
+  quantity: Int!
+  available: Int
+  status: Boolean
+}
+
+type CouponCodeEdge {
+  node: CouponCode!
+  cursor: String!
+}
+
+enum CouponCodeOrderByInput {
+  _id_ASC
+  _id_DESC
+  type_couponcode_ASC
+  type_couponcode_DESC
+  percent_ASC
+  percent_DESC
+  code_ASC
+  code_DESC
+  date_start_ASC
+  date_start_DESC
+  date_end_ASC
+  date_end_DESC
+  quantity_ASC
+  quantity_DESC
+  available_ASC
+  available_DESC
+  status_ASC
+  status_DESC
+}
+
+type CouponCodePreviousValues {
+  _id: ID!
+  type_couponcode: TypeCouponCode!
+  percent: Float!
+  code: String!
+  date_start: String!
+  date_end: String!
+  quantity: Int!
+  available: Int
+  status: Boolean
+}
+
+type CouponCodeSubscriptionPayload {
+  mutation: MutationType!
+  node: CouponCode
+  updatedFields: [String!]
+  previousValues: CouponCodePreviousValues
+}
+
+input CouponCodeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CouponCodeWhereInput
+  AND: [CouponCodeSubscriptionWhereInput!]
+}
+
+input CouponCodeUpdateInput {
+  type_couponcode: TypeCouponCode
+  hotel: HotelUpdateOneInput
+  tour: TourUpdateOneInput
+  percent: Float
+  code: String
+  creater: ProfileUpdateOneInput
+  date_start: String
+  date_end: String
+  quantity: Int
+  available: Int
+  status: Boolean
+}
+
+input CouponCodeUpdateManyMutationInput {
+  type_couponcode: TypeCouponCode
+  percent: Float
+  code: String
+  date_start: String
+  date_end: String
+  quantity: Int
+  available: Int
+  status: Boolean
+}
+
+input CouponCodeWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_couponcode: TypeCouponCode
+  type_couponcode_not: TypeCouponCode
+  type_couponcode_in: [TypeCouponCode!]
+  type_couponcode_not_in: [TypeCouponCode!]
+  hotel: HotelWhereInput
+  tour: TourWhereInput
+  percent: Float
+  percent_not: Float
+  percent_in: [Float!]
+  percent_not_in: [Float!]
+  percent_lt: Float
+  percent_lte: Float
+  percent_gt: Float
+  percent_gte: Float
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  creater: ProfileWhereInput
+  date_start: String
+  date_start_not: String
+  date_start_in: [String!]
+  date_start_not_in: [String!]
+  date_start_lt: String
+  date_start_lte: String
+  date_start_gt: String
+  date_start_gte: String
+  date_start_contains: String
+  date_start_not_contains: String
+  date_start_starts_with: String
+  date_start_not_starts_with: String
+  date_start_ends_with: String
+  date_start_not_ends_with: String
+  date_end: String
+  date_end_not: String
+  date_end_in: [String!]
+  date_end_not_in: [String!]
+  date_end_lt: String
+  date_end_lte: String
+  date_end_gt: String
+  date_end_gte: String
+  date_end_contains: String
+  date_end_not_contains: String
+  date_end_starts_with: String
+  date_end_not_starts_with: String
+  date_end_ends_with: String
+  date_end_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  available: Int
+  available_not: Int
+  available_in: [Int!]
+  available_not_in: [Int!]
+  available_lt: Int
+  available_lte: Int
+  available_gt: Int
+  available_gte: Int
+  status: Boolean
+  status_not: Boolean
+  AND: [CouponCodeWhereInput!]
+}
+
+input CouponCodeWhereUniqueInput {
+  _id: ID
+}
+
+type Customer {
+  _id: ID!
+  email: String!
+  lastname: String!
+  firstname: String!
+  phone_number: String!
+}
+
+type CustomerConnection {
+  pageInfo: PageInfo!
+  edges: [CustomerEdge]!
+  aggregate: AggregateCustomer!
+}
+
+input CustomerCreateInput {
+  _id: ID
+  email: String!
+  lastname: String!
+  firstname: String!
+  phone_number: String!
+}
+
+input CustomerCreateManyInput {
+  create: [CustomerCreateInput!]
+  connect: [CustomerWhereUniqueInput!]
+}
+
+type CustomerEdge {
+  node: Customer!
+  cursor: String!
+}
+
+enum CustomerOrderByInput {
+  _id_ASC
+  _id_DESC
+  email_ASC
+  email_DESC
+  lastname_ASC
+  lastname_DESC
+  firstname_ASC
+  firstname_DESC
+  phone_number_ASC
+  phone_number_DESC
+}
+
+type CustomerPreviousValues {
+  _id: ID!
+  email: String!
+  lastname: String!
+  firstname: String!
+  phone_number: String!
+}
+
+input CustomerScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  phone_number: String
+  phone_number_not: String
+  phone_number_in: [String!]
+  phone_number_not_in: [String!]
+  phone_number_lt: String
+  phone_number_lte: String
+  phone_number_gt: String
+  phone_number_gte: String
+  phone_number_contains: String
+  phone_number_not_contains: String
+  phone_number_starts_with: String
+  phone_number_not_starts_with: String
+  phone_number_ends_with: String
+  phone_number_not_ends_with: String
+  AND: [CustomerScalarWhereInput!]
+  OR: [CustomerScalarWhereInput!]
+  NOT: [CustomerScalarWhereInput!]
+}
+
+type CustomerSubscriptionPayload {
+  mutation: MutationType!
+  node: Customer
+  updatedFields: [String!]
+  previousValues: CustomerPreviousValues
+}
+
+input CustomerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CustomerWhereInput
+  AND: [CustomerSubscriptionWhereInput!]
+}
+
+input CustomerUpdateDataInput {
+  email: String
+  lastname: String
+  firstname: String
+  phone_number: String
+}
+
+input CustomerUpdateInput {
+  email: String
+  lastname: String
+  firstname: String
+  phone_number: String
+}
+
+input CustomerUpdateManyDataInput {
+  email: String
+  lastname: String
+  firstname: String
+  phone_number: String
+}
+
+input CustomerUpdateManyInput {
+  create: [CustomerCreateInput!]
+  update: [CustomerUpdateWithWhereUniqueNestedInput!]
+  upsert: [CustomerUpsertWithWhereUniqueNestedInput!]
+  delete: [CustomerWhereUniqueInput!]
+  connect: [CustomerWhereUniqueInput!]
+  set: [CustomerWhereUniqueInput!]
+  disconnect: [CustomerWhereUniqueInput!]
+  deleteMany: [CustomerScalarWhereInput!]
+  updateMany: [CustomerUpdateManyWithWhereNestedInput!]
+}
+
+input CustomerUpdateManyMutationInput {
+  email: String
+  lastname: String
+  firstname: String
+  phone_number: String
+}
+
+input CustomerUpdateManyWithWhereNestedInput {
+  where: CustomerScalarWhereInput!
+  data: CustomerUpdateManyDataInput!
+}
+
+input CustomerUpdateWithWhereUniqueNestedInput {
+  where: CustomerWhereUniqueInput!
+  data: CustomerUpdateDataInput!
+}
+
+input CustomerUpsertWithWhereUniqueNestedInput {
+  where: CustomerWhereUniqueInput!
+  update: CustomerUpdateDataInput!
+  create: CustomerCreateInput!
+}
+
+input CustomerWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  phone_number: String
+  phone_number_not: String
+  phone_number_in: [String!]
+  phone_number_not_in: [String!]
+  phone_number_lt: String
+  phone_number_lte: String
+  phone_number_gt: String
+  phone_number_gte: String
+  phone_number_contains: String
+  phone_number_not_contains: String
+  phone_number_starts_with: String
+  phone_number_not_starts_with: String
+  phone_number_ends_with: String
+  phone_number_not_ends_with: String
+  AND: [CustomerWhereInput!]
+}
+
+input CustomerWhereUniqueInput {
+  _id: ID
+}
+
+type Discount {
+  _id: ID!
+  name: String!
+  type_discount: TypeDiscount!
+  percent: Float!
+  creater: Profile!
+  hotel: Hotel
+  tour: Tour
+  date_start: String!
+  date_end: String!
+  status: Boolean
+}
+
+type DiscountConnection {
+  pageInfo: PageInfo!
+  edges: [DiscountEdge]!
+  aggregate: AggregateDiscount!
+}
+
+input DiscountCreateInput {
+  _id: ID
+  name: String!
+  type_discount: TypeDiscount!
+  percent: Float!
+  creater: ProfileCreateOneInput!
+  hotel: HotelCreateOneInput
+  tour: TourCreateOneInput
+  date_start: String!
+  date_end: String!
+  status: Boolean
+}
+
+type DiscountEdge {
+  node: Discount!
+  cursor: String!
+}
+
+enum DiscountOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  type_discount_ASC
+  type_discount_DESC
+  percent_ASC
+  percent_DESC
+  date_start_ASC
+  date_start_DESC
+  date_end_ASC
+  date_end_DESC
+  status_ASC
+  status_DESC
+}
+
+type DiscountPreviousValues {
+  _id: ID!
+  name: String!
+  type_discount: TypeDiscount!
+  percent: Float!
+  date_start: String!
+  date_end: String!
+  status: Boolean
+}
+
+type DiscountSubscriptionPayload {
+  mutation: MutationType!
+  node: Discount
+  updatedFields: [String!]
+  previousValues: DiscountPreviousValues
+}
+
+input DiscountSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DiscountWhereInput
+  AND: [DiscountSubscriptionWhereInput!]
+}
+
+input DiscountUpdateInput {
+  name: String
+  type_discount: TypeDiscount
+  percent: Float
+  creater: ProfileUpdateOneRequiredInput
+  hotel: HotelUpdateOneInput
+  tour: TourUpdateOneInput
+  date_start: String
+  date_end: String
+  status: Boolean
+}
+
+input DiscountUpdateManyMutationInput {
+  name: String
+  type_discount: TypeDiscount
+  percent: Float
+  date_start: String
+  date_end: String
+  status: Boolean
+}
+
+input DiscountWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  type_discount: TypeDiscount
+  type_discount_not: TypeDiscount
+  type_discount_in: [TypeDiscount!]
+  type_discount_not_in: [TypeDiscount!]
+  percent: Float
+  percent_not: Float
+  percent_in: [Float!]
+  percent_not_in: [Float!]
+  percent_lt: Float
+  percent_lte: Float
+  percent_gt: Float
+  percent_gte: Float
+  creater: ProfileWhereInput
+  hotel: HotelWhereInput
+  tour: TourWhereInput
+  date_start: String
+  date_start_not: String
+  date_start_in: [String!]
+  date_start_not_in: [String!]
+  date_start_lt: String
+  date_start_lte: String
+  date_start_gt: String
+  date_start_gte: String
+  date_start_contains: String
+  date_start_not_contains: String
+  date_start_starts_with: String
+  date_start_not_starts_with: String
+  date_start_ends_with: String
+  date_start_not_ends_with: String
+  date_end: String
+  date_end_not: String
+  date_end_in: [String!]
+  date_end_not_in: [String!]
+  date_end_lt: String
+  date_end_lte: String
+  date_end_gt: String
+  date_end_gte: String
+  date_end_contains: String
+  date_end_not_contains: String
+  date_end_starts_with: String
+  date_end_not_starts_with: String
+  date_end_ends_with: String
+  date_end_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [DiscountWhereInput!]
+}
+
+input DiscountWhereUniqueInput {
+  _id: ID
+}
+
+type Facility {
+  _id: ID!
+  icon: String!
+  name: String!
+  status: Boolean
+}
+
+input FacilityCreateInput {
+  _id: ID
+  icon: String!
+  name: String!
+  status: Boolean
+}
+
+input FacilityCreateManyInput {
+  create: [FacilityCreateInput!]
+}
+
+input FacilityRestrictedWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [FacilityRestrictedWhereInput!]
+}
+
+input FacilityScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [FacilityScalarWhereInput!]
+  OR: [FacilityScalarWhereInput!]
+  NOT: [FacilityScalarWhereInput!]
+}
+
+input FacilityUpdateDataInput {
+  icon: String
+  name: String
+  status: Boolean
+}
+
+input FacilityUpdateManyDataInput {
+  icon: String
+  name: String
+  status: Boolean
+}
+
+input FacilityUpdateManyInput {
+  create: [FacilityCreateInput!]
+  update: [FacilityUpdateWithWhereUniqueNestedInput!]
+  upsert: [FacilityUpsertWithWhereUniqueNestedInput!]
+  delete: [FacilityWhereUniqueInput!]
+  deleteMany: [FacilityScalarWhereInput!]
+  updateMany: [FacilityUpdateManyWithWhereNestedInput!]
+}
+
+input FacilityUpdateManyWithWhereNestedInput {
+  where: FacilityScalarWhereInput!
+  data: FacilityUpdateManyDataInput!
+}
+
+input FacilityUpdateWithWhereUniqueNestedInput {
+  where: FacilityWhereUniqueInput!
+  data: FacilityUpdateDataInput!
+}
+
+input FacilityUpsertWithWhereUniqueNestedInput {
+  where: FacilityWhereUniqueInput!
+  update: FacilityUpdateDataInput!
+  create: FacilityCreateInput!
+}
+
+input FacilityWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  icon: String
+  icon_not: String
+  icon_in: [String!]
+  icon_not_in: [String!]
+  icon_lt: String
+  icon_lte: String
+  icon_gt: String
+  icon_gte: String
+  icon_contains: String
+  icon_not_contains: String
+  icon_starts_with: String
+  icon_not_starts_with: String
+  icon_ends_with: String
+  icon_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  AND: [FacilityWhereInput!]
+}
+
+input FacilityWhereUniqueInput {
+  _id: ID
+}
+
+type Favorite {
+  _id: ID!
+  type_favorite: TypeFavorite!
+  favoritor: Profile
+  hotel: Hotel
+  tour: Tour
+}
+
+type FavoriteConnection {
+  pageInfo: PageInfo!
+  edges: [FavoriteEdge]!
+  aggregate: AggregateFavorite!
+}
+
+input FavoriteCreateInput {
+  _id: ID
+  type_favorite: TypeFavorite!
+  favoritor: ProfileCreateOneWithoutFavoritesInput
+  hotel: HotelCreateOneInput
+  tour: TourCreateOneInput
+}
+
+input FavoriteCreateManyWithoutFavoritorInput {
+  create: [FavoriteCreateWithoutFavoritorInput!]
+  connect: [FavoriteWhereUniqueInput!]
+}
+
+input FavoriteCreateWithoutFavoritorInput {
+  _id: ID
+  type_favorite: TypeFavorite!
+  hotel: HotelCreateOneInput
+  tour: TourCreateOneInput
+}
+
+type FavoriteEdge {
+  node: Favorite!
+  cursor: String!
+}
+
+enum FavoriteOrderByInput {
+  _id_ASC
+  _id_DESC
+  type_favorite_ASC
+  type_favorite_DESC
+}
+
+type FavoritePreviousValues {
+  _id: ID!
+  type_favorite: TypeFavorite!
+}
+
+input FavoriteScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_favorite: TypeFavorite
+  type_favorite_not: TypeFavorite
+  type_favorite_in: [TypeFavorite!]
+  type_favorite_not_in: [TypeFavorite!]
+  AND: [FavoriteScalarWhereInput!]
+  OR: [FavoriteScalarWhereInput!]
+  NOT: [FavoriteScalarWhereInput!]
+}
+
+type FavoriteSubscriptionPayload {
+  mutation: MutationType!
+  node: Favorite
+  updatedFields: [String!]
+  previousValues: FavoritePreviousValues
+}
+
+input FavoriteSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FavoriteWhereInput
+  AND: [FavoriteSubscriptionWhereInput!]
+}
+
+input FavoriteUpdateInput {
+  type_favorite: TypeFavorite
+  favoritor: ProfileUpdateOneWithoutFavoritesInput
+  hotel: HotelUpdateOneInput
+  tour: TourUpdateOneInput
+}
+
+input FavoriteUpdateManyDataInput {
+  type_favorite: TypeFavorite
+}
+
+input FavoriteUpdateManyMutationInput {
+  type_favorite: TypeFavorite
+}
+
+input FavoriteUpdateManyWithoutFavoritorInput {
+  create: [FavoriteCreateWithoutFavoritorInput!]
+  delete: [FavoriteWhereUniqueInput!]
+  connect: [FavoriteWhereUniqueInput!]
+  set: [FavoriteWhereUniqueInput!]
+  disconnect: [FavoriteWhereUniqueInput!]
+  update: [FavoriteUpdateWithWhereUniqueWithoutFavoritorInput!]
+  upsert: [FavoriteUpsertWithWhereUniqueWithoutFavoritorInput!]
+  deleteMany: [FavoriteScalarWhereInput!]
+  updateMany: [FavoriteUpdateManyWithWhereNestedInput!]
+}
+
+input FavoriteUpdateManyWithWhereNestedInput {
+  where: FavoriteScalarWhereInput!
+  data: FavoriteUpdateManyDataInput!
+}
+
+input FavoriteUpdateWithoutFavoritorDataInput {
+  type_favorite: TypeFavorite
+  hotel: HotelUpdateOneInput
+  tour: TourUpdateOneInput
+}
+
+input FavoriteUpdateWithWhereUniqueWithoutFavoritorInput {
+  where: FavoriteWhereUniqueInput!
+  data: FavoriteUpdateWithoutFavoritorDataInput!
+}
+
+input FavoriteUpsertWithWhereUniqueWithoutFavoritorInput {
+  where: FavoriteWhereUniqueInput!
+  update: FavoriteUpdateWithoutFavoritorDataInput!
+  create: FavoriteCreateWithoutFavoritorInput!
+}
+
+input FavoriteWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_favorite: TypeFavorite
+  type_favorite_not: TypeFavorite
+  type_favorite_in: [TypeFavorite!]
+  type_favorite_not_in: [TypeFavorite!]
+  favoritor: ProfileWhereInput
+  hotel: HotelWhereInput
+  tour: TourWhereInput
+  AND: [FavoriteWhereInput!]
+}
+
+input FavoriteWhereUniqueInput {
+  _id: ID
+}
+
+type Flight {
+  _id: ID!
+  name: String!
+  start_location: AirPort!
+  end_location: AirPort!
+  time_start: TimeFlight!
+  time_end: TimeFlight!
+  price: Float!
+  date_start: String!
+  date_end: String!
+  provider: Provider
+  flight_id: String!
+}
+
+type FlightConnection {
+  pageInfo: PageInfo!
+  edges: [FlightEdge]!
+  aggregate: AggregateFlight!
+}
+
+input FlightCreateInput {
+  _id: ID
+  name: String!
+  start_location: AirPortCreateOneInput!
+  end_location: AirPortCreateOneInput!
+  time_start: TimeFlightCreateOneInput!
+  time_end: TimeFlightCreateOneInput!
+  price: Float!
+  date_start: String!
+  date_end: String!
+  provider: ProviderCreateOneInput
+  flight_id: String!
+}
+
+input FlightCreateOneInput {
+  create: FlightCreateInput
+  connect: FlightWhereUniqueInput
+}
+
+type FlightEdge {
+  node: Flight!
+  cursor: String!
+}
+
+enum FlightOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  date_start_ASC
+  date_start_DESC
+  date_end_ASC
+  date_end_DESC
+  flight_id_ASC
+  flight_id_DESC
+}
+
+type FlightPreviousValues {
+  _id: ID!
+  name: String!
+  price: Float!
+  date_start: String!
+  date_end: String!
+  flight_id: String!
+}
+
+type FlightSubscriptionPayload {
+  mutation: MutationType!
+  node: Flight
+  updatedFields: [String!]
+  previousValues: FlightPreviousValues
+}
+
+input FlightSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FlightWhereInput
+  AND: [FlightSubscriptionWhereInput!]
+}
+
+input FlightUpdateDataInput {
+  name: String
+  start_location: AirPortUpdateOneRequiredInput
+  end_location: AirPortUpdateOneRequiredInput
+  time_start: TimeFlightUpdateOneRequiredInput
+  time_end: TimeFlightUpdateOneRequiredInput
+  price: Float
+  date_start: String
+  date_end: String
+  provider: ProviderUpdateOneInput
+  flight_id: String
+}
+
+input FlightUpdateInput {
+  name: String
+  start_location: AirPortUpdateOneRequiredInput
+  end_location: AirPortUpdateOneRequiredInput
+  time_start: TimeFlightUpdateOneRequiredInput
+  time_end: TimeFlightUpdateOneRequiredInput
+  price: Float
+  date_start: String
+  date_end: String
+  provider: ProviderUpdateOneInput
+  flight_id: String
+}
+
+input FlightUpdateManyMutationInput {
+  name: String
+  price: Float
+  date_start: String
+  date_end: String
+  flight_id: String
+}
+
+input FlightUpdateOneInput {
+  create: FlightCreateInput
+  update: FlightUpdateDataInput
+  upsert: FlightUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: FlightWhereUniqueInput
+}
+
+input FlightUpsertNestedInput {
+  update: FlightUpdateDataInput!
+  create: FlightCreateInput!
+}
+
+input FlightWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  start_location: AirPortWhereInput
+  end_location: AirPortWhereInput
+  time_start: TimeFlightWhereInput
+  time_end: TimeFlightWhereInput
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  date_start: String
+  date_start_not: String
+  date_start_in: [String!]
+  date_start_not_in: [String!]
+  date_start_lt: String
+  date_start_lte: String
+  date_start_gt: String
+  date_start_gte: String
+  date_start_contains: String
+  date_start_not_contains: String
+  date_start_starts_with: String
+  date_start_not_starts_with: String
+  date_start_ends_with: String
+  date_start_not_ends_with: String
+  date_end: String
+  date_end_not: String
+  date_end_in: [String!]
+  date_end_not_in: [String!]
+  date_end_lt: String
+  date_end_lte: String
+  date_end_gt: String
+  date_end_gte: String
+  date_end_contains: String
+  date_end_not_contains: String
+  date_end_starts_with: String
+  date_end_not_starts_with: String
+  date_end_ends_with: String
+  date_end_not_ends_with: String
+  provider: ProviderWhereInput
+  flight_id: String
+  flight_id_not: String
+  flight_id_in: [String!]
+  flight_id_not_in: [String!]
+  flight_id_lt: String
+  flight_id_lte: String
+  flight_id_gt: String
+  flight_id_gte: String
+  flight_id_contains: String
+  flight_id_not_contains: String
+  flight_id_starts_with: String
+  flight_id_not_starts_with: String
+  flight_id_ends_with: String
+  flight_id_not_ends_with: String
+  AND: [FlightWhereInput!]
+}
+
+input FlightWhereUniqueInput {
+  _id: ID
+}
+
+type Hotel {
+  _id: ID!
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  city: City!
+  facilities: [Facility!]
+  images: [String!]!
+  rules: [Rule!]
+  location: Location!
+  rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room!]
+  owner: Profile!
+  isOpen: Boolean
+  reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review!]
+}
+
+type HotelConnection {
+  pageInfo: PageInfo!
+  edges: [HotelEdge]!
+  aggregate: AggregateHotel!
+}
+
+input HotelCreateimagesInput {
+  set: [String!]
+}
+
+input HotelCreateInput {
+  _id: ID
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  city: CityCreateOneInput!
+  facilities: FacilityCreateManyInput
+  images: HotelCreateimagesInput
+  rules: RuleCreateManyInput
+  location: LocationCreateOneInput!
+  rooms: RoomCreateManyWithoutHotelInput
+  owner: ProfileCreateOneInput!
+  isOpen: Boolean
+  reviews: ReviewCreateManyWithoutHotelInput
+}
+
+input HotelCreateOneInput {
+  create: HotelCreateInput
+  connect: HotelWhereUniqueInput
+}
+
+input HotelCreateOneWithoutReviewsInput {
+  create: HotelCreateWithoutReviewsInput
+  connect: HotelWhereUniqueInput
+}
+
+input HotelCreateOneWithoutRoomsInput {
+  create: HotelCreateWithoutRoomsInput
+  connect: HotelWhereUniqueInput
+}
+
+input HotelCreateWithoutReviewsInput {
+  _id: ID
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  city: CityCreateOneInput!
+  facilities: FacilityCreateManyInput
+  images: HotelCreateimagesInput
+  rules: RuleCreateManyInput
+  location: LocationCreateOneInput!
+  rooms: RoomCreateManyWithoutHotelInput
+  owner: ProfileCreateOneInput!
+  isOpen: Boolean
+}
+
+input HotelCreateWithoutRoomsInput {
+  _id: ID
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  city: CityCreateOneInput!
+  facilities: FacilityCreateManyInput
+  images: HotelCreateimagesInput
+  rules: RuleCreateManyInput
+  location: LocationCreateOneInput!
+  owner: ProfileCreateOneInput!
+  isOpen: Boolean
+  reviews: ReviewCreateManyWithoutHotelInput
+}
+
+type HotelEdge {
+  node: Hotel!
+  cursor: String!
+}
+
+enum HotelOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  rate_ASC
+  rate_DESC
+  num_review_ASC
+  num_review_DESC
+  address_ASC
+  address_DESC
+  isOpen_ASC
+  isOpen_DESC
+}
+
+type HotelPreviousValues {
+  _id: ID!
+  name: String!
+  description: String!
+  rate: Float
+  num_review: Int
+  address: String!
+  images: [String!]!
+  isOpen: Boolean
+}
+
+type HotelSubscriptionPayload {
+  mutation: MutationType!
+  node: Hotel
+  updatedFields: [String!]
+  previousValues: HotelPreviousValues
+}
+
+input HotelSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: HotelWhereInput
+  AND: [HotelSubscriptionWhereInput!]
+}
+
+input HotelUpdateDataInput {
+  name: String
+  description: String
+  rate: Float
+  num_review: Int
+  address: String
+  city: CityUpdateOneRequiredInput
+  facilities: FacilityUpdateManyInput
+  images: HotelUpdateimagesInput
+  rules: RuleUpdateManyInput
+  location: LocationUpdateOneRequiredInput
+  rooms: RoomUpdateManyWithoutHotelInput
+  owner: ProfileUpdateOneRequiredInput
+  isOpen: Boolean
+  reviews: ReviewUpdateManyWithoutHotelInput
+}
+
+input HotelUpdateimagesInput {
+  set: [String!]
+}
+
+input HotelUpdateInput {
+  name: String
+  description: String
+  rate: Float
+  num_review: Int
+  address: String
+  city: CityUpdateOneRequiredInput
+  facilities: FacilityUpdateManyInput
+  images: HotelUpdateimagesInput
+  rules: RuleUpdateManyInput
+  location: LocationUpdateOneRequiredInput
+  rooms: RoomUpdateManyWithoutHotelInput
+  owner: ProfileUpdateOneRequiredInput
+  isOpen: Boolean
+  reviews: ReviewUpdateManyWithoutHotelInput
+}
+
+input HotelUpdateManyMutationInput {
+  name: String
+  description: String
+  rate: Float
+  num_review: Int
+  address: String
+  images: HotelUpdateimagesInput
+  isOpen: Boolean
+}
+
+input HotelUpdateOneInput {
+  create: HotelCreateInput
+  update: HotelUpdateDataInput
+  upsert: HotelUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: HotelWhereUniqueInput
+}
+
+input HotelUpdateOneRequiredWithoutRoomsInput {
+  create: HotelCreateWithoutRoomsInput
+  update: HotelUpdateWithoutRoomsDataInput
+  upsert: HotelUpsertWithoutRoomsInput
+  connect: HotelWhereUniqueInput
+}
+
+input HotelUpdateOneWithoutReviewsInput {
+  create: HotelCreateWithoutReviewsInput
+  update: HotelUpdateWithoutReviewsDataInput
+  upsert: HotelUpsertWithoutReviewsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: HotelWhereUniqueInput
+}
+
+input HotelUpdateWithoutReviewsDataInput {
+  name: String
+  description: String
+  rate: Float
+  num_review: Int
+  address: String
+  city: CityUpdateOneRequiredInput
+  facilities: FacilityUpdateManyInput
+  images: HotelUpdateimagesInput
+  rules: RuleUpdateManyInput
+  location: LocationUpdateOneRequiredInput
+  rooms: RoomUpdateManyWithoutHotelInput
+  owner: ProfileUpdateOneRequiredInput
+  isOpen: Boolean
+}
+
+input HotelUpdateWithoutRoomsDataInput {
+  name: String
+  description: String
+  rate: Float
+  num_review: Int
+  address: String
+  city: CityUpdateOneRequiredInput
+  facilities: FacilityUpdateManyInput
+  images: HotelUpdateimagesInput
+  rules: RuleUpdateManyInput
+  location: LocationUpdateOneRequiredInput
+  owner: ProfileUpdateOneRequiredInput
+  isOpen: Boolean
+  reviews: ReviewUpdateManyWithoutHotelInput
+}
+
+input HotelUpsertNestedInput {
+  update: HotelUpdateDataInput!
+  create: HotelCreateInput!
+}
+
+input HotelUpsertWithoutReviewsInput {
+  update: HotelUpdateWithoutReviewsDataInput!
+  create: HotelCreateWithoutReviewsInput!
+}
+
+input HotelUpsertWithoutRoomsInput {
+  update: HotelUpdateWithoutRoomsDataInput!
+  create: HotelCreateWithoutRoomsInput!
+}
+
+input HotelWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  rate: Float
+  rate_not: Float
+  rate_in: [Float!]
+  rate_not_in: [Float!]
+  rate_lt: Float
+  rate_lte: Float
+  rate_gt: Float
+  rate_gte: Float
+  num_review: Int
+  num_review_not: Int
+  num_review_in: [Int!]
+  num_review_not_in: [Int!]
+  num_review_lt: Int
+  num_review_lte: Int
+  num_review_gt: Int
+  num_review_gte: Int
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  city: CityWhereInput
+  facilities_some: FacilityWhereInput
+  facilities_every: FacilityRestrictedWhereInput
+  facilities_none: FacilityRestrictedWhereInput
+  rules_some: RuleWhereInput
+  rules_every: RuleRestrictedWhereInput
+  rules_none: RuleRestrictedWhereInput
+  location: LocationWhereInput
+  rooms_some: RoomWhereInput
+  owner: ProfileWhereInput
+  isOpen: Boolean
+  isOpen_not: Boolean
+  reviews_some: ReviewWhereInput
+  AND: [HotelWhereInput!]
+}
+
+input HotelWhereUniqueInput {
+  _id: ID
+}
+
+type Itinerary {
+  _id: ID!
+  place: Place!
+  description: String!
+  image: String!
+}
+
+input ItineraryCreateInput {
+  _id: ID
+  place: PlaceCreateOneInput!
+  description: String!
+  image: String!
+}
+
+input ItineraryCreateManyInput {
+  create: [ItineraryCreateInput!]
+}
+
+input ItineraryRestrictedWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  AND: [ItineraryRestrictedWhereInput!]
+}
+
+input ItineraryScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  AND: [ItineraryScalarWhereInput!]
+  OR: [ItineraryScalarWhereInput!]
+  NOT: [ItineraryScalarWhereInput!]
+}
+
+input ItineraryUpdateDataInput {
+  place: PlaceUpdateOneRequiredInput
+  description: String
+  image: String
+}
+
+input ItineraryUpdateManyDataInput {
+  description: String
+  image: String
+}
+
+input ItineraryUpdateManyInput {
+  create: [ItineraryCreateInput!]
+  update: [ItineraryUpdateWithWhereUniqueNestedInput!]
+  upsert: [ItineraryUpsertWithWhereUniqueNestedInput!]
+  delete: [ItineraryWhereUniqueInput!]
+  deleteMany: [ItineraryScalarWhereInput!]
+  updateMany: [ItineraryUpdateManyWithWhereNestedInput!]
+}
+
+input ItineraryUpdateManyWithWhereNestedInput {
+  where: ItineraryScalarWhereInput!
+  data: ItineraryUpdateManyDataInput!
+}
+
+input ItineraryUpdateWithWhereUniqueNestedInput {
+  where: ItineraryWhereUniqueInput!
+  data: ItineraryUpdateDataInput!
+}
+
+input ItineraryUpsertWithWhereUniqueNestedInput {
+  where: ItineraryWhereUniqueInput!
+  update: ItineraryUpdateDataInput!
+  create: ItineraryCreateInput!
+}
+
+input ItineraryWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  place: PlaceWhereInput
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  AND: [ItineraryWhereInput!]
+}
+
+input ItineraryWhereUniqueInput {
+  _id: ID
+}
+
+type Location {
+  _id: ID!
+  type_location: TypeLocation!
+  coordinates: [Float!]!
+}
+
+input LocationCreatecoordinatesInput {
+  set: [Float!]
+}
+
+input LocationCreateInput {
+  _id: ID
+  type_location: TypeLocation!
+  coordinates: LocationCreatecoordinatesInput
+}
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+}
+
+input LocationUpdatecoordinatesInput {
+  set: [Float!]
+}
+
+input LocationUpdateDataInput {
+  type_location: TypeLocation
+  coordinates: LocationUpdatecoordinatesInput
+}
+
+input LocationUpdateOneRequiredInput {
+  create: LocationCreateInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
+  connect: LocationWhereUniqueInput
+}
+
+input LocationUpsertNestedInput {
+  update: LocationUpdateDataInput!
+  create: LocationCreateInput!
+}
+
+input LocationWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_location: TypeLocation
+  type_location_not: TypeLocation
+  type_location_in: [TypeLocation!]
+  type_location_not_in: [TypeLocation!]
+  AND: [LocationWhereInput!]
+}
+
+input LocationWhereUniqueInput {
+  _id: ID
+}
+
+scalar Long
+
+type Message {
+  _id: ID!
+  type_message: TypeMessage!
+  partner: Profile
+  member: Profile!
+  content: String!
+}
+
+type MessageConnection {
+  pageInfo: PageInfo!
+  edges: [MessageEdge]!
+  aggregate: AggregateMessage!
+}
+
+input MessageCreateInput {
+  _id: ID
+  type_message: TypeMessage!
+  partner: ProfileCreateOneInput
+  member: ProfileCreateOneInput!
+  content: String!
+}
+
+type MessageEdge {
+  node: Message!
+  cursor: String!
+}
+
+enum MessageOrderByInput {
+  _id_ASC
+  _id_DESC
+  type_message_ASC
+  type_message_DESC
+  content_ASC
+  content_DESC
+}
+
+type MessagePreviousValues {
+  _id: ID!
+  type_message: TypeMessage!
+  content: String!
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  node: Message
+  updatedFields: [String!]
+  previousValues: MessagePreviousValues
+}
+
+input MessageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MessageWhereInput
+  AND: [MessageSubscriptionWhereInput!]
+}
+
+input MessageUpdateInput {
+  type_message: TypeMessage
+  partner: ProfileUpdateOneInput
+  member: ProfileUpdateOneRequiredInput
+  content: String
+}
+
+input MessageUpdateManyMutationInput {
+  type_message: TypeMessage
+  content: String
+}
+
+input MessageWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_message: TypeMessage
+  type_message_not: TypeMessage
+  type_message_in: [TypeMessage!]
+  type_message_not_in: [TypeMessage!]
+  partner: ProfileWhereInput
+  member: ProfileWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [MessageWhereInput!]
+}
+
+input MessageWhereUniqueInput {
+  _id: ID
+}
+
+type Mutation {
+  createAirPort(data: AirPortCreateInput!): AirPort!
+  updateAirPort(data: AirPortUpdateInput!, where: AirPortWhereUniqueInput!): AirPort
+  updateManyAirPorts(data: AirPortUpdateManyMutationInput!, where: AirPortWhereInput): BatchPayload!
+  upsertAirPort(where: AirPortWhereUniqueInput!, create: AirPortCreateInput!, update: AirPortUpdateInput!): AirPort!
+  deleteAirPort(where: AirPortWhereUniqueInput!): AirPort
+  deleteManyAirPorts(where: AirPortWhereInput): BatchPayload!
+  createBooking(data: BookingCreateInput!): Booking!
+  updateBooking(data: BookingUpdateInput!, where: BookingWhereUniqueInput!): Booking
+  updateManyBookings(data: BookingUpdateManyMutationInput!, where: BookingWhereInput): BatchPayload!
+  upsertBooking(where: BookingWhereUniqueInput!, create: BookingCreateInput!, update: BookingUpdateInput!): Booking!
+  deleteBooking(where: BookingWhereUniqueInput!): Booking
+  deleteManyBookings(where: BookingWhereInput): BatchPayload!
+  createBookingItem(data: BookingItemCreateInput!): BookingItem!
+  updateBookingItem(data: BookingItemUpdateInput!, where: BookingItemWhereUniqueInput!): BookingItem
+  updateManyBookingItems(data: BookingItemUpdateManyMutationInput!, where: BookingItemWhereInput): BatchPayload!
+  upsertBookingItem(where: BookingItemWhereUniqueInput!, create: BookingItemCreateInput!, update: BookingItemUpdateInput!): BookingItem!
+  deleteBookingItem(where: BookingItemWhereUniqueInput!): BookingItem
+  deleteManyBookingItems(where: BookingItemWhereInput): BatchPayload!
+  createCity(data: CityCreateInput!): City!
+  updateCity(data: CityUpdateInput!, where: CityWhereUniqueInput!): City
+  updateManyCities(data: CityUpdateManyMutationInput!, where: CityWhereInput): BatchPayload!
+  upsertCity(where: CityWhereUniqueInput!, create: CityCreateInput!, update: CityUpdateInput!): City!
+  deleteCity(where: CityWhereUniqueInput!): City
+  deleteManyCities(where: CityWhereInput): BatchPayload!
+  createCouponCode(data: CouponCodeCreateInput!): CouponCode!
+  updateCouponCode(data: CouponCodeUpdateInput!, where: CouponCodeWhereUniqueInput!): CouponCode
+  updateManyCouponCodes(data: CouponCodeUpdateManyMutationInput!, where: CouponCodeWhereInput): BatchPayload!
+  upsertCouponCode(where: CouponCodeWhereUniqueInput!, create: CouponCodeCreateInput!, update: CouponCodeUpdateInput!): CouponCode!
+  deleteCouponCode(where: CouponCodeWhereUniqueInput!): CouponCode
+  deleteManyCouponCodes(where: CouponCodeWhereInput): BatchPayload!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer
+  updateManyCustomers(data: CustomerUpdateManyMutationInput!, where: CustomerWhereInput): BatchPayload!
+  upsertCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer!
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer
+  deleteManyCustomers(where: CustomerWhereInput): BatchPayload!
+  createDiscount(data: DiscountCreateInput!): Discount!
+  updateDiscount(data: DiscountUpdateInput!, where: DiscountWhereUniqueInput!): Discount
+  updateManyDiscounts(data: DiscountUpdateManyMutationInput!, where: DiscountWhereInput): BatchPayload!
+  upsertDiscount(where: DiscountWhereUniqueInput!, create: DiscountCreateInput!, update: DiscountUpdateInput!): Discount!
+  deleteDiscount(where: DiscountWhereUniqueInput!): Discount
+  deleteManyDiscounts(where: DiscountWhereInput): BatchPayload!
+  createFavorite(data: FavoriteCreateInput!): Favorite!
+  updateFavorite(data: FavoriteUpdateInput!, where: FavoriteWhereUniqueInput!): Favorite
+  updateManyFavorites(data: FavoriteUpdateManyMutationInput!, where: FavoriteWhereInput): BatchPayload!
+  upsertFavorite(where: FavoriteWhereUniqueInput!, create: FavoriteCreateInput!, update: FavoriteUpdateInput!): Favorite!
+  deleteFavorite(where: FavoriteWhereUniqueInput!): Favorite
+  deleteManyFavorites(where: FavoriteWhereInput): BatchPayload!
+  createFlight(data: FlightCreateInput!): Flight!
+  updateFlight(data: FlightUpdateInput!, where: FlightWhereUniqueInput!): Flight
+  updateManyFlights(data: FlightUpdateManyMutationInput!, where: FlightWhereInput): BatchPayload!
+  upsertFlight(where: FlightWhereUniqueInput!, create: FlightCreateInput!, update: FlightUpdateInput!): Flight!
+  deleteFlight(where: FlightWhereUniqueInput!): Flight
+  deleteManyFlights(where: FlightWhereInput): BatchPayload!
+  createHotel(data: HotelCreateInput!): Hotel!
+  updateHotel(data: HotelUpdateInput!, where: HotelWhereUniqueInput!): Hotel
+  updateManyHotels(data: HotelUpdateManyMutationInput!, where: HotelWhereInput): BatchPayload!
+  upsertHotel(where: HotelWhereUniqueInput!, create: HotelCreateInput!, update: HotelUpdateInput!): Hotel!
+  deleteHotel(where: HotelWhereUniqueInput!): Hotel
+  deleteManyHotels(where: HotelWhereInput): BatchPayload!
+  createMessage(data: MessageCreateInput!): Message!
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  createNotification(data: NotificationCreateInput!): Notification!
+  updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
+  upsertNotification(where: NotificationWhereUniqueInput!, create: NotificationCreateInput!, update: NotificationUpdateInput!): Notification!
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
+  createPassenger(data: PassengerCreateInput!): Passenger!
+  updatePassenger(data: PassengerUpdateInput!, where: PassengerWhereUniqueInput!): Passenger
+  updateManyPassengers(data: PassengerUpdateManyMutationInput!, where: PassengerWhereInput): BatchPayload!
+  upsertPassenger(where: PassengerWhereUniqueInput!, create: PassengerCreateInput!, update: PassengerUpdateInput!): Passenger!
+  deletePassenger(where: PassengerWhereUniqueInput!): Passenger
+  deleteManyPassengers(where: PassengerWhereInput): BatchPayload!
+  createPayment(data: PaymentCreateInput!): Payment!
+  updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment
+  updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
+  upsertPayment(where: PaymentWhereUniqueInput!, create: PaymentCreateInput!, update: PaymentUpdateInput!): Payment!
+  deletePayment(where: PaymentWhereUniqueInput!): Payment
+  deleteManyPayments(where: PaymentWhereInput): BatchPayload!
+  createPermission(data: PermissionCreateInput!): Permission!
+  updatePermission(data: PermissionUpdateInput!, where: PermissionWhereUniqueInput!): Permission
+  updateManyPermissions(data: PermissionUpdateManyMutationInput!, where: PermissionWhereInput): BatchPayload!
+  upsertPermission(where: PermissionWhereUniqueInput!, create: PermissionCreateInput!, update: PermissionUpdateInput!): Permission!
+  deletePermission(where: PermissionWhereUniqueInput!): Permission
+  deleteManyPermissions(where: PermissionWhereInput): BatchPayload!
+  createPlace(data: PlaceCreateInput!): Place!
+  updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
+  updateManyPlaces(data: PlaceUpdateManyMutationInput!, where: PlaceWhereInput): BatchPayload!
+  upsertPlace(where: PlaceWhereUniqueInput!, create: PlaceCreateInput!, update: PlaceUpdateInput!): Place!
+  deletePlace(where: PlaceWhereUniqueInput!): Place
+  deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
+  createProfile(data: ProfileCreateInput!): Profile!
+  updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
+  updateManyProfiles(data: ProfileUpdateManyMutationInput!, where: ProfileWhereInput): BatchPayload!
+  upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
+  deleteProfile(where: ProfileWhereUniqueInput!): Profile
+  deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
+  createProvider(data: ProviderCreateInput!): Provider!
+  updateProvider(data: ProviderUpdateInput!, where: ProviderWhereUniqueInput!): Provider
+  updateManyProviders(data: ProviderUpdateManyMutationInput!, where: ProviderWhereInput): BatchPayload!
+  upsertProvider(where: ProviderWhereUniqueInput!, create: ProviderCreateInput!, update: ProviderUpdateInput!): Provider!
+  deleteProvider(where: ProviderWhereUniqueInput!): Provider
+  deleteManyProviders(where: ProviderWhereInput): BatchPayload!
+  createRecommendation(data: RecommendationCreateInput!): Recommendation!
+  updateRecommendation(data: RecommendationUpdateInput!, where: RecommendationWhereUniqueInput!): Recommendation
+  updateManyRecommendations(data: RecommendationUpdateManyMutationInput!, where: RecommendationWhereInput): BatchPayload!
+  upsertRecommendation(where: RecommendationWhereUniqueInput!, create: RecommendationCreateInput!, update: RecommendationUpdateInput!): Recommendation!
+  deleteRecommendation(where: RecommendationWhereUniqueInput!): Recommendation
+  deleteManyRecommendations(where: RecommendationWhereInput): BatchPayload!
+  createReview(data: ReviewCreateInput!): Review!
+  updateReview(data: ReviewUpdateInput!, where: ReviewWhereUniqueInput!): Review
+  updateManyReviews(data: ReviewUpdateManyMutationInput!, where: ReviewWhereInput): BatchPayload!
+  upsertReview(where: ReviewWhereUniqueInput!, create: ReviewCreateInput!, update: ReviewUpdateInput!): Review!
+  deleteReview(where: ReviewWhereUniqueInput!): Review
+  deleteManyReviews(where: ReviewWhereInput): BatchPayload!
+  createRole(data: RoleCreateInput!): Role!
+  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
+  updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
+  upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
+  deleteRole(where: RoleWhereUniqueInput!): Role
+  deleteManyRoles(where: RoleWhereInput): BatchPayload!
+  createRoom(data: RoomCreateInput!): Room!
+  updateRoom(data: RoomUpdateInput!, where: RoomWhereUniqueInput!): Room
+  updateManyRooms(data: RoomUpdateManyMutationInput!, where: RoomWhereInput): BatchPayload!
+  upsertRoom(where: RoomWhereUniqueInput!, create: RoomCreateInput!, update: RoomUpdateInput!): Room!
+  deleteRoom(where: RoomWhereUniqueInput!): Room
+  deleteManyRooms(where: RoomWhereInput): BatchPayload!
+  createTour(data: TourCreateInput!): Tour!
+  updateTour(data: TourUpdateInput!, where: TourWhereUniqueInput!): Tour
+  updateManyTours(data: TourUpdateManyMutationInput!, where: TourWhereInput): BatchPayload!
+  upsertTour(where: TourWhereUniqueInput!, create: TourCreateInput!, update: TourUpdateInput!): Tour!
+  deleteTour(where: TourWhereUniqueInput!): Tour
+  deleteManyTours(where: TourWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type Notification {
+  _id: ID!
+  reciever: Profile!
+  title: String!
+  content: String!
+}
+
+type NotificationConnection {
+  pageInfo: PageInfo!
+  edges: [NotificationEdge]!
+  aggregate: AggregateNotification!
+}
+
+input NotificationCreateInput {
+  _id: ID
+  reciever: ProfileCreateOneInput!
+  title: String!
+  content: String!
+}
+
+type NotificationEdge {
+  node: Notification!
+  cursor: String!
+}
+
+enum NotificationOrderByInput {
+  _id_ASC
+  _id_DESC
+  title_ASC
+  title_DESC
+  content_ASC
+  content_DESC
+}
+
+type NotificationPreviousValues {
+  _id: ID!
+  title: String!
+  content: String!
+}
+
+type NotificationSubscriptionPayload {
+  mutation: MutationType!
+  node: Notification
+  updatedFields: [String!]
+  previousValues: NotificationPreviousValues
+}
+
+input NotificationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: NotificationWhereInput
+  AND: [NotificationSubscriptionWhereInput!]
+}
+
+input NotificationUpdateInput {
+  reciever: ProfileUpdateOneRequiredInput
+  title: String
+  content: String
+}
+
+input NotificationUpdateManyMutationInput {
+  title: String
+  content: String
+}
+
+input NotificationWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  reciever: ProfileWhereInput
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [NotificationWhereInput!]
+}
+
+input NotificationWhereUniqueInput {
+  _id: ID
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Passenger {
+  _id: ID!
+  email: String!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  phone_number: String!
+}
+
+type PassengerConnection {
+  pageInfo: PageInfo!
+  edges: [PassengerEdge]!
+  aggregate: AggregatePassenger!
+}
+
+input PassengerCreateInput {
+  _id: ID
+  email: String!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  phone_number: String!
+}
+
+type PassengerEdge {
+  node: Passenger!
+  cursor: String!
+}
+
+enum PassengerOrderByInput {
+  _id_ASC
+  _id_DESC
+  email_ASC
+  email_DESC
+  firstname_ASC
+  firstname_DESC
+  lastname_ASC
+  lastname_DESC
+  birthday_ASC
+  birthday_DESC
+  phone_number_ASC
+  phone_number_DESC
+}
+
+type PassengerPreviousValues {
+  _id: ID!
+  email: String!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  phone_number: String!
+}
+
+type PassengerSubscriptionPayload {
+  mutation: MutationType!
+  node: Passenger
+  updatedFields: [String!]
+  previousValues: PassengerPreviousValues
+}
+
+input PassengerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PassengerWhereInput
+  AND: [PassengerSubscriptionWhereInput!]
+}
+
+input PassengerUpdateInput {
+  email: String
+  firstname: String
+  lastname: String
+  birthday: String
+  phone_number: String
+}
+
+input PassengerUpdateManyMutationInput {
+  email: String
+  firstname: String
+  lastname: String
+  birthday: String
+  phone_number: String
+}
+
+input PassengerWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  birthday: String
+  birthday_not: String
+  birthday_in: [String!]
+  birthday_not_in: [String!]
+  birthday_lt: String
+  birthday_lte: String
+  birthday_gt: String
+  birthday_gte: String
+  birthday_contains: String
+  birthday_not_contains: String
+  birthday_starts_with: String
+  birthday_not_starts_with: String
+  birthday_ends_with: String
+  birthday_not_ends_with: String
+  phone_number: String
+  phone_number_not: String
+  phone_number_in: [String!]
+  phone_number_not_in: [String!]
+  phone_number_lt: String
+  phone_number_lte: String
+  phone_number_gt: String
+  phone_number_gte: String
+  phone_number_contains: String
+  phone_number_not_contains: String
+  phone_number_starts_with: String
+  phone_number_not_starts_with: String
+  phone_number_ends_with: String
+  phone_number_not_ends_with: String
+  AND: [PassengerWhereInput!]
+}
+
+input PassengerWhereUniqueInput {
+  _id: ID
+}
+
+type Payment {
+  _id: ID!
+  email_receiver: String!
+  email_sender: String!
+  type_payment: TypePayment!
+  price: Float!
+  paymentID: String!
+}
+
+type PaymentConnection {
+  pageInfo: PageInfo!
+  edges: [PaymentEdge]!
+  aggregate: AggregatePayment!
+}
+
+input PaymentCreateInput {
+  _id: ID
+  email_receiver: String!
+  email_sender: String!
+  type_payment: TypePayment!
+  price: Float!
+  paymentID: String!
+}
+
+type PaymentEdge {
+  node: Payment!
+  cursor: String!
+}
+
+enum PaymentOrderByInput {
+  _id_ASC
+  _id_DESC
+  email_receiver_ASC
+  email_receiver_DESC
+  email_sender_ASC
+  email_sender_DESC
+  type_payment_ASC
+  type_payment_DESC
+  price_ASC
+  price_DESC
+  paymentID_ASC
+  paymentID_DESC
+}
+
+type PaymentPreviousValues {
+  _id: ID!
+  email_receiver: String!
+  email_sender: String!
+  type_payment: TypePayment!
+  price: Float!
+  paymentID: String!
+}
+
+type PaymentSubscriptionPayload {
+  mutation: MutationType!
+  node: Payment
+  updatedFields: [String!]
+  previousValues: PaymentPreviousValues
+}
+
+input PaymentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PaymentWhereInput
+  AND: [PaymentSubscriptionWhereInput!]
+}
+
+input PaymentUpdateInput {
+  email_receiver: String
+  email_sender: String
+  type_payment: TypePayment
+  price: Float
+  paymentID: String
+}
+
+input PaymentUpdateManyMutationInput {
+  email_receiver: String
+  email_sender: String
+  type_payment: TypePayment
+  price: Float
+  paymentID: String
+}
+
+input PaymentWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  email_receiver: String
+  email_receiver_not: String
+  email_receiver_in: [String!]
+  email_receiver_not_in: [String!]
+  email_receiver_lt: String
+  email_receiver_lte: String
+  email_receiver_gt: String
+  email_receiver_gte: String
+  email_receiver_contains: String
+  email_receiver_not_contains: String
+  email_receiver_starts_with: String
+  email_receiver_not_starts_with: String
+  email_receiver_ends_with: String
+  email_receiver_not_ends_with: String
+  email_sender: String
+  email_sender_not: String
+  email_sender_in: [String!]
+  email_sender_not_in: [String!]
+  email_sender_lt: String
+  email_sender_lte: String
+  email_sender_gt: String
+  email_sender_gte: String
+  email_sender_contains: String
+  email_sender_not_contains: String
+  email_sender_starts_with: String
+  email_sender_not_starts_with: String
+  email_sender_ends_with: String
+  email_sender_not_ends_with: String
+  type_payment: TypePayment
+  type_payment_not: TypePayment
+  type_payment_in: [TypePayment!]
+  type_payment_not_in: [TypePayment!]
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  paymentID: String
+  paymentID_not: String
+  paymentID_in: [String!]
+  paymentID_not_in: [String!]
+  paymentID_lt: String
+  paymentID_lte: String
+  paymentID_gt: String
+  paymentID_gte: String
+  paymentID_contains: String
+  paymentID_not_contains: String
+  paymentID_starts_with: String
+  paymentID_not_starts_with: String
+  paymentID_ends_with: String
+  paymentID_not_ends_with: String
+  AND: [PaymentWhereInput!]
+}
+
+input PaymentWhereUniqueInput {
+  _id: ID
+}
+
+type Permission {
+  _id: ID!
+  role: Role!
+  resource: String!
+  action: String!
+  possession: TypePossession!
+  attributes: [Attribute!]
+}
+
+type PermissionConnection {
+  pageInfo: PageInfo!
+  edges: [PermissionEdge]!
+  aggregate: AggregatePermission!
+}
+
+input PermissionCreateInput {
+  _id: ID
+  role: RoleCreateOneInput!
+  resource: String!
+  action: String!
+  possession: TypePossession!
+  attributes: AttributeCreateManyInput
+}
+
+type PermissionEdge {
+  node: Permission!
+  cursor: String!
+}
+
+enum PermissionOrderByInput {
+  _id_ASC
+  _id_DESC
+  resource_ASC
+  resource_DESC
+  action_ASC
+  action_DESC
+  possession_ASC
+  possession_DESC
+}
+
+type PermissionPreviousValues {
+  _id: ID!
+  resource: String!
+  action: String!
+  possession: TypePossession!
+}
+
+type PermissionSubscriptionPayload {
+  mutation: MutationType!
+  node: Permission
+  updatedFields: [String!]
+  previousValues: PermissionPreviousValues
+}
+
+input PermissionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PermissionWhereInput
+  AND: [PermissionSubscriptionWhereInput!]
+}
+
+input PermissionUpdateInput {
+  role: RoleUpdateOneRequiredInput
+  resource: String
+  action: String
+  possession: TypePossession
+  attributes: AttributeUpdateManyInput
+}
+
+input PermissionUpdateManyMutationInput {
+  resource: String
+  action: String
+  possession: TypePossession
+}
+
+input PermissionWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  role: RoleWhereInput
+  resource: String
+  resource_not: String
+  resource_in: [String!]
+  resource_not_in: [String!]
+  resource_lt: String
+  resource_lte: String
+  resource_gt: String
+  resource_gte: String
+  resource_contains: String
+  resource_not_contains: String
+  resource_starts_with: String
+  resource_not_starts_with: String
+  resource_ends_with: String
+  resource_not_ends_with: String
+  action: String
+  action_not: String
+  action_in: [String!]
+  action_not_in: [String!]
+  action_lt: String
+  action_lte: String
+  action_gt: String
+  action_gte: String
+  action_contains: String
+  action_not_contains: String
+  action_starts_with: String
+  action_not_starts_with: String
+  action_ends_with: String
+  action_not_ends_with: String
+  possession: TypePossession
+  possession_not: TypePossession
+  possession_in: [TypePossession!]
+  possession_not_in: [TypePossession!]
+  attributes_some: AttributeWhereInput
+  attributes_every: AttributeRestrictedWhereInput
+  attributes_none: AttributeRestrictedWhereInput
+  AND: [PermissionWhereInput!]
+}
+
+input PermissionWhereUniqueInput {
+  _id: ID
+}
+
+type Place {
+  _id: ID!
+  name: String!
+  location: Location!
+  address: String!
+  city: City!
+  image: String!
+}
+
+type PlaceConnection {
+  pageInfo: PageInfo!
+  edges: [PlaceEdge]!
+  aggregate: AggregatePlace!
+}
+
+input PlaceCreateInput {
+  _id: ID
+  name: String!
+  location: LocationCreateOneInput!
+  address: String!
+  city: CityCreateOneInput!
+  image: String!
+}
+
+input PlaceCreateOneInput {
+  create: PlaceCreateInput
+  connect: PlaceWhereUniqueInput
+}
+
+type PlaceEdge {
+  node: Place!
+  cursor: String!
+}
+
+enum PlaceOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  address_ASC
+  address_DESC
+  image_ASC
+  image_DESC
+}
+
+type PlacePreviousValues {
+  _id: ID!
+  name: String!
+  address: String!
+  image: String!
+}
+
+type PlaceSubscriptionPayload {
+  mutation: MutationType!
+  node: Place
+  updatedFields: [String!]
+  previousValues: PlacePreviousValues
+}
+
+input PlaceSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PlaceWhereInput
+  AND: [PlaceSubscriptionWhereInput!]
+}
+
+input PlaceUpdateDataInput {
+  name: String
+  location: LocationUpdateOneRequiredInput
+  address: String
+  city: CityUpdateOneRequiredInput
+  image: String
+}
+
+input PlaceUpdateInput {
+  name: String
+  location: LocationUpdateOneRequiredInput
+  address: String
+  city: CityUpdateOneRequiredInput
+  image: String
+}
+
+input PlaceUpdateManyMutationInput {
+  name: String
+  address: String
+  image: String
+}
+
+input PlaceUpdateOneRequiredInput {
+  create: PlaceCreateInput
+  update: PlaceUpdateDataInput
+  upsert: PlaceUpsertNestedInput
+  connect: PlaceWhereUniqueInput
+}
+
+input PlaceUpsertNestedInput {
+  update: PlaceUpdateDataInput!
+  create: PlaceCreateInput!
+}
+
+input PlaceWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  location: LocationWhereInput
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  city: CityWhereInput
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  AND: [PlaceWhereInput!]
+}
+
+input PlaceWhereUniqueInput {
+  _id: ID
+}
+
+type Profile {
+  _id: ID!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  address: String!
+  email: String!
+  phone_number: String!
+  role: Int
+  is_complete: Boolean
+  favorites(where: FavoriteWhereInput, orderBy: FavoriteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Favorite!]
+  bookings(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking!]
+}
+
+type ProfileConnection {
+  pageInfo: PageInfo!
+  edges: [ProfileEdge]!
+  aggregate: AggregateProfile!
+}
+
+input ProfileCreateInput {
+  _id: ID
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  address: String!
+  email: String!
+  phone_number: String!
+  role: Int
+  is_complete: Boolean
+  favorites: FavoriteCreateManyWithoutFavoritorInput
+  bookings: BookingCreateManyWithoutBuyerInput
+}
+
+input ProfileCreateOneInput {
+  create: ProfileCreateInput
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileCreateOneWithoutBookingsInput {
+  create: ProfileCreateWithoutBookingsInput
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileCreateOneWithoutFavoritesInput {
+  create: ProfileCreateWithoutFavoritesInput
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileCreateWithoutBookingsInput {
+  _id: ID
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  address: String!
+  email: String!
+  phone_number: String!
+  role: Int
+  is_complete: Boolean
+  favorites: FavoriteCreateManyWithoutFavoritorInput
+}
+
+input ProfileCreateWithoutFavoritesInput {
+  _id: ID
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  address: String!
+  email: String!
+  phone_number: String!
+  role: Int
+  is_complete: Boolean
+  bookings: BookingCreateManyWithoutBuyerInput
+}
+
+type ProfileEdge {
+  node: Profile!
+  cursor: String!
+}
+
+enum ProfileOrderByInput {
+  _id_ASC
+  _id_DESC
+  firstname_ASC
+  firstname_DESC
+  lastname_ASC
+  lastname_DESC
+  birthday_ASC
+  birthday_DESC
+  avatar_ASC
+  avatar_DESC
+  gender_ASC
+  gender_DESC
+  address_ASC
+  address_DESC
+  email_ASC
+  email_DESC
+  phone_number_ASC
+  phone_number_DESC
+  role_ASC
+  role_DESC
+  is_complete_ASC
+  is_complete_DESC
+}
+
+type ProfilePreviousValues {
+  _id: ID!
+  firstname: String!
+  lastname: String!
+  birthday: String!
+  avatar: String
+  gender: Boolean!
+  address: String!
+  email: String!
+  phone_number: String!
+  role: Int
+  is_complete: Boolean
+}
+
+type ProfileSubscriptionPayload {
+  mutation: MutationType!
+  node: Profile
+  updatedFields: [String!]
+  previousValues: ProfilePreviousValues
+}
+
+input ProfileSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProfileWhereInput
+  AND: [ProfileSubscriptionWhereInput!]
+}
+
+input ProfileUpdateDataInput {
+  firstname: String
+  lastname: String
+  birthday: String
+  avatar: String
+  gender: Boolean
+  address: String
+  email: String
+  phone_number: String
+  role: Int
+  is_complete: Boolean
+  favorites: FavoriteUpdateManyWithoutFavoritorInput
+  bookings: BookingUpdateManyWithoutBuyerInput
+}
+
+input ProfileUpdateInput {
+  firstname: String
+  lastname: String
+  birthday: String
+  avatar: String
+  gender: Boolean
+  address: String
+  email: String
+  phone_number: String
+  role: Int
+  is_complete: Boolean
+  favorites: FavoriteUpdateManyWithoutFavoritorInput
+  bookings: BookingUpdateManyWithoutBuyerInput
+}
+
+input ProfileUpdateManyMutationInput {
+  firstname: String
+  lastname: String
+  birthday: String
+  avatar: String
+  gender: Boolean
+  address: String
+  email: String
+  phone_number: String
+  role: Int
+  is_complete: Boolean
+}
+
+input ProfileUpdateOneInput {
+  create: ProfileCreateInput
+  update: ProfileUpdateDataInput
+  upsert: ProfileUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileUpdateOneRequiredInput {
+  create: ProfileCreateInput
+  update: ProfileUpdateDataInput
+  upsert: ProfileUpsertNestedInput
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileUpdateOneRequiredWithoutBookingsInput {
+  create: ProfileCreateWithoutBookingsInput
+  update: ProfileUpdateWithoutBookingsDataInput
+  upsert: ProfileUpsertWithoutBookingsInput
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileUpdateOneWithoutFavoritesInput {
+  create: ProfileCreateWithoutFavoritesInput
+  update: ProfileUpdateWithoutFavoritesDataInput
+  upsert: ProfileUpsertWithoutFavoritesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ProfileWhereUniqueInput
+}
+
+input ProfileUpdateWithoutBookingsDataInput {
+  firstname: String
+  lastname: String
+  birthday: String
+  avatar: String
+  gender: Boolean
+  address: String
+  email: String
+  phone_number: String
+  role: Int
+  is_complete: Boolean
+  favorites: FavoriteUpdateManyWithoutFavoritorInput
+}
+
+input ProfileUpdateWithoutFavoritesDataInput {
+  firstname: String
+  lastname: String
+  birthday: String
+  avatar: String
+  gender: Boolean
+  address: String
+  email: String
+  phone_number: String
+  role: Int
+  is_complete: Boolean
+  bookings: BookingUpdateManyWithoutBuyerInput
+}
+
+input ProfileUpsertNestedInput {
+  update: ProfileUpdateDataInput!
+  create: ProfileCreateInput!
+}
+
+input ProfileUpsertWithoutBookingsInput {
+  update: ProfileUpdateWithoutBookingsDataInput!
+  create: ProfileCreateWithoutBookingsInput!
+}
+
+input ProfileUpsertWithoutFavoritesInput {
+  update: ProfileUpdateWithoutFavoritesDataInput!
+  create: ProfileCreateWithoutFavoritesInput!
+}
+
+input ProfileWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  birthday: String
+  birthday_not: String
+  birthday_in: [String!]
+  birthday_not_in: [String!]
+  birthday_lt: String
+  birthday_lte: String
+  birthday_gt: String
+  birthday_gte: String
+  birthday_contains: String
+  birthday_not_contains: String
+  birthday_starts_with: String
+  birthday_not_starts_with: String
+  birthday_ends_with: String
+  birthday_not_ends_with: String
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
+  gender: Boolean
+  gender_not: Boolean
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  phone_number: String
+  phone_number_not: String
+  phone_number_in: [String!]
+  phone_number_not_in: [String!]
+  phone_number_lt: String
+  phone_number_lte: String
+  phone_number_gt: String
+  phone_number_gte: String
+  phone_number_contains: String
+  phone_number_not_contains: String
+  phone_number_starts_with: String
+  phone_number_not_starts_with: String
+  phone_number_ends_with: String
+  phone_number_not_ends_with: String
+  role: Int
+  role_not: Int
+  role_in: [Int!]
+  role_not_in: [Int!]
+  role_lt: Int
+  role_lte: Int
+  role_gt: Int
+  role_gte: Int
+  is_complete: Boolean
+  is_complete_not: Boolean
+  favorites_some: FavoriteWhereInput
+  bookings_some: BookingWhereInput
+  AND: [ProfileWhereInput!]
+}
+
+input ProfileWhereUniqueInput {
+  _id: ID
+}
+
+type Provider {
+  _id: ID!
+  name: String!
+  code: String!
+}
+
+type ProviderConnection {
+  pageInfo: PageInfo!
+  edges: [ProviderEdge]!
+  aggregate: AggregateProvider!
+}
+
+input ProviderCreateInput {
+  _id: ID
+  name: String!
+  code: String!
+}
+
+input ProviderCreateOneInput {
+  create: ProviderCreateInput
+  connect: ProviderWhereUniqueInput
+}
+
+type ProviderEdge {
+  node: Provider!
+  cursor: String!
+}
+
+enum ProviderOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  code_ASC
+  code_DESC
+}
+
+type ProviderPreviousValues {
+  _id: ID!
+  name: String!
+  code: String!
+}
+
+type ProviderSubscriptionPayload {
+  mutation: MutationType!
+  node: Provider
+  updatedFields: [String!]
+  previousValues: ProviderPreviousValues
+}
+
+input ProviderSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProviderWhereInput
+  AND: [ProviderSubscriptionWhereInput!]
+}
+
+input ProviderUpdateDataInput {
+  name: String
+  code: String
+}
+
+input ProviderUpdateInput {
+  name: String
+  code: String
+}
+
+input ProviderUpdateManyMutationInput {
+  name: String
+  code: String
+}
+
+input ProviderUpdateOneInput {
+  create: ProviderCreateInput
+  update: ProviderUpdateDataInput
+  upsert: ProviderUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ProviderWhereUniqueInput
+}
+
+input ProviderUpsertNestedInput {
+  update: ProviderUpdateDataInput!
+  create: ProviderCreateInput!
+}
+
+input ProviderWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  AND: [ProviderWhereInput!]
+}
+
+input ProviderWhereUniqueInput {
+  _id: ID
+}
+
+type Query {
+  airPort(where: AirPortWhereUniqueInput!): AirPort
+  airPorts(where: AirPortWhereInput, orderBy: AirPortOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AirPort]!
+  airPortsConnection(where: AirPortWhereInput, orderBy: AirPortOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AirPortConnection!
+  booking(where: BookingWhereUniqueInput!): Booking
+  bookings(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking]!
+  bookingsConnection(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookingConnection!
+  bookingItem(where: BookingItemWhereUniqueInput!): BookingItem
+  bookingItems(where: BookingItemWhereInput, orderBy: BookingItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BookingItem]!
+  bookingItemsConnection(where: BookingItemWhereInput, orderBy: BookingItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookingItemConnection!
+  city(where: CityWhereUniqueInput!): City
+  cities(where: CityWhereInput, orderBy: CityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [City]!
+  citiesConnection(where: CityWhereInput, orderBy: CityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CityConnection!
+  couponCode(where: CouponCodeWhereUniqueInput!): CouponCode
+  couponCodes(where: CouponCodeWhereInput, orderBy: CouponCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CouponCode]!
+  couponCodesConnection(where: CouponCodeWhereInput, orderBy: CouponCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CouponCodeConnection!
+  customer(where: CustomerWhereUniqueInput!): Customer
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
+  customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
+  discount(where: DiscountWhereUniqueInput!): Discount
+  discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount]!
+  discountsConnection(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DiscountConnection!
+  favorite(where: FavoriteWhereUniqueInput!): Favorite
+  favorites(where: FavoriteWhereInput, orderBy: FavoriteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Favorite]!
+  favoritesConnection(where: FavoriteWhereInput, orderBy: FavoriteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FavoriteConnection!
+  flight(where: FlightWhereUniqueInput!): Flight
+  flights(where: FlightWhereInput, orderBy: FlightOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Flight]!
+  flightsConnection(where: FlightWhereInput, orderBy: FlightOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FlightConnection!
+  hotel(where: HotelWhereUniqueInput!): Hotel
+  hotels(where: HotelWhereInput, orderBy: HotelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hotel]!
+  hotelsConnection(where: HotelWhereInput, orderBy: HotelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HotelConnection!
+  message(where: MessageWhereUniqueInput!): Message
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  notification(where: NotificationWhereUniqueInput!): Notification
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
+  notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
+  passenger(where: PassengerWhereUniqueInput!): Passenger
+  passengers(where: PassengerWhereInput, orderBy: PassengerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Passenger]!
+  passengersConnection(where: PassengerWhereInput, orderBy: PassengerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PassengerConnection!
+  payment(where: PaymentWhereUniqueInput!): Payment
+  payments(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Payment]!
+  paymentsConnection(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaymentConnection!
+  permission(where: PermissionWhereUniqueInput!): Permission
+  permissions(where: PermissionWhereInput, orderBy: PermissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Permission]!
+  permissionsConnection(where: PermissionWhereInput, orderBy: PermissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PermissionConnection!
+  place(where: PlaceWhereUniqueInput!): Place
+  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
+  placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
+  profile(where: ProfileWhereUniqueInput!): Profile
+  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
+  profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
+  provider(where: ProviderWhereUniqueInput!): Provider
+  providers(where: ProviderWhereInput, orderBy: ProviderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provider]!
+  providersConnection(where: ProviderWhereInput, orderBy: ProviderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProviderConnection!
+  recommendation(where: RecommendationWhereUniqueInput!): Recommendation
+  recommendations(where: RecommendationWhereInput, orderBy: RecommendationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recommendation]!
+  recommendationsConnection(where: RecommendationWhereInput, orderBy: RecommendationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecommendationConnection!
+  review(where: ReviewWhereUniqueInput!): Review
+  reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review]!
+  reviewsConnection(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReviewConnection!
+  role(where: RoleWhereUniqueInput!): Role
+  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
+  rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
+  room(where: RoomWhereUniqueInput!): Room
+  rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room]!
+  roomsConnection(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoomConnection!
+  tour(where: TourWhereUniqueInput!): Tour
+  tours(where: TourWhereInput, orderBy: TourOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tour]!
+  toursConnection(where: TourWhereInput, orderBy: TourOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TourConnection!
+  node(id: ID!): Node
+}
+
+type Recommendation {
+  _id: ID!
+  type_recommendation: TypeRecommendation!
+  hotel: Hotel
+  tour: Tour
+  flight: Flight
+}
+
+type RecommendationConnection {
+  pageInfo: PageInfo!
+  edges: [RecommendationEdge]!
+  aggregate: AggregateRecommendation!
+}
+
+input RecommendationCreateInput {
+  _id: ID
+  type_recommendation: TypeRecommendation!
+  hotel: HotelCreateOneInput
+  tour: TourCreateOneInput
+  flight: FlightCreateOneInput
+}
+
+type RecommendationEdge {
+  node: Recommendation!
+  cursor: String!
+}
+
+enum RecommendationOrderByInput {
+  _id_ASC
+  _id_DESC
+  type_recommendation_ASC
+  type_recommendation_DESC
+}
+
+type RecommendationPreviousValues {
+  _id: ID!
+  type_recommendation: TypeRecommendation!
+}
+
+type RecommendationSubscriptionPayload {
+  mutation: MutationType!
+  node: Recommendation
+  updatedFields: [String!]
+  previousValues: RecommendationPreviousValues
+}
+
+input RecommendationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RecommendationWhereInput
+  AND: [RecommendationSubscriptionWhereInput!]
+}
+
+input RecommendationUpdateInput {
+  type_recommendation: TypeRecommendation
+  hotel: HotelUpdateOneInput
+  tour: TourUpdateOneInput
+  flight: FlightUpdateOneInput
+}
+
+input RecommendationUpdateManyMutationInput {
+  type_recommendation: TypeRecommendation
+}
+
+input RecommendationWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  type_recommendation: TypeRecommendation
+  type_recommendation_not: TypeRecommendation
+  type_recommendation_in: [TypeRecommendation!]
+  type_recommendation_not_in: [TypeRecommendation!]
+  hotel: HotelWhereInput
+  tour: TourWhereInput
+  flight: FlightWhereInput
+  AND: [RecommendationWhereInput!]
+}
+
+input RecommendationWhereUniqueInput {
+  _id: ID
+}
+
+type Review {
+  _id: ID!
+  reviewer: Profile
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+  hotel: Hotel
+  tour: Tour
+}
+
+type ReviewConnection {
+  pageInfo: PageInfo!
+  edges: [ReviewEdge]!
+  aggregate: AggregateReview!
+}
+
+input ReviewCreateInput {
+  _id: ID
+  reviewer: ProfileCreateOneInput
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+  hotel: HotelCreateOneWithoutReviewsInput
+  tour: TourCreateOneWithoutReviewsInput
+}
+
+input ReviewCreateManyWithoutHotelInput {
+  create: [ReviewCreateWithoutHotelInput!]
+  connect: [ReviewWhereUniqueInput!]
+}
+
+input ReviewCreateManyWithoutTourInput {
+  create: [ReviewCreateWithoutTourInput!]
+  connect: [ReviewWhereUniqueInput!]
+}
+
+input ReviewCreateWithoutHotelInput {
+  _id: ID
+  reviewer: ProfileCreateOneInput
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+  tour: TourCreateOneWithoutReviewsInput
+}
+
+input ReviewCreateWithoutTourInput {
+  _id: ID
+  reviewer: ProfileCreateOneInput
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+  hotel: HotelCreateOneWithoutReviewsInput
+}
+
+type ReviewEdge {
+  node: Review!
+  cursor: String!
+}
+
+enum ReviewOrderByInput {
+  _id_ASC
+  _id_DESC
+  content_ASC
+  content_DESC
+  title_ASC
+  title_DESC
+  rate_star_ASC
+  rate_star_DESC
+  type_ASC
+  type_DESC
+}
+
+type ReviewPreviousValues {
+  _id: ID!
+  content: String!
+  title: String!
+  rate_star: Int!
+  type: TypeReview!
+}
+
+input ReviewScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  rate_star: Int
+  rate_star_not: Int
+  rate_star_in: [Int!]
+  rate_star_not_in: [Int!]
+  rate_star_lt: Int
+  rate_star_lte: Int
+  rate_star_gt: Int
+  rate_star_gte: Int
+  type: TypeReview
+  type_not: TypeReview
+  type_in: [TypeReview!]
+  type_not_in: [TypeReview!]
+  AND: [ReviewScalarWhereInput!]
+  OR: [ReviewScalarWhereInput!]
+  NOT: [ReviewScalarWhereInput!]
+}
+
+type ReviewSubscriptionPayload {
+  mutation: MutationType!
+  node: Review
+  updatedFields: [String!]
+  previousValues: ReviewPreviousValues
+}
+
+input ReviewSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ReviewWhereInput
+  AND: [ReviewSubscriptionWhereInput!]
+}
+
+input ReviewUpdateInput {
+  reviewer: ProfileUpdateOneInput
+  content: String
+  title: String
+  rate_star: Int
+  type: TypeReview
+  hotel: HotelUpdateOneWithoutReviewsInput
+  tour: TourUpdateOneWithoutReviewsInput
+}
+
+input ReviewUpdateManyDataInput {
+  content: String
+  title: String
+  rate_star: Int
+  type: TypeReview
+}
+
+input ReviewUpdateManyMutationInput {
+  content: String
+  title: String
+  rate_star: Int
+  type: TypeReview
+}
+
+input ReviewUpdateManyWithoutHotelInput {
+  create: [ReviewCreateWithoutHotelInput!]
+  delete: [ReviewWhereUniqueInput!]
+  connect: [ReviewWhereUniqueInput!]
+  set: [ReviewWhereUniqueInput!]
+  disconnect: [ReviewWhereUniqueInput!]
+  update: [ReviewUpdateWithWhereUniqueWithoutHotelInput!]
+  upsert: [ReviewUpsertWithWhereUniqueWithoutHotelInput!]
+  deleteMany: [ReviewScalarWhereInput!]
+  updateMany: [ReviewUpdateManyWithWhereNestedInput!]
+}
+
+input ReviewUpdateManyWithoutTourInput {
+  create: [ReviewCreateWithoutTourInput!]
+  delete: [ReviewWhereUniqueInput!]
+  connect: [ReviewWhereUniqueInput!]
+  set: [ReviewWhereUniqueInput!]
+  disconnect: [ReviewWhereUniqueInput!]
+  update: [ReviewUpdateWithWhereUniqueWithoutTourInput!]
+  upsert: [ReviewUpsertWithWhereUniqueWithoutTourInput!]
+  deleteMany: [ReviewScalarWhereInput!]
+  updateMany: [ReviewUpdateManyWithWhereNestedInput!]
+}
+
+input ReviewUpdateManyWithWhereNestedInput {
+  where: ReviewScalarWhereInput!
+  data: ReviewUpdateManyDataInput!
+}
+
+input ReviewUpdateWithoutHotelDataInput {
+  reviewer: ProfileUpdateOneInput
+  content: String
+  title: String
+  rate_star: Int
+  type: TypeReview
+  tour: TourUpdateOneWithoutReviewsInput
+}
+
+input ReviewUpdateWithoutTourDataInput {
+  reviewer: ProfileUpdateOneInput
+  content: String
+  title: String
+  rate_star: Int
+  type: TypeReview
+  hotel: HotelUpdateOneWithoutReviewsInput
+}
+
+input ReviewUpdateWithWhereUniqueWithoutHotelInput {
+  where: ReviewWhereUniqueInput!
+  data: ReviewUpdateWithoutHotelDataInput!
+}
+
+input ReviewUpdateWithWhereUniqueWithoutTourInput {
+  where: ReviewWhereUniqueInput!
+  data: ReviewUpdateWithoutTourDataInput!
+}
+
+input ReviewUpsertWithWhereUniqueWithoutHotelInput {
+  where: ReviewWhereUniqueInput!
+  update: ReviewUpdateWithoutHotelDataInput!
+  create: ReviewCreateWithoutHotelInput!
+}
+
+input ReviewUpsertWithWhereUniqueWithoutTourInput {
+  where: ReviewWhereUniqueInput!
+  update: ReviewUpdateWithoutTourDataInput!
+  create: ReviewCreateWithoutTourInput!
+}
+
+input ReviewWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  reviewer: ProfileWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  rate_star: Int
+  rate_star_not: Int
+  rate_star_in: [Int!]
+  rate_star_not_in: [Int!]
+  rate_star_lt: Int
+  rate_star_lte: Int
+  rate_star_gt: Int
+  rate_star_gte: Int
+  type: TypeReview
+  type_not: TypeReview
+  type_in: [TypeReview!]
+  type_not_in: [TypeReview!]
+  hotel: HotelWhereInput
+  tour: TourWhereInput
+  AND: [ReviewWhereInput!]
+}
+
+input ReviewWhereUniqueInput {
+  _id: ID
+}
+
+type Role {
+  _id: ID!
+  name: String!
+}
+
+type RoleConnection {
+  pageInfo: PageInfo!
+  edges: [RoleEdge]!
+  aggregate: AggregateRole!
+}
+
+input RoleCreateInput {
+  _id: ID
+  name: String!
+}
+
+input RoleCreateOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+}
+
+type RoleEdge {
+  node: Role!
+  cursor: String!
+}
+
+enum RoleOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+}
+
+type RolePreviousValues {
+  _id: ID!
+  name: String!
+}
+
+type RoleSubscriptionPayload {
+  mutation: MutationType!
+  node: Role
+  updatedFields: [String!]
+  previousValues: RolePreviousValues
+}
+
+input RoleSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RoleWhereInput
+  AND: [RoleSubscriptionWhereInput!]
+}
+
+input RoleUpdateDataInput {
+  name: String
+}
+
+input RoleUpdateInput {
+  name: String
+}
+
+input RoleUpdateManyMutationInput {
+  name: String
+}
+
+input RoleUpdateOneRequiredInput {
+  create: RoleCreateInput
+  update: RoleUpdateDataInput
+  upsert: RoleUpsertNestedInput
+  connect: RoleWhereUniqueInput
+}
+
+input RoleUpsertNestedInput {
+  update: RoleUpdateDataInput!
+  create: RoleCreateInput!
+}
+
+input RoleWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [RoleWhereInput!]
+}
+
+input RoleWhereUniqueInput {
+  _id: ID
+}
+
+type Room {
+  _id: ID!
+  name: String!
+  square: Float!
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int!
+  adults: Int!
+  children: Int!
+  price: Float!
+  description: String!
+  images: [String!]!
+  amenities: [Amenity!]
+  hotel: Hotel!
+}
+
+type RoomConnection {
+  pageInfo: PageInfo!
+  edges: [RoomEdge]!
+  aggregate: AggregateRoom!
+}
+
+input RoomCreateimagesInput {
+  set: [String!]
+}
+
+input RoomCreateInput {
+  _id: ID
+  name: String!
+  square: Float!
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int!
+  adults: Int!
+  children: Int!
+  price: Float!
+  description: String!
+  images: RoomCreateimagesInput
+  amenities: AmenityCreateManyInput
+  hotel: HotelCreateOneWithoutRoomsInput!
+}
+
+input RoomCreateManyWithoutHotelInput {
+  create: [RoomCreateWithoutHotelInput!]
+  connect: [RoomWhereUniqueInput!]
+}
+
+input RoomCreateOneInput {
+  create: RoomCreateInput
+  connect: RoomWhereUniqueInput
+}
+
+input RoomCreateWithoutHotelInput {
+  _id: ID
+  name: String!
+  square: Float!
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int!
+  adults: Int!
+  children: Int!
+  price: Float!
+  description: String!
+  images: RoomCreateimagesInput
+  amenities: AmenityCreateManyInput
+}
+
+type RoomEdge {
+  node: Room!
+  cursor: String!
+}
+
+enum RoomOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  square_ASC
+  square_DESC
+  status_ASC
+  status_DESC
+  rate_ASC
+  rate_DESC
+  num_review_ASC
+  num_review_DESC
+  beds_ASC
+  beds_DESC
+  adults_ASC
+  adults_DESC
+  children_ASC
+  children_DESC
+  price_ASC
+  price_DESC
+  description_ASC
+  description_DESC
+}
+
+type RoomPreviousValues {
+  _id: ID!
+  name: String!
+  square: Float!
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int!
+  adults: Int!
+  children: Int!
+  price: Float!
+  description: String!
+  images: [String!]!
+}
+
+input RoomScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  square: Float
+  square_not: Float
+  square_in: [Float!]
+  square_not_in: [Float!]
+  square_lt: Float
+  square_lte: Float
+  square_gt: Float
+  square_gte: Float
+  status: TypeRoom
+  status_not: TypeRoom
+  status_in: [TypeRoom!]
+  status_not_in: [TypeRoom!]
+  rate: Float
+  rate_not: Float
+  rate_in: [Float!]
+  rate_not_in: [Float!]
+  rate_lt: Float
+  rate_lte: Float
+  rate_gt: Float
+  rate_gte: Float
+  num_review: Int
+  num_review_not: Int
+  num_review_in: [Int!]
+  num_review_not_in: [Int!]
+  num_review_lt: Int
+  num_review_lte: Int
+  num_review_gt: Int
+  num_review_gte: Int
+  beds: Int
+  beds_not: Int
+  beds_in: [Int!]
+  beds_not_in: [Int!]
+  beds_lt: Int
+  beds_lte: Int
+  beds_gt: Int
+  beds_gte: Int
+  adults: Int
+  adults_not: Int
+  adults_in: [Int!]
+  adults_not_in: [Int!]
+  adults_lt: Int
+  adults_lte: Int
+  adults_gt: Int
+  adults_gte: Int
+  children: Int
+  children_not: Int
+  children_in: [Int!]
+  children_not_in: [Int!]
+  children_lt: Int
+  children_lte: Int
+  children_gt: Int
+  children_gte: Int
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  AND: [RoomScalarWhereInput!]
+  OR: [RoomScalarWhereInput!]
+  NOT: [RoomScalarWhereInput!]
+}
+
+type RoomSubscriptionPayload {
+  mutation: MutationType!
+  node: Room
+  updatedFields: [String!]
+  previousValues: RoomPreviousValues
+}
+
+input RoomSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RoomWhereInput
+  AND: [RoomSubscriptionWhereInput!]
+}
+
+input RoomUpdateDataInput {
+  name: String
+  square: Float
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int
+  adults: Int
+  children: Int
+  price: Float
+  description: String
+  images: RoomUpdateimagesInput
+  amenities: AmenityUpdateManyInput
+  hotel: HotelUpdateOneRequiredWithoutRoomsInput
+}
+
+input RoomUpdateimagesInput {
+  set: [String!]
+}
+
+input RoomUpdateInput {
+  name: String
+  square: Float
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int
+  adults: Int
+  children: Int
+  price: Float
+  description: String
+  images: RoomUpdateimagesInput
+  amenities: AmenityUpdateManyInput
+  hotel: HotelUpdateOneRequiredWithoutRoomsInput
+}
+
+input RoomUpdateManyDataInput {
+  name: String
+  square: Float
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int
+  adults: Int
+  children: Int
+  price: Float
+  description: String
+  images: RoomUpdateimagesInput
+}
+
+input RoomUpdateManyMutationInput {
+  name: String
+  square: Float
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int
+  adults: Int
+  children: Int
+  price: Float
+  description: String
+  images: RoomUpdateimagesInput
+}
+
+input RoomUpdateManyWithoutHotelInput {
+  create: [RoomCreateWithoutHotelInput!]
+  delete: [RoomWhereUniqueInput!]
+  connect: [RoomWhereUniqueInput!]
+  set: [RoomWhereUniqueInput!]
+  disconnect: [RoomWhereUniqueInput!]
+  update: [RoomUpdateWithWhereUniqueWithoutHotelInput!]
+  upsert: [RoomUpsertWithWhereUniqueWithoutHotelInput!]
+  deleteMany: [RoomScalarWhereInput!]
+  updateMany: [RoomUpdateManyWithWhereNestedInput!]
+}
+
+input RoomUpdateManyWithWhereNestedInput {
+  where: RoomScalarWhereInput!
+  data: RoomUpdateManyDataInput!
+}
+
+input RoomUpdateOneInput {
+  create: RoomCreateInput
+  update: RoomUpdateDataInput
+  upsert: RoomUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: RoomWhereUniqueInput
+}
+
+input RoomUpdateWithoutHotelDataInput {
+  name: String
+  square: Float
+  status: TypeRoom
+  rate: Float
+  num_review: Int
+  beds: Int
+  adults: Int
+  children: Int
+  price: Float
+  description: String
+  images: RoomUpdateimagesInput
+  amenities: AmenityUpdateManyInput
+}
+
+input RoomUpdateWithWhereUniqueWithoutHotelInput {
+  where: RoomWhereUniqueInput!
+  data: RoomUpdateWithoutHotelDataInput!
+}
+
+input RoomUpsertNestedInput {
+  update: RoomUpdateDataInput!
+  create: RoomCreateInput!
+}
+
+input RoomUpsertWithWhereUniqueWithoutHotelInput {
+  where: RoomWhereUniqueInput!
+  update: RoomUpdateWithoutHotelDataInput!
+  create: RoomCreateWithoutHotelInput!
+}
+
+input RoomWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  square: Float
+  square_not: Float
+  square_in: [Float!]
+  square_not_in: [Float!]
+  square_lt: Float
+  square_lte: Float
+  square_gt: Float
+  square_gte: Float
+  status: TypeRoom
+  status_not: TypeRoom
+  status_in: [TypeRoom!]
+  status_not_in: [TypeRoom!]
+  rate: Float
+  rate_not: Float
+  rate_in: [Float!]
+  rate_not_in: [Float!]
+  rate_lt: Float
+  rate_lte: Float
+  rate_gt: Float
+  rate_gte: Float
+  num_review: Int
+  num_review_not: Int
+  num_review_in: [Int!]
+  num_review_not_in: [Int!]
+  num_review_lt: Int
+  num_review_lte: Int
+  num_review_gt: Int
+  num_review_gte: Int
+  beds: Int
+  beds_not: Int
+  beds_in: [Int!]
+  beds_not_in: [Int!]
+  beds_lt: Int
+  beds_lte: Int
+  beds_gt: Int
+  beds_gte: Int
+  adults: Int
+  adults_not: Int
+  adults_in: [Int!]
+  adults_not_in: [Int!]
+  adults_lt: Int
+  adults_lte: Int
+  adults_gt: Int
+  adults_gte: Int
+  children: Int
+  children_not: Int
+  children_in: [Int!]
+  children_not_in: [Int!]
+  children_lt: Int
+  children_lte: Int
+  children_gt: Int
+  children_gte: Int
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  amenities_some: AmenityWhereInput
+  amenities_every: AmenityRestrictedWhereInput
+  amenities_none: AmenityRestrictedWhereInput
+  hotel: HotelWhereInput
+  AND: [RoomWhereInput!]
+}
+
+input RoomWhereUniqueInput {
+  _id: ID
+}
+
+type Rule {
+  _id: ID!
+  name: String!
+  content: String!
+}
+
+input RuleCreateInput {
+  _id: ID
+  name: String!
+  content: String!
+}
+
+input RuleCreateManyInput {
+  create: [RuleCreateInput!]
+}
+
+input RuleRestrictedWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [RuleRestrictedWhereInput!]
+}
+
+input RuleScalarWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [RuleScalarWhereInput!]
+  OR: [RuleScalarWhereInput!]
+  NOT: [RuleScalarWhereInput!]
+}
+
+input RuleUpdateDataInput {
+  name: String
+  content: String
+}
+
+input RuleUpdateManyDataInput {
+  name: String
+  content: String
+}
+
+input RuleUpdateManyInput {
+  create: [RuleCreateInput!]
+  update: [RuleUpdateWithWhereUniqueNestedInput!]
+  upsert: [RuleUpsertWithWhereUniqueNestedInput!]
+  delete: [RuleWhereUniqueInput!]
+  deleteMany: [RuleScalarWhereInput!]
+  updateMany: [RuleUpdateManyWithWhereNestedInput!]
+}
+
+input RuleUpdateManyWithWhereNestedInput {
+  where: RuleScalarWhereInput!
+  data: RuleUpdateManyDataInput!
+}
+
+input RuleUpdateWithWhereUniqueNestedInput {
+  where: RuleWhereUniqueInput!
+  data: RuleUpdateDataInput!
+}
+
+input RuleUpsertWithWhereUniqueNestedInput {
+  where: RuleWhereUniqueInput!
+  update: RuleUpdateDataInput!
+  create: RuleCreateInput!
+}
+
+input RuleWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [RuleWhereInput!]
+}
+
+input RuleWhereUniqueInput {
+  _id: ID
+}
+
+type Subscription {
+  airPort(where: AirPortSubscriptionWhereInput): AirPortSubscriptionPayload
+  booking(where: BookingSubscriptionWhereInput): BookingSubscriptionPayload
+  bookingItem(where: BookingItemSubscriptionWhereInput): BookingItemSubscriptionPayload
+  city(where: CitySubscriptionWhereInput): CitySubscriptionPayload
+  couponCode(where: CouponCodeSubscriptionWhereInput): CouponCodeSubscriptionPayload
+  customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
+  discount(where: DiscountSubscriptionWhereInput): DiscountSubscriptionPayload
+  favorite(where: FavoriteSubscriptionWhereInput): FavoriteSubscriptionPayload
+  flight(where: FlightSubscriptionWhereInput): FlightSubscriptionPayload
+  hotel(where: HotelSubscriptionWhereInput): HotelSubscriptionPayload
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
+  passenger(where: PassengerSubscriptionWhereInput): PassengerSubscriptionPayload
+  payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
+  permission(where: PermissionSubscriptionWhereInput): PermissionSubscriptionPayload
+  place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
+  profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
+  provider(where: ProviderSubscriptionWhereInput): ProviderSubscriptionPayload
+  recommendation(where: RecommendationSubscriptionWhereInput): RecommendationSubscriptionPayload
+  review(where: ReviewSubscriptionWhereInput): ReviewSubscriptionPayload
+  role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
+  room(where: RoomSubscriptionWhereInput): RoomSubscriptionPayload
+  tour(where: TourSubscriptionWhereInput): TourSubscriptionPayload
+}
+
+type TimeFlight {
+  _id: ID!
+  hour: Int!
+  minute: Int!
+}
+
+input TimeFlightCreateInput {
+  _id: ID
+  hour: Int!
+  minute: Int!
+}
+
+input TimeFlightCreateOneInput {
+  create: TimeFlightCreateInput
+}
+
+input TimeFlightUpdateDataInput {
+  hour: Int
+  minute: Int
+}
+
+input TimeFlightUpdateOneRequiredInput {
+  create: TimeFlightCreateInput
+  update: TimeFlightUpdateDataInput
+  upsert: TimeFlightUpsertNestedInput
+  connect: TimeFlightWhereUniqueInput
+}
+
+input TimeFlightUpsertNestedInput {
+  update: TimeFlightUpdateDataInput!
+  create: TimeFlightCreateInput!
+}
+
+input TimeFlightWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  hour: Int
+  hour_not: Int
+  hour_in: [Int!]
+  hour_not_in: [Int!]
+  hour_lt: Int
+  hour_lte: Int
+  hour_gt: Int
+  hour_gte: Int
+  minute: Int
+  minute_not: Int
+  minute_in: [Int!]
+  minute_not_in: [Int!]
+  minute_lt: Int
+  minute_lte: Int
+  minute_gt: Int
+  minute_gte: Int
+  AND: [TimeFlightWhereInput!]
+}
+
+input TimeFlightWhereUniqueInput {
+  _id: ID
+}
+
+type Tour {
+  _id: ID!
+  name: String!
+  duration: String!
+  tour_type: String!
+  group_size: Int!
+  price: Float!
+  language_tour: String!
+  description: String!
+  images: [String!]!
+  rate: Float
+  num_review: Int
+  departure_day: String!
+  city: City!
+  itineraries: [Itinerary!]
+  available: Int
+  owner: Profile!
+  reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review!]
+}
+
+type TourConnection {
+  pageInfo: PageInfo!
+  edges: [TourEdge]!
+  aggregate: AggregateTour!
+}
+
+input TourCreateimagesInput {
+  set: [String!]
+}
+
+input TourCreateInput {
+  _id: ID
+  name: String!
+  duration: String!
+  tour_type: String!
+  group_size: Int!
+  price: Float!
+  language_tour: String!
+  description: String!
+  images: TourCreateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String!
+  city: CityCreateOneInput!
+  itineraries: ItineraryCreateManyInput
+  available: Int
+  owner: ProfileCreateOneInput!
+  reviews: ReviewCreateManyWithoutTourInput
+}
+
+input TourCreateOneInput {
+  create: TourCreateInput
+  connect: TourWhereUniqueInput
+}
+
+input TourCreateOneWithoutReviewsInput {
+  create: TourCreateWithoutReviewsInput
+  connect: TourWhereUniqueInput
+}
+
+input TourCreateWithoutReviewsInput {
+  _id: ID
+  name: String!
+  duration: String!
+  tour_type: String!
+  group_size: Int!
+  price: Float!
+  language_tour: String!
+  description: String!
+  images: TourCreateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String!
+  city: CityCreateOneInput!
+  itineraries: ItineraryCreateManyInput
+  available: Int
+  owner: ProfileCreateOneInput!
+}
+
+type TourEdge {
+  node: Tour!
+  cursor: String!
+}
+
+enum TourOrderByInput {
+  _id_ASC
+  _id_DESC
+  name_ASC
+  name_DESC
+  duration_ASC
+  duration_DESC
+  tour_type_ASC
+  tour_type_DESC
+  group_size_ASC
+  group_size_DESC
+  price_ASC
+  price_DESC
+  language_tour_ASC
+  language_tour_DESC
+  description_ASC
+  description_DESC
+  rate_ASC
+  rate_DESC
+  num_review_ASC
+  num_review_DESC
+  departure_day_ASC
+  departure_day_DESC
+  available_ASC
+  available_DESC
+}
+
+type TourPreviousValues {
+  _id: ID!
+  name: String!
+  duration: String!
+  tour_type: String!
+  group_size: Int!
+  price: Float!
+  language_tour: String!
+  description: String!
+  images: [String!]!
+  rate: Float
+  num_review: Int
+  departure_day: String!
+  available: Int
+}
+
+type TourSubscriptionPayload {
+  mutation: MutationType!
+  node: Tour
+  updatedFields: [String!]
+  previousValues: TourPreviousValues
+}
+
+input TourSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TourWhereInput
+  AND: [TourSubscriptionWhereInput!]
+}
+
+input TourUpdateDataInput {
+  name: String
+  duration: String
+  tour_type: String
+  group_size: Int
+  price: Float
+  language_tour: String
+  description: String
+  images: TourUpdateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String
+  city: CityUpdateOneRequiredInput
+  itineraries: ItineraryUpdateManyInput
+  available: Int
+  owner: ProfileUpdateOneRequiredInput
+  reviews: ReviewUpdateManyWithoutTourInput
+}
+
+input TourUpdateimagesInput {
+  set: [String!]
+}
+
+input TourUpdateInput {
+  name: String
+  duration: String
+  tour_type: String
+  group_size: Int
+  price: Float
+  language_tour: String
+  description: String
+  images: TourUpdateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String
+  city: CityUpdateOneRequiredInput
+  itineraries: ItineraryUpdateManyInput
+  available: Int
+  owner: ProfileUpdateOneRequiredInput
+  reviews: ReviewUpdateManyWithoutTourInput
+}
+
+input TourUpdateManyMutationInput {
+  name: String
+  duration: String
+  tour_type: String
+  group_size: Int
+  price: Float
+  language_tour: String
+  description: String
+  images: TourUpdateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String
+  available: Int
+}
+
+input TourUpdateOneInput {
+  create: TourCreateInput
+  update: TourUpdateDataInput
+  upsert: TourUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TourWhereUniqueInput
+}
+
+input TourUpdateOneWithoutReviewsInput {
+  create: TourCreateWithoutReviewsInput
+  update: TourUpdateWithoutReviewsDataInput
+  upsert: TourUpsertWithoutReviewsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TourWhereUniqueInput
+}
+
+input TourUpdateWithoutReviewsDataInput {
+  name: String
+  duration: String
+  tour_type: String
+  group_size: Int
+  price: Float
+  language_tour: String
+  description: String
+  images: TourUpdateimagesInput
+  rate: Float
+  num_review: Int
+  departure_day: String
+  city: CityUpdateOneRequiredInput
+  itineraries: ItineraryUpdateManyInput
+  available: Int
+  owner: ProfileUpdateOneRequiredInput
+}
+
+input TourUpsertNestedInput {
+  update: TourUpdateDataInput!
+  create: TourCreateInput!
+}
+
+input TourUpsertWithoutReviewsInput {
+  update: TourUpdateWithoutReviewsDataInput!
+  create: TourCreateWithoutReviewsInput!
+}
+
+input TourWhereInput {
+  _id: ID
+  _id_not: ID
+  _id_in: [ID!]
+  _id_not_in: [ID!]
+  _id_lt: ID
+  _id_lte: ID
+  _id_gt: ID
+  _id_gte: ID
+  _id_contains: ID
+  _id_not_contains: ID
+  _id_starts_with: ID
+  _id_not_starts_with: ID
+  _id_ends_with: ID
+  _id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  tour_type: String
+  tour_type_not: String
+  tour_type_in: [String!]
+  tour_type_not_in: [String!]
+  tour_type_lt: String
+  tour_type_lte: String
+  tour_type_gt: String
+  tour_type_gte: String
+  tour_type_contains: String
+  tour_type_not_contains: String
+  tour_type_starts_with: String
+  tour_type_not_starts_with: String
+  tour_type_ends_with: String
+  tour_type_not_ends_with: String
+  group_size: Int
+  group_size_not: Int
+  group_size_in: [Int!]
+  group_size_not_in: [Int!]
+  group_size_lt: Int
+  group_size_lte: Int
+  group_size_gt: Int
+  group_size_gte: Int
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  language_tour: String
+  language_tour_not: String
+  language_tour_in: [String!]
+  language_tour_not_in: [String!]
+  language_tour_lt: String
+  language_tour_lte: String
+  language_tour_gt: String
+  language_tour_gte: String
+  language_tour_contains: String
+  language_tour_not_contains: String
+  language_tour_starts_with: String
+  language_tour_not_starts_with: String
+  language_tour_ends_with: String
+  language_tour_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  rate: Float
+  rate_not: Float
+  rate_in: [Float!]
+  rate_not_in: [Float!]
+  rate_lt: Float
+  rate_lte: Float
+  rate_gt: Float
+  rate_gte: Float
+  num_review: Int
+  num_review_not: Int
+  num_review_in: [Int!]
+  num_review_not_in: [Int!]
+  num_review_lt: Int
+  num_review_lte: Int
+  num_review_gt: Int
+  num_review_gte: Int
+  departure_day: String
+  departure_day_not: String
+  departure_day_in: [String!]
+  departure_day_not_in: [String!]
+  departure_day_lt: String
+  departure_day_lte: String
+  departure_day_gt: String
+  departure_day_gte: String
+  departure_day_contains: String
+  departure_day_not_contains: String
+  departure_day_starts_with: String
+  departure_day_not_starts_with: String
+  departure_day_ends_with: String
+  departure_day_not_ends_with: String
+  city: CityWhereInput
+  itineraries_some: ItineraryWhereInput
+  itineraries_every: ItineraryRestrictedWhereInput
+  itineraries_none: ItineraryRestrictedWhereInput
+  available: Int
+  available_not: Int
+  available_in: [Int!]
+  available_not_in: [Int!]
+  available_lt: Int
+  available_lte: Int
+  available_gt: Int
+  available_gte: Int
+  owner: ProfileWhereInput
+  reviews_some: ReviewWhereInput
+  AND: [TourWhereInput!]
+}
+
+input TourWhereUniqueInput {
+  _id: ID
+}
+
+enum TypeBooking {
+  FLIGHT
+  HOTEL
+  TOUR
+}
+
+enum TypeCouponCode {
+  ALL
+  HOTEL
+  TOUR
+}
+
+enum TypeDiscount {
+  ALL
+  HOTEL
+  TOUR
+}
+
+enum TypeFavorite {
+  HOTEL
+  TOUR
+}
+
+enum TypeLocation {
+  POINT
+}
+
+enum TypeMessage {
+  SUPPORT
+  CHATBOT
+}
+
+enum TypePayment {
+  BOOKING
+  PAY
+  REFUND
+}
+
+enum TypePossession {
+  OWN
+  ANY
+}
+
+enum TypeRecommendation {
+  FLIGHT
+  HOTEL
+  TOUR
+}
+
+enum TypeReview {
+  ROOM
+  HOTEL
+  TOUR
+}
+
+enum TypeRoom {
+  AVAILABLE
+  NOT_AVAILABLE
+}
