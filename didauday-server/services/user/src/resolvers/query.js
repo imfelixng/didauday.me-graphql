@@ -7,7 +7,7 @@ import * as helps from '../helpers/firebase';
 const resolvers = {
   Query: {
     checkProfile: async (parent, args, {
-      req, mongo,
+      req,
       prisma,
     }, info) => {
       let user = null;
@@ -18,26 +18,21 @@ const resolvers = {
       }
 
       if (user) {
+        console.log(prisma.exists.Profile);
         const { uid } = user;
         let profile = null;
         try {
-          profile = await mongo.Profile.findOne({
+          profile = await prisma.exists.Profile({
             uid,
           });
         } catch (error) {
           console.log(error);
-          return {
-            is_complete: false,
-          }
+          profile = null;
         }
 
-        if (!profile) {
-          return {
-            is_complete: false,
-          }
-        }
+        console.log(profile);
 
-        if (!profile.is_complete) {
+        if (!profile || profile && !profile.is_complete) {
           return {
             is_complete: false,
           }

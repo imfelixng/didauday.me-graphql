@@ -219,6 +219,7 @@ type Profile {
   email: String!
   phone_number: String!
   role: Int @default(value: 2)
+  uid: String!
   is_complete: Boolean
   favorites: [Favorite!]!
   bookings: [Booking!]!

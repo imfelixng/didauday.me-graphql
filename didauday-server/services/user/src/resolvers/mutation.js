@@ -10,7 +10,7 @@ const resolvers = {
             data
         }, {
             req,
-            mongo
+            prisma
         }, info) => {
             let user = null;
             try {
@@ -20,23 +20,31 @@ const resolvers = {
             }
 
             if (user) {
-                const { uid, email } = user;
+                const {
+                    uid,
+                    email
+                } = user;
                 let profile = null;
                 try {
-                    profile = await mongo.Profile.findOneAndUpdate(
+                    profile = await prisma.mutation.upsertProfile(
                         {
-                            uid,
-                        },
-                            {
+                            where: {
+                                uid,
+                            },
+                            update: {
+                                ...data,
+                                uid,
+                                email,
+                                is_complete: true,
+                            },
+                            create: {
                                 ...data,
                                 uid,
                                 email,
                                 is_complete: true,
                             }
-                        , {
-                        new: true,
-                        upsert: true,
-                      });
+                        }
+                    );
                 } catch (error) {
                     console.log(error);
                     throw new Error("400: bad request")
@@ -52,6 +60,7 @@ const resolvers = {
                             gender: profile.gender,
                             address: profile.address,
                             phone_number: profile.phone_number,
+                            email: profile.email,
                             avatar: profile.avatar,
                             role: profile.role,
                             is_complete: profile.is_complete,

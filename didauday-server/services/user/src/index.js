@@ -8,17 +8,7 @@ const fs = require('fs');
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
-import './configs/db/mongo';
-
-import Profile from './models/mongo/profile';
-import Role from './models/mongo/profile';
-
 const PORT = process.env.PORT || 5002;
-
-const mongo = {
-  Profile,
-  Role,
-}
 
 const file = fs.createWriteStream("schema.graphql");
 
@@ -40,7 +30,6 @@ http.get(process.env.PRISMA_SCHEMA_URL, function(response) {
       context: async ({ req }) => {
         return {
           req,
-          mongo,
           prisma
         };
       },

@@ -274,7 +274,6 @@ services:
       - ./didauday-server/services/prisma:/app
     depends_on:
       - prisma
-    restart: on-failure
   server:
     build:
       context: ./didauday-server/gateway

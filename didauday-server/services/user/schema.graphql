@@ -4412,6 +4412,7 @@ type Profile {
   email: String!
   phone_number: String!
   role: Int
+  uid: String!
   is_complete: Boolean
   favorites(where: FavoriteWhereInput, orderBy: FavoriteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Favorite!]
   bookings(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking!]
@@ -4434,6 +4435,7 @@ input ProfileCreateInput {
   email: String!
   phone_number: String!
   role: Int
+  uid: String!
   is_complete: Boolean
   favorites: FavoriteCreateManyWithoutFavoritorInput
   bookings: BookingCreateManyWithoutBuyerInput
@@ -4465,6 +4467,7 @@ input ProfileCreateWithoutBookingsInput {
   email: String!
   phone_number: String!
   role: Int
+  uid: String!
   is_complete: Boolean
   favorites: FavoriteCreateManyWithoutFavoritorInput
 }
@@ -4480,6 +4483,7 @@ input ProfileCreateWithoutFavoritesInput {
   email: String!
   phone_number: String!
   role: Int
+  uid: String!
   is_complete: Boolean
   bookings: BookingCreateManyWithoutBuyerInput
 }
@@ -4510,6 +4514,8 @@ enum ProfileOrderByInput {
   phone_number_DESC
   role_ASC
   role_DESC
+  uid_ASC
+  uid_DESC
   is_complete_ASC
   is_complete_DESC
 }
@@ -4525,6 +4531,7 @@ type ProfilePreviousValues {
   email: String!
   phone_number: String!
   role: Int
+  uid: String!
   is_complete: Boolean
 }
 
@@ -4554,6 +4561,7 @@ input ProfileUpdateDataInput {
   email: String
   phone_number: String
   role: Int
+  uid: String
   is_complete: Boolean
   favorites: FavoriteUpdateManyWithoutFavoritorInput
   bookings: BookingUpdateManyWithoutBuyerInput
@@ -4569,6 +4577,7 @@ input ProfileUpdateInput {
   email: String
   phone_number: String
   role: Int
+  uid: String
   is_complete: Boolean
   favorites: FavoriteUpdateManyWithoutFavoritorInput
   bookings: BookingUpdateManyWithoutBuyerInput
@@ -4584,6 +4593,7 @@ input ProfileUpdateManyMutationInput {
   email: String
   phone_number: String
   role: Int
+  uid: String
   is_complete: Boolean
 }
 
@@ -4629,6 +4639,7 @@ input ProfileUpdateWithoutBookingsDataInput {
   email: String
   phone_number: String
   role: Int
+  uid: String
   is_complete: Boolean
   favorites: FavoriteUpdateManyWithoutFavoritorInput
 }
@@ -4643,6 +4654,7 @@ input ProfileUpdateWithoutFavoritesDataInput {
   email: String
   phone_number: String
   role: Int
+  uid: String
   is_complete: Boolean
   bookings: BookingUpdateManyWithoutBuyerInput
 }
@@ -4785,6 +4797,20 @@ input ProfileWhereInput {
   role_lte: Int
   role_gt: Int
   role_gte: Int
+  uid: String
+  uid_not: String
+  uid_in: [String!]
+  uid_not_in: [String!]
+  uid_lt: String
+  uid_lte: String
+  uid_gt: String
+  uid_gte: String
+  uid_contains: String
+  uid_not_contains: String
+  uid_starts_with: String
+  uid_not_starts_with: String
+  uid_ends_with: String
+  uid_not_ends_with: String
   is_complete: Boolean
   is_complete_not: Boolean
   favorites_some: FavoriteWhereInput
